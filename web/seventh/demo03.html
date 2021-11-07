@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .gray{background:#ccc};
+        #thick{font-weight: bolder;}
+    </style>
+</head>
+<body>
+    <div>test word.</div>
+    <script>
+        //在想一个事，写了的代码tmd不报错，就tm操蛋
+        var ele = document.getElementsByTagName("div")[0];
+        console.log("未操作前属性个数" + ele.attributes.length);
+        ele.setAttribute("align", "center");
+        ele.setAttribute("tittle","测试文字");
+        ele.setAttribute("class","gray");
+        ele.setAttribute("id","thick");
+        ele.setAttribute("style","font-size:24px;border:1px solid green;");
+        console.log("添加属性后的属性个数" + ele.attributes.length);
+        console.log("获取style属性个数" + ele.getAttribute("style"));
+        ele.removeAttribute("style");
+        console.log("查看所有属性");
+        for(var i = 0; i < ele.attributes.length; i++){
+            console.log(ele.attributes[i]);
+        }
+    </script>
+</body>
+</html>

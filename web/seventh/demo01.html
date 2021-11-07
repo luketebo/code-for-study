@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="box">box</div>
+    <div class="bar">bar</div>
+    <div name="main">main</div>
+    <script>
+        //获取操作的元素有什么用吗？
+      console.log(document.getElementById("box"));
+      console.log(document.getElementsByClassName("bar"));
+      console.log(document.getElementsByTagName("div"));
+      console.log(document.getElementsByName("main"));
+      var box = document.getElementById("box");
+      var divs = document.getElementsByTagName("div");
+      console.log(divs[0] === box);
+      console.log(document.querySelectorAll('div'));
+      console.log(document.querySelector('div'));
+      console.log(document.querySelector('#box'));
+      console.log(document.querySelector('div[name]'));  //或缺含有name属性的第一个div
+      console.log(document.querySelector('div.bar'));  //获取class = bar 的第一个div
+      console.log(document.querySelector('div#box'));   //获取文档中id为box的第一个div
+
+    </script>
+  </body>
+</html>
