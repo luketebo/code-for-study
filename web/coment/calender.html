@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        var year = parseInt(prompt('输入年份：','2020'));
+        document.write(calender(year));
+        
+        function calendar(y){
+        var htm = ' ';
+        return htm;
+    }
+    for(var m=1;m<=12;++m){
+        htm += '<table>';
+        htm += '<tr><th colspan="7">' + y + '年' + m + '月</th></tr>';
+        htm += '<tr><td>日</td><td>一</td><td>二</td><td>三</td><td>四</td>';
+        htm += '<td>五</td><td>六</td></tr>';
+        htm += '</table>';
+}
+        var w= new Data(y,0).getDay();
+        var max = new Data(y,0).getData();
+        for(var d=1;d<=max;++d){
+        w=(w+1>6) ? 0:W+1;
+}
+        htm += '<tr>';
+        for(var d=1;d<=max;++d){
+        if(w&&d==1){
+            htm += '<td colspan ="'+ w +'"> </td>';
+        }
+        htm +='<td>' + d +'</td>';
+        if(w==6&&d!=max){
+            htm +='</tr><tr>';
+        }else if(d==max){
+            htm += '</tr>';
+        }
+        w =(w+1>6) ? 0 : w+1;
+    }
+    </script>
+</head>
+<body>  
+</body>
+</html>

@@ -1,0 +1,72 @@
+// 1、编写矩形构造函数，定义属性：长和宽，定义方法：求周长与求面积。生成2个对象并测试方法的正确性。
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+    
+        //创建对象
+        /*
+        var matrix ={
+            length:10,
+            width:10,
+            //周长
+            perimeter:function per(){
+                console.log('周长：'+(length+width)*2);
+            },
+            //面积
+           area:function are(){
+                console.log('面积：'+length*width);
+            },
+            /*
+            show:function(){
+
+            }
+            */
+     //  };
+    
+        /*
+        function matr(){
+            length = 10;
+            width = 10;
+        }
+        */
+     //   var mat1=new matr();
+     /*
+        matrix.perimeter();
+        matrix.area();
+    */
+      //  var mat2 = new matrix();
+      /*
+        mat2.length = 5;
+        mat2.width = 5;
+        mat2.perimeter();
+        mat2.area();
+        */
+       function matrix(length,width){
+           var o={};
+           o.length=length;
+           o.width=width;
+
+       }
+       function area(length,width){
+           return length*width;
+       }
+       function perimeter(length,width){
+           return 2*(length+width);
+       }
+       var mar1 = matrix(10,10);
+       console.log('area：'+area(10,10));
+       console.log('perimeter:'+perimeter(10,10))
+       var mar2 = matrix(5,5);
+       console.log('area:'+area(5,5));
+       console.log('perimeter:' + perimeter(5,5));
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

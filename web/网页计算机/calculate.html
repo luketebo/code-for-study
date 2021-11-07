@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function calc(func){
+            var reasult = document.getElementById('reasult');
+            var num1 = parseInt(document.getElementById('num1').value);
+            var num2 = parseInt(document.getElementById('num2').value);
+            if(isNaN(num1)||isNaN(num2)){
+                alert('请输入数字');
+                return flase;
+            }
+            reasult.value =func(num1,num2);
+        }
+        function add(num1,num2){
+        return num1+num2;
+    }
+    function sub(num1,num2){
+        return num1-num2;
+    }
+    function mul(num1,num2){
+        return num1*num2;
+    }
+    function div(num1,num2){
+        if(num2==0){
+            alert('除数不能为0');
+            return '';
+        }
+        return num1/num2;
+    }
+    </script>
+</head>
+<body>
+    <p>整数1：<input id="num1" type = "text"></p>
+    <p>整数2：<input id="num2" type = "text"></p>
+    <p>
+        <input type="button" value="相加" onclick="calc(add)">
+        <input type="button" value="相减" onclick="calc(sub)">
+        <input type="button" value="相乘" onclick="calc(mul)">
+        <input type="button" value="相除" onclick="calc(div)">
+    </p>
+    <p>结果：<input id = "reasult" type="text" readonly></p>
+    
+</body>
+</html>

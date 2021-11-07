@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+	<script>
+	var arr=[1,8,5,6,3,4];
+	//用选择排序实现数组排序的sort函数，sort函数的相关参数与js的sort函数参数一致。并做测试。
+	function fn(a,b){
+		if(a>b) return 1;
+		else return -1;
+	}
+	function mysort(arr,fn) {
+	    var len = arr.length;
+	    var minIndex, temp;
+	    for (var i = 0; i < len - 1; i++) {
+	        minIndex = i;
+	        for (var j = i + 1; j < len; j++) {
+	            if (fn(arr[j],arr[minIndex])<0) {     // 寻找最小的数
+	                minIndex = j;                 // 将最小数的索引保存
+	            }
+	        }
+	        temp = arr[i];
+	        arr[i] = arr[minIndex];
+	        arr[minIndex] = temp;
+	    }
+	return arr;
+		
+	}
+	mysort(arr,fn);
+	console.log(arr);
+		</script>
+	</body>
+</html>

@@ -1,0 +1,31 @@
+/*head begin*/
+
+header{
+    width:100%;
+    height: 46px;
+    background-attachment: rgb(46, 7, 7);
+}
+header .con{
+    width: 1200px;
+    margin: 0 auto;
+}
+header .con .left{float :left};
+header .con .right{float :right};
+
+header .con .left li{
+    float: left;
+    height: 46px;
+    line-height: 46px;
+    margin-right: 50px;
+    color:rgb(2, 16, 27);
+    cursor: pointer;
+}
+header .con .right li{
+    float: left;
+    height: 46px;
+    line-height: 46px;
+    margin-right: 50px;
+    color:rgb(4, 16, 27);
+    cursor: pointer;
+}
+header .con .right li a{color:rgb(4, 10, 15);}

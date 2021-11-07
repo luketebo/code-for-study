@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>//编程实现find、every、some、forEach和map，功能和参数与js的相关函数一致。并做测试。
+    //map 函数
+		var arr = [1,2,3,4,5] ;
+		arr.forEach(function(item,index){
+			console.log(item);
+		});
+		var arr = [1,2,3,4,5] ;
+		var newArr = arr.map(function(item,index){
+		return item*2 ;		
+    })
+		 console.log(newArr); // 打印新数组
+		 console.log(arr); // 打印原数组，map()没有改变原数组
+		var newArr2 = newArr.map(function(item,index){
+		return item*2;
+		})
+		console.log(newArr2); 
+		console.log(newArr); // 打印数组，map()没有改变原数组
+
+        //find 函数
+		var arr = [1,2,3,4,5] ;
+		var new1 = arr.find(function(item,index){
+		return item>2&&item<5 ;// 当遍历循环到判断到一个为true则跳出循环，输出当前数组元素，不再循环
+		})
+		console.log(new1);// 打印操作后的结果
+		console.log(arr);// 打印原数组，find()没有改变原数组
+
+
+		//some 函数
+		var arr = [1,2,3,4,5] ;
+		var new1 = arr.some(function(item,index){
+		return item>2&&item<5 ;// 判断出一个符合条件则跳出循环并输出true
+		})
+		var new2 = arr.some(function(item,index){
+		return item>5 ;// 判断出数组全部元素都不符合条件则输出flase
+		})
+		console.log(new1);
+		console.log(new2);
+		console.log(arr);
+
+
+
+		//every 函数
+		var arr = [1,2,3,4,5] ;
+		var new1 = arr.every(function(item,index){
+		return item>2&&item<5 ;// 判断出一个不符合条件则跳出循环并输出flase
+		})
+		var new2 = arr.every(function(item,index){
+		return item<10 ;// 判断出数组全部元素都符合条件则输出true
+		})
+		console.log(new1);
+		console.log(new2);
+		console.log(arr);
+		</script>
+</head>
+<body>
+</body>
+</html>

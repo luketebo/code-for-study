@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        var navlist=['首页','免费资源','课程中心','IT学院','学院故事','线上学院','技术社区'];
+        var str ='<ul>';
+            for(var i in navlist){
+                str +='<li><a>'+navlist[i]+'</li></a>';
+            }
+            str +='</ul>';
+            document.getElementById('navlist').innerHTML =str;
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

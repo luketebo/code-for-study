@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        var arr = [89,56,100,21,87,45,1,888];
+        console.log('待排序的数组' + arr);
+        for(var i=1;i<arr.length;i++){
+            for(var j=i;j<arr.length;--j){
+                if(arr[j-1]>arr[j]){
+                    [arr[j-1],arr[j]]=[arr[j],arr[j-1]];
+                }
+            }
+        }
+        console.log('排序后的数组'+arr);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

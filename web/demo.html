@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<title>Calculator</title>
+	<meta charset="utf-8"/>
+	<style type="text/css">
+				/*这里是调节等于号按钮*/
+		#is{height: 166px;}
+				/*这里是调节所有的按钮*/
+		.butt{
+			height:52px;
+			width: 60px;
+			background: #99869010;
+			border-width: 0;
+			cursor: pointer;
+			color: rgb(19, 17, 17);
+			font-size: 30px;
+			border-color: blue;}
+				/*这里是调节计算器的显示器*/
+				/*让超出范围的数字显示为...*/
+		#end{
+			font-size: 40px;
+			max-width: 316px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+        }
+	</style>
+	<script type="text/javascript">
+				//定义a储存算式,
+				//bool记录上一次按完运算符后是否按过等于号
+		var a="";
+		var bool=false;
+				//按按钮后触发事件,将按过的按钮显示在显示器上
+		function show(){
+			element=event.srcElement.innerText;
+			if (element=="="||element=="C") {
+				return;
+			}
+			if (bool&&(element!="+" && element!="/" && element!="*" && element!="-")) {			
+					a="";
+			}
+			bool=false;
+			a+=element;
+			document.getElementById('end').innerText=a;
+		}
+				//按等于号后触发事件,计算显示器中的式子
+		function Calculate(){
+			bool=true;
+			document.getElementById('end').innerText=eval(a);
+			a=eval(a);
+			if(a>=999999){
+				a="Err";
+			}
+		}
+				//按归零键后触发事件,将显示器归零
+		function clearly(){
+			alert("Cleared！！！");
+			a="";
+			document.getElementById('end').innerText="0";
+		}
+	</script>
+</head>
+<body>
+	<!-- 这里是充当显示器的第一个表格 -->
+	<table border="5px" align="center">
+		<tr height="80px"><td width="312px"><div id="end"></div></td></tr>
+	</table>
+	<!-- 这里是充当按键的第二个表格				-->
+	<!-- 每个单元格里都放入一个计算器按键 			-->
+	<table border="5px" cellspacing="0" align="center" onclick="show()">	
+		<tr height="54px">
+			<td><button class="butt">7</button></td>
+			<td><button class="butt">8</button></td>
+			<td><button class="butt">9</button></td>
+			<td><button class="butt">+</button></td>
+		<!-- 这里是归零键的按钮					-->
+			<td><button class="butt" onclick="clearly()">C</button></td>
+		</tr>
+		<tr height="54px">
+			<td><button class="butt">4</button></td>
+			<td><button class="butt">5</button></td>
+			<td><button class="butt">6</button></td>
+			<td><button class="butt">-</button></td>
+		<!-- 这里是等于号的按键					-->
+			<td rowspan="3">
+				<button class="butt" id="is" onclick="Calculate()">=</button>
+			</td>
+		</tr>
+		<tr height="54px">
+			<td><button class="butt">1</button></td>
+			<td><button class="butt">2</button></td>
+			<td><button class="butt">3</button></td>
+			<td><button class="butt">*</button></td>
+		</tr>
+		<tr height="54px">
+			<td><button class="butt">0</button></td>
+			<td><button class="butt">.</button></td>
+			<td><button class="butt">00</button></td>
+			<td><button class="butt">/</button></td>
+		</tr>
+	</table>
+</body>
+</html>

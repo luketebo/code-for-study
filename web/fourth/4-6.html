@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function factorial(n){
+            if(n==1){
+                return 1;
+
+            }
+            return n * factorial(n-1);
+        }
+        var n= prompt('求n的阶乘\n n是大于等于1的正整数，如2表示求2！。');
+        n =parseInt(n);
+        if(isNaN){
+            console.log('输入n值不合法');
+        }else {
+            console.log(n + '的阶乘: ' + factorial(n));
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

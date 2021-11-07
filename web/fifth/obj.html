@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function student(){
+            this.name = "jack";
+            this.age = 19;
+            this.school = "大学";
+            student.prototype.study = function (){
+                console.log("name:"+this.name);
+                console.log("age:"+this.age);
+                console.log("school:"+this.school);
+                console.log("好好学习");
+            }
+        }
+        var s1 = new student();
+        s1.study();
+        function pupil(){
+            this.name = "Tom";
+            this.age = 6;
+            this.school = "小学";
+            pupil.prototype.studys = function (){
+                console.log("name:"+this.name);
+                console.log("age:"+this.age);
+                console.log("school:"+this.school);
+                console.log("好好学习");
+            }
+        }
+        var p1 = new pupil();
+        
+       // extend(p1,s1);
+        p1.studys();
+
+    </script>
+    
+</body>
+</html>

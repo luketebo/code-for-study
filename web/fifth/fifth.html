@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // part01
+        alert(1);
+        var obj = 123;
+        console.log(obj.toString());
+        obj = [1,2,3];
+        console.log(obj.toString());
+        obj = function(){
+            console.log(obj.toString());
+        }
+        //part02
+        var o1 = {};
+        var o2 = {name:"Jim"};
+        var o3 = {name:"Jim",age:19,gender:"man"};
+        //part03
+        var o4 = {
+            name:"Jim",
+            age: 19,
+            gender:"man",
+            sayHello:function(){
+                console.log("Hello");
+            }
+        };
+        //part04
+        var o5 = {};
+        o5.name = "Jack";
+        o5.introduce = function(){
+            alert("My name is " + this.name);
+        }
+        alert(o5.name);
+        o5.introduce();
+        //parto5
+        var o6 = {};
+        var key = "id";
+        o6[key] = 123;
+    </script>
+    <!--part06-->
+    <input id = "k" type = "text" vlaue = "name">
+    <input id = "v" type = "text" value = "Jack">
+    <input id = "btn" type = "button" value = "test" >
+    <script>
+        var k = document.getElementById('k');
+        var v = document.getElementById('v');
+        var btn = documet.getElementById('btn');
+        var o = {};
+        btn.onclick = function () {
+            o.[k.value] = v.value;
+            console.log(o);
+        };
+
+    </script>
+    <script>
+        //part07
+        var obj = { name: "Jack", age: 16};
+        for(var k in obj) {
+            console.log(k + "-" + obj[k]);
+        }
+        //part08
+        var obj = {name: "Tom", age: 16};
+        console.log("name" in obj);
+        console.log("gender" in obj);
+        //part09 复制快捷方式
+        var p1 = {name: "Jim", age: 19};
+        var p2 = p1;
+        p2.name = "Tom";
+        console.log(p1);
+        console.log(p2);
+        console.log(p1===p2);   //=== 全等
+        //part10
+        function deepcopy(obj){
+            var o = {};
+            for(var k in obj){
+                o[k] = (typeof obj[k] === "object" ) ? deepcopy(obj[k]) : obj[k];
+            }
+            return 0;
+        }
+        //test  deepcopy 创建副本，深拷贝
+        var p1 = { name: "Jim", subject: {name:["html", " css"]} };
+        var p2 = deepcopy(p1);
+        p2.subject.name[0] = "javascript";
+        console.log(p1.subject.name[0]);
+        console.log(p2.subject.name[0]);
+        console.log(p1===p2);   //这两个对象的subject.name[0] 是不一样的，那这叫做什么拷贝呢？ 
+        //按书上的意思，就是通过函数赋值的就叫深拷贝呗？
+        //part11
+        function factory(name,age){
+            var o = {};
+            o.name = name;
+            o.age = age;
+            return 0;
+        }
+        var o1 = factory("Jack", 18);
+        var o2 = factory("Alice", 19);
+        console.log(o1); 
+        console.log(o2); 
+        //part12
+        var obj = new Object();  //object  what means?
+        var str = new String("123");
+        console.log(obj.constructor);
+        console.log(str.constructor);
+        console.log({}.constructor);     
+        //part13
+        function person(name,age){
+            this.name = name;
+            this.age = age;
+            this.sayHello = function(){
+                console.log("Hello, my name is "  + this.name);
+            };
+        }
+        var p1 = new person("Jack", 18);
+        var p2 = new person("Alice",19);
+        console.log(p1);
+        console.log(p2);
+        p1.sayHello();
+        console.log(p1.constructor);   //constructor 是啥意思?
+        //part14
+        class Person{
+            constructor (name,age,gender){
+                this.name = name;
+                this.age = age;
+                this.gender = gender;
+            }
+            introduce(){
+                console.log("我是" + this.name + "今年" + this.age + "岁。");
+            }
+
+        }
+        var p = new Person("Jim",19,"男");
+        p.introduce();
+        //part15
+        function Person(){
+            var name = "Jim";
+            this.getName = function(){
+                return name;
+            };
+        }
+        var p = new Person();
+        console.log(p.name);
+        p.getName();
+        //part16
+        function foo(){
+            return this;
+        }
+        var o = {name:"Jim",func:foo};
+        console.log(foo() ===window);
+        console.log(o.func()===0);
+        //part17
+        var num = 10.88;
+        Math.ceil(num);
+        Math.round(num);
+        Math.random(num);
+        Math.abs(-25);
+        Math.abs("-25");
+        Math.max(5,7,9,8);
+        Math.min(6,2,5,3);
+        Math.random()*(3-1);
+        Math.random()*(20-10);
+        Math.random()*(99-88);
+        function randomNum(min,max){
+            return Math.floor(Math.random()*(max-min+1)+min);
+
+        }
+        console.log(randomNum(1,3));
+        //part18
+        var date = new Date();
+        date.toString();
+        date.getFullYear();
+        date.getMonth();
+        date.getDate();
+        var date1 = new Date(2017,9,1,11,53,4);
+        date1.toString();
+        var date2 = new Date("2017-10-01 11:53:04");
+        date2.toString();
+        //part19
+        var o = {};
+        o.func();
+        console.log('test');
+        //part20
+        var o = {};
+        try{
+            o.func();
+            console.log("a");
+
+        }catch(e){
+            console.log(e);
+        }
+        console.log("b");
+        //part21
+        function fool(){
+            foo2();
+            console.log("fool");
+        }
+        function foo2(){
+            var o = {};
+            o.func();
+        }
+        try{
+            fool();
+        }catch(e){
+            console.log('test');
+        }
+        //part22
+        try{
+            var el = new Error({"错误信息");
+            throw el;
+        }catch(e){
+            console.log(e.message);
+            console.log(el===e);
+        }
+        try{
+            var o = {};
+        }catch(e){
+            console.log(e.message);
+        }
+        //part23
+        function Person(name){
+            this.name = name;
+            this.introduce = function(){};
+        }
+        var p1 = new Person("Jim");
+        var p2 = new Person("Alice");
+        console.log(p1.introduce == p2.introduce);
+        //part24
+        function Person(){};
+        console.log(typedf Person.prototype);
+        function Person(name){
+            this.name = name;
+        }
+        Person.prototype.introduce = function(){};
+        var p1 = new Person("Jim");
+        var p2 = new Person("Alice");
+        console.log(p1.introduce);
+        console.log(p1.introduce ===p2.introduce);
+        //par25
+        function Person(name){
+            this.name = name;
+        }
+        Person.prototype.sayHello = function(){
+            console.log("你好，我是" + this.name);
+
+        }
+        var p1 = new Person("Jim");
+        var p2 = new Person("Tom");
+        p1.sayHello();
+        p2.sayHello();
+        //part26
+        function Person(){
+            Person.prototype = {
+                sayHello:function(){
+                    console.log("你好，我是新对象");
+                }
+            }
+        }
+        var p = new Person();
+        p.sayHello();
+        function Person(){};
+        Person.prototype.sayHello = function(){
+            console.log("原来的对象");
+        }
+        var p1 = new Person();
+        Person.prototype = {
+            sayHello:function(){
+                console.log("替换后的对象");
+            }
+        }
+        var p2 = new Person();
+        p1.sayHello();
+        p2.sayHello();
+        //part27
+        var obj = {
+            sayHello:function(){
+                console.log("我是一个带有sayHello方法的对象");
+
+            }
+        };
+        var newObj = Object.create(obj);
+        newObj.sayHello();
+        newObj._proto_===obj;
+        var o1 = {};
+        var o2 = {name:"Jim"};
+        o1.name = o2.name;
+        console.log(o1.name);
+        function extend(o1,o2){
+            for(var k in o2){
+                o1[k] = o2[k];
+            }
+        }
+        function Person(options){
+            extend(this,options);
+        }
+        Person.fn = Person.prototype;
+        Person.fn.extend = function(obj){
+            extend(this,obj);
+        };
+        Person.fn.extend({sayHello:function(){
+            console.log("你好，我是" + (this.name||"无名"));
+        }});
+        var p1 = new Person();
+        var p2 = new Person({name:"张三",age:16});
+        p1.sayHello();
+        p2.sayHello();
+        //part28
+        function Person(name){
+            this.name = name;
+            this.sayHello = function(){
+                console.log(this.name);
+            };
+        }
+    </script>
+    Person.age = 123;
+    Person.sayGood = function(){
+        console.log(this.age);
+    }
+    console.log(Person.age);
+    Person.sayGood();
+    var p = new Person("Tom");
+    console.log(p.name);
+    p.sayHello();
+</body>
+</html>
