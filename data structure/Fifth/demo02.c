@@ -1,11 +1,9 @@
 /**
  * 二叉树的第二次尝试
- * 用最基本的二叉树?,关键是我写不来c语言呀，太久没用了
+ * 用最基本的二叉树,关键是我写不来c语言呀，太久没用了
  * 啥指针都忘得差不多了，随便吧，用什么语言
  * 先想好，我要用什么语言来写数据结构，我是否是真的受不了
- * c++来写数据结构,我照着他写的但是我写的有问题，运行不了，为啥子?
- * 
- * 
+ * c++来写数据结构,我照着他写的但是我写的有问题，运行不了，为啥子? 
  * 已经被我创建，现在只有编码问题了，第一个写完了 
  * */
 #include <stdio.h>
@@ -18,7 +16,7 @@ typedef struct
 } BiNode, *BiTree;
 //创建一个二叉树,预定用户用前序遍历的方式输入数据
 void CreateBiTree(BiTree *T)
-{ //需要一个指�?
+{ 
     char ch;
     scanf("%c", &ch);
     if (ch == '#')
@@ -38,9 +36,9 @@ void CreateBiTree(BiTree *T)
 //访问二叉树的具体操作
 void visit(char c,int level)
 {
-    printf("%c λ�� %d ��\n",c,level);
+    printf("%c 位于 %d 层\n",c,level);
 }
-//遍历二叉�? 前序遍历
+//遍历二叉树 前序遍历
 void PreOrder(BiTree T, int level)
 {
     if (T)
