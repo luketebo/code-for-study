@@ -34,7 +34,7 @@ void fuction(int num)
 {
     printf("结点数: %d \n ", num);
 }
-//二叉树的前序遍历，寻找结点?
+//二叉树的前序遍历，寻找结点
 void PreOrder(BiTree T, int num)
 { //为什么遍历的时候，要传递指针，传值理论上应该也是可以的吧
    // printf("bc");
