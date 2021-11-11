@@ -11,7 +11,7 @@ void CreateBiTree(BiTree *T)
 {
     char ch;
 
-   // printf("Creating");
+    // printf("Creating");
 
     scanf("%c", &ch);
     if (ch == '#')
@@ -36,8 +36,8 @@ void fuction(int num)
 }
 //二叉树的前序遍历，寻找结点
 void PreOrder(BiTree T, int num)
-{ //为什么遍历的时候，要传递指针，传值理论上应该也是可以的吧
-   // printf("bc");
+{   //为什么遍历的时候，要传递指针，传值理论上应该也是可以的吧
+    // printf("bc");
     if (T)
     {
         //写一个函数实现功能
@@ -53,9 +53,9 @@ int main()
 {
     BiTree T = NULL;
     int num = 0;
-   // printf("akfnlkjsfglka");
+    // printf("akfnlkjsfglka");
     CreateBiTree(&T);
     PreOrder(T, num);
- //   printf("cc");
+    //   printf("cc");
     return 0;
 }

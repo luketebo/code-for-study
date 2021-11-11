@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+  <head>
+    <meta charset="UTF-8">
+    <title>缓动的小球</title>
+    <style>
+      
+    </style>
+  </head>
+  <body>
+    <div id ="tips"></div>
+    <div class = "box">
+      <label>用户名:<input id = "user" type = "text"></label>
+      <label>密码：<input id = "pass" type = "password"></label>
+      <button id = "login">登陆</button>
+    </div>
+    <script>
+      window.onload = function(){
+        addBlur($('user'));
+        addBlur($('pass'));
+      };
+      function $(obj){
+        return document.getElementById(obj);
+      }
+    </script>
+  </body>
+</html>

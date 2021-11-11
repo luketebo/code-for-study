@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+  </head>
+  <body>
+    <style>
+      #box {
+        position: absolute;
+        width: 120px;
+        height: 120px;
+        line-height: 120px;
+        text-align: center;
+        color: #fff;
+        border-radius: 60px;
+        background: red;
+      }
+    </style>
+    <div id="box">点我呀，崽种！</div>
+    <script>
+      function animate(obj, option) {
+        clearInterval(obj.timer); //防止多次触发事件，重复开启定时器
+        obj.timer = setInterval(function () {
+          var flag = true;
+          for (var k in option) {
+            var leader = parseInt(getStyle(obj, k)) || 0;
+            var target = option[k];
+            var step = (target - leader) / 10;
+            step = step > 0 ? Math.ceil(step) : Math.floor(step);
+            leader = leader + step;
+          //  obj.style[k] = leader + step;
+            obj.style[k] = leader + 'px';
+            if (leader != target) {
+              flag = false;
+            }
+          }
+          if (flag) {
+            clearInterval(obj.timer);
+          }
+        }, 15);
+      }
+      function getStyle(obj, attr) {
+        if (window.getComputedStyle) {    
+          return window.getComputedStyle(obj,null)[attr];
+        } else {
+          return obj.currentStyle[attr];
+        }
+      }
+      var obj = document.getElementById('box');
+      obj.onclick = function () {
+        animate(obj, { 'left': 200, 'top': 50 });
+      };
+      
+      obj.onclick = function () {
+        animate(obj,{'left':0,'top':0});
+      }
+      
+    </script>
+  </body>
+</html>
