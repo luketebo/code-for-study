@@ -31,16 +31,11 @@ int main()
     char a[100];
     char b[10];
     int pos = 0;
-    //我没有加&这个符号，但是为啥子程序连print都没有执行呢？啥子原因？
     printf("please input the array values of a:\n");
     scanf("%s", &a);
     printf("please input the array values of b:\n");
     scanf("%s", &b);
     printf("please input the pos:\n");
     scanf("%d", &pos);
-    //上面执行完了之后，就直接结束程序了，为啥呀
-    //为什么没有做这个呢？
-    //   printf("bad");
     insert(&a, &b, pos);
-    //   printf("good");
 }
