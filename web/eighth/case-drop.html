@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>鼠标特效</title>
+    <style>
+      .front-last {
+        float: right;
+      }
+      #front-first {
+        height: 20px;
+        width: 350px;
+        /*  border: 4px solid red;*/
+        font-size: 17px;
+        background-color: turquoise;
+        cursor: move;
+      }
+      #back {
+        height: 180px;
+        width: 350px;
+        /* border: 4px solid red;*/
+      }
+      #box {
+        height: 200px;
+        width: 350px;
+        position: absolute;
+        top: 30%;
+        left: 15%;
+        box-shadow: 4px 4px wheat;
+      }
+      img {
+        height: 180px;
+        width: 350px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="box">
+      <div id="front-first">
+        注册信息(可以拖曳)<span class="front-last">【先辈】</span>
+      </div>
+      <div id="back">
+        <img src="R-C.jpg" />
+      </div>
+    </div>
+    <script>
+      var box = document.getElementById("box");
+      var front = document.getElementById("front-first");
+      front.onmousedown = function (event) {
+        var event = event || window.event; /* 获取鼠标按下的位置*/
+        console.log(event);
+        var pageX =
+          event.pageX || event.clientX + document.documentElement.scrollLeft;
+        var pageY =
+          event.pageY || event.clientY + document.documentElement.scrollTop;
+        var spaceX = pageX - box.offsetLeft;
+        var spaceY = pageY - box.offsetTop;
+        // console.log(event);
+        document.onmousemove = function (event) {
+          var event = event || window.event;
+          console.log(event);
+          var pageX =
+            event.pageX || event.clientX + document.documentElement.scrollLeft;
+          var pageY =
+            event.pageY || event.clientY + document.documentElement.scrollTop;
+
+          box.style.left = pageX - spaceX + "px";
+          box.style.top = pageY - spaceY + "px";
+          if (window.getSelection) {
+            window.getSelection().removeAllRanges();
+          } else {
+            document.selection.empty();
+          }
+          document.onmouseup = function () {
+            // 释放鼠标按键时  取消盒子的移动
+            document.onmousemove = null;
+          };
+        };
+      };
+    </script>
+  </body>
+</html>
