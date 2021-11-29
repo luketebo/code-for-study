@@ -1,26 +1,52 @@
 <!DOCTYPE html>
-  <head>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
-    <title>缓动的小球</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
     <style>
-      
-    </style>
-  </head>
-  <body>
-    <div id ="tips"></div>
+        body{background:#ddd;}
+        .box{background:#fff;padding:20px 30px;width:400px;margin: 0 auto;text-align:center;}
+        #login{width:90px;height:25px;background:#3388ff;border:1px solid #fff;color:#fff;font-size:14px;}
+       
+        label{
+            display:inline-block;
+            width:250px;
+        }
+        
+        #tips{width:440px;height:30px;margin:5px auto;background:#fff;color:red;border:1px solid #ccc;display:none;line-height:30px;padding-left:20px;font-size:13px;}
+      </style>
+    <div id = "tips"></div>
     <div class = "box">
-      <label>用户名:<input id = "user" type = "text"></label>
-      <label>密码：<input id = "pass" type = "password"></label>
-      <button id = "login">登陆</button>
+        <p><label>用户名：<input id = "user"  type="text"></label></p>
+        <p><label>密码：  <input id = "pass" type="password"></label></p>
+        <button id = "login">登录</button>
     </div>
     <script>
-      window.onload = function(){
-        addBlur($('user'));
-        addBlur($('pass'));
-      };
-      function $(obj){
-        return document.getElementById(obj);
-      }
+        window.onload = function (){
+            addBlur($('user'));
+            addBlur($('pass'));
+        }
+        function $(obj){
+            return document.getElementById(obj);
+        }
+        function addBlur(obj){
+            obj.onblur = function(){
+                isEmpty(this);
+            };
+        }
+        function isEmpty(obj){
+            if(obj.value === ''){
+                $('tips').style.display = 'block';
+                $('tips').innerHTML = '注意：输入内容不能为空！';
+            }
+            else {
+                $('tips').style.display = 'none';
+            }
+        }
     </script>
-  </body>
+</body>
 </html>
