@@ -16,16 +16,10 @@ typedef struct
 void CreateBiTree(BiTree *T)
 {
     char ch = NULL;
-    printf("我没输入\n");
-    scanf("%c", &ch);
-    while(1){
-        int a;
-        scanf("%d", &a);
-        if(a==1) break;
-        else {
-            printf("焯\n");
-        }
-    }
+    scanf("%c", &ch); //缓存区问题，这里面有一个回车
+    //%c 为什么可以输入一大串字符？
+    //这个键盘缓冲区我该怎么解决？
+
     if (ch == '#')
     {
         *T = NULL;
@@ -36,9 +30,6 @@ void CreateBiTree(BiTree *T)
         //创造下一个结点，创造一个指针？
         *T = (BiNode *)malloc(sizeof(BiNode));
         (*T)->data = ch;
-        //有一个啥子玩意当了我的根结点
-        printf("哈哈哈大笑\n");
-        printf("%c ",ch);
         //创造左子树
         CreateBiTree(&(*T)->lchild); //这里应该是传递一个指向BiNode的指针
         //创造右子树
@@ -52,7 +43,6 @@ void function(char t)
 //检索二叉树 我感觉单纯检索就不需要传递一个指针，只要把值传递了就可以
 void PreOrder(BiTree T)
 {
-    printf("不好笑\n");
     if (T)
     {
         //这种方法的遍历好像还是太粗糙了，毕竟情况有很多种
@@ -63,6 +53,21 @@ void PreOrder(BiTree T)
         //遍历右子树
         PreOrder(T->rchild);
     }
+}
+void func(char a,char b){
+    if(a != b) {
+        printf("the BiTrees are not same\n");
+        exit(1);
+    }
+}
+void PreChange(BiTree T, BiTree L)
+{
+    if(T && L){
+        func(T->data, L->data);
+        PreChange(T->lchild, L->lchild);
+        PreChange(T->rchild, L->rchild);
+    }
+    
 }
 int main()
 {
@@ -75,8 +80,16 @@ int main()
     PreOrder(T);
     printf("\n");
     printf("now create the second bitree\n");
+    //创建的时候出了问题，他给我生成了一个结点
     //他已经给我创建了一个根结点了，阿哲
+    char cho;
+    while ((cho = getchar()) != '\n' && cho != EOF);
+
+    //终于把键盘缓冲区给干掉了，气死了，啊啊啊啊
     CreateBiTree(&R);
     PreOrder(R);
+    printf("\n");
+    PreChange(T,R);
+    printf("the BiTrees are same\n");
     //   printf("********************************\n");
 }
