@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    #big{
+        position: absolute;   
+        height:140px;
+        width:140px;
+        border: 1px solid red;
+    }
+    .small{
+        position:absolute;
+        height:20px;
+        width:20px;
+        background-color: red;
+    }
+    </style>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<body>
+    <input id = "btn" type=submit value="开始动画">
+    <div id = "big">
+        <div class = "small"></div>
+    </div>
+    
+    <script>
+        $(document).onload(function(event) {
+            var item = $('.small');
+            var time = setInterval(function(){
+                if(item.offset == 120){
+                    clearInterval(time);
+                }else{
+                    item.style.left = item.offsetLeft + 10 + "px";
+                    item.style.top  = item.offsetTop + 10 + "px";
+                }
+            },100);
+        })
+    </script>
+</body>
+</html>
