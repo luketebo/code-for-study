@@ -47,11 +47,11 @@ void PreOrder(BiTree T)
 }
 void Change(BiTree T){
     if(T){
-        BiNode * a = NULL;  // 创建一个新指针用来进行交换数据
-
+        BiNode * a = NULL;  // 创建一个新指针用来进行交换数据      
         a = T->lchild;
         T->lchild = T->rchild;
         T->rchild = a;
+        
     }
 }
 

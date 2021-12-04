@@ -2,102 +2,101 @@
  * 作业：19 计算二叉树的宽度（二叉树的最大宽度是指二叉树所有层中结点个数的最大值)
  * 宽度本来是指什么？那就用层次遍历
  */
-#define INITQUEUE 20
+#define MAXSIZE 20
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 typedef char ElemType;
-typedef struct{
+typedef struct
+{
     ElemType data;
-    struct BiNode * lchild, *rchild;
-}BiNode,*BiTree;
+    struct BiNode *lchild, *rchild;
+} BiNode, *BiTree;
 //  创建队列
-typedef struct{
-    BiNode * front, *tail;
-    int size;
-}Queue;
+typedef struct
+{
+    int front;
+    int rear;
+    BiTree *base;
+} Queue;
 //  初始化队列
-int InitQueue(Queue Q){
-    Q.front = (BiNode *)malloc(INITQUEUE * sizeof(BiNode));
-    if(!Q.front){
-        return 0;
-    }
-    Q.tail = Q.front;
-    Q.size = INITQUEUE;
+int InitQueue(Queue Q)
+{
+    Q.base = (BiNode *)malloc(sizeof(BiNode) * MAXSIZE);
+    if (!Q.base)
+        exit;
+    Q.front = Q.rear;
+    return 1;
 }
 //  判断队列是否为空
-int EmptyQueue(Queue Q){
-    if(Q.tail == Q.front){
+int EmptyQueue(Queue Q)
+{
+    if (Q.front == Q.rear)
         return 1;
-    }else{
+    else
         return 0;
-    }
 }
 //  进队
-int EnQueue(Queue Q,BiNode e){
-    if((Q.tail - Q.front + INITQUEUE)% INITQUEUE == INITQUEUE - 1);
-    {
+int EnQueue(Queue Q, BiTree e)
+{
+    if ((Q.rear + 1) % MAXSIZE == Q.front)
         return 0;
-    }
-    *Q.tail = e;
-    Q.tail++;
+    Q.base[Q.rear] = e;
+    Q.rear = (Q.rear + 1) % MAXSIZE;
     return 1;
 }
 //  出队
-int DeQueue(Queue Q,BiNode e){
-    if(Q.front == Q.tail){
+int DeQueue(Queue Q, BiTree e)
+{
+    if (Q.front == Q.rear)
         return 0;
-    }
-    e = *Q.front;
-    Q.front++;
+    e = Q.base[Q.front];
+    Q.front = (Q.front + 1) % MAXSIZE;
     return 1;
 }
 // 创建一颗二叉树
-void CreateBiTree(BiTree *T){
+void CreateBiTree(BiTree *T)
+{
     char ch = NULL;
-    scanf("%c",&ch);
-    if(ch == '#'){
+    scanf("%c", &ch);
+    if (ch == '#')
+    {
         *T = NULL;
-    }else{
+    }
+    else
+    {
         *T = (BiNode *)malloc(sizeof(BiNode));
         (*T)->data = ch;
         CreateBiTree(&(*T)->lchild);
         CreateBiTree(&(*T)->rchild);
     }
 }
-// 层次遍历  用栈来存储
-void LevOrder(BiTree T){
-    if(T == NULL){
-        return 0;
-    }
-    BiNode e;
+// 层次遍历
+void LevOrder(BiTree T)
+{
     Queue Q;
-    int levelcount = 0;
-    int curlevel = 1;
-    int nextlevel = 0;
     InitQueue(Q);
-    EnQueue(Q,*T);
-    while(!EmptyQueue(Q)){
+    BiTree e;
+    EnQueue(Q,T);
+    printf("%c ",T->data);
+    int a = 0;
+    printf("yxyy\n");
+    while (a == EmptyQueue(Q))
+    {
+        printf("yyyy\n");
         DeQueue(Q,e);
-        printf("%c ",e.data);
-        curlevel--;
-        if(NULL != e.lchild){
-            EnQueue(Q,e.lchild);
-            nextlevel++;
+        printf("%c ",e->data);
+        if(e->lchild){
+            EnQueue(Q,e->lchild);
         }
-        if(NULL != e.rchild){
-            EnQueue(Q,e.rchild);
-            nextlevel++;
+        if(e->rchild){
+            EnQueue(Q,e->rchild);
         }
-        if(0 == curlevel){
-            levelcount++;
-            printf("第%d层结点遍历结束！\n",levelcount);
-            curlevel = nextlevel;
-            nextlevel = 0;
-        } 
     }
-    return 1;
 }
-int main(){
-
+int main()
+{
+    BiTree t;
+    CreateBiTree(&t);
+    LevOrder(&t);
 }
