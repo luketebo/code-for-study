@@ -1,2 +1,0 @@
-
-    EnQueue(Q,T);
