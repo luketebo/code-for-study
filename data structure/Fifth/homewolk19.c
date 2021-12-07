@@ -75,15 +75,13 @@ void CreateBiTree(BiTree *T)
 void LevOrder(BiTree T)
 {
     Queue Q;
-    InitQueue(Q);
     BiTree e;
+    InitQueue(Q);
     EnQueue(Q,T);
     printf("%c ",T->data);
     int a = 0;
-    printf("yxyy\n");
     while (a == EmptyQueue(Q))
     {
-        printf("yyyy\n");
         DeQueue(Q,e);
         printf("%c ",e->data);
         if(e->lchild){
