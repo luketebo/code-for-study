@@ -29,7 +29,8 @@
         var dd = document.getElementById("face1");
         var time = setInterval(function () {    // 定时器
           if (dd.offsetLeft == 90) {
-            clearInterval(time);   //清空时间
+            dd.style.left = 10 + "px";   //清空时间
+            dd.style.top = 10 + "px";
           } else {
             dd.style.left = dd.offsetLeft + 10 + "px";
             dd.style.top = dd.offsetTop + 10 + "px";

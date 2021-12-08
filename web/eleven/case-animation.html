@@ -19,26 +19,24 @@
         background-color: red;
     }
     </style>
-    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 </head>
 <body>
     <input id = "btn" type=submit value="开始动画">
     <div id = "big">
         <div class = "small"></div>
     </div>
-    
     <script>
-        $(document).onload(function(event) {
-            var item = $('.small');
-            var time = setInterval(function(){
-                if(item.offset == 120){
-                    clearInterval(time);
-                }else{
-                    item.style.left = item.offsetLeft + 10 + "px";
-                    item.style.top  = item.offsetTop + 10 + "px";
-                }
-            },100);
+        $(document).ready(function(event){
+
+            $("#btn").click(300,function(){
+                $('.small').everyTime(function(){
+                    $(".small").animate({left:'10px',height:'10px'})
+                })  
+            })
         })
+    
+    
     </script>
 </body>
 </html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<body>
+    <!--start case--
+    <div class = "list">
+        <ul><li>one</li><li>two</li><li>three</li></ul>
+    </div>
+    <div class = "add">添加</div>
+    <script type="text/javascript">
+        $('.add').click(function(){
+            var str = '<li>four</li>';
+            $('.list li:last-child').after(str);
+        })
+    </script>
+    !--end case-->
+    <div>
+        <li>j</li>
+        <li>f</li>
+        <li>m</li>
+    </div>
+    <script>
+        //$('li:first-child').empty();
+        //$('li')[1].remove();
+        var str = $('li:last-child').clone();
+        $('div').append(str);   //append 将元素插入末尾
+    </script>
+
+</body>
+</html>
