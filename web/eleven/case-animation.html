@@ -28,15 +28,14 @@
     </div>
     <script>
         $(document).ready(function(event){
-
-            $("#btn").click(300,function(){
-                $('.small').everyTime(function(){
-                    $(".small").animate({left:'10px',height:'10px'})
-                })  
-            })
-        })
-    
-    
+            
+            $("#btn").click(setInterval(function(){
+                var top = 10 + "px";
+                var left = 10 + "px";
+                $('.small').animate({top:'top',left:'left'},300);
+            }),300)
+        }
+        )
     </script>
 </body>
 </html>
