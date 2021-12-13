@@ -23,19 +23,27 @@
 </head>
 <body>
     <input id = "btn" type=submit value="开始动画">
+    <input id = "bt" type=submit value="结束动画">
     <div id = "big">
         <div class = "small"></div>
     </div>
     <script>
-        $(document).ready(function(event){
-            
-            $("#btn").click(setInterval(function(){
-                var top = 10 + "px";
-                var left = 10 + "px";
-                $('.small').animate({top:'top',left:'left'},300);
-            }),300)
-        }
-        )
-    </script>
-</body>
+        $(document).ready(function(event){  
+            $("#btn").click(function(){
+                var top = 120 + "px";
+                var left = 120 + "px";
+                var params = {top:top,left:left};
+                var settings = $.speed(2000,'linear');
+                $('.small').animate(params, settings); 
+            })
+        })
+        $('bt').click(function(){
+            var top = 0 + "px";
+            var left = 0 + "px";
+            console.log(top);
+            console.log(left);
+            $('.small').html("top"+top, "left"+left);
+        })
+       
+    </script></body>
 </html>
