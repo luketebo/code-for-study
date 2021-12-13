@@ -1,92 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
-</head>
-<body>
+    <style>
+      /* 热点图样式 */
+      .banner {
+        position: relative;
+        overflow: hidden;
+        margin: 100px auto;
+        width: 958px;
+        height: 400px;
+      }
+      .banner ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      .hot {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+      .hot li {
+        float: left;
+      }
+      /* 小圆点样式 */
+      .dot {
+        position: absolute;
+        bottom: 10px;
+        width: 100%;
+        text-align: center;
+        font-size: 0;
+      }
+      .dot li {
+        display: block;
+        display: inline-block;
+        margin: 0 5px;
+        width: 15px;
+        height: 15px;
+        border-radius: 100%;
+        background: rgba(145, 144, 144, 0.5);
+        cursor: pointer;
+      }
+      .dot .on {
+        background-color: #fff;
+      }
+      /* 左右翻页箭头样式 */
+      .arrow {
+        display: none;
+      }
+      .arrow span {
+        display: block;
+        width: 50px;
+        height: 100px;
+        background: rgba(0, 0, 0, 0.6);
+        color: #fff;
+        text-align: center;
+        font-size: 40px;
+        line-height: 100px;
+        cursor: pointer;
+      }
+      .arrow .prev {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        margin-top: -50px;
+      }
+      .arrow .next {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        margin-top: -50px;
+      }
+    </style>
+  </head>
+  <body>
     <div class="banner">
-        <ul class="hot"><!----轮播图片-->
-            <li><a href="#"><img src=""></a></li>
-            <li><a href="#"><img src=""></a></li>
-            <li><a href="#"><img src=""></a></li>
-            <li><a href="#"><img src=""></a></li>
-        </ul>
-        <!----小圆点-->
-        <ul class="dot">
-            <li class="on"></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-        </ul>
-        <div class="arrow">
-            <span class="prev">&it;</span><span class="next">&gt;</span>
-        </div>
+      <ul class="hot">
+        <!----轮播图片-->
+        <li>
+          <a href="#"><img src="img/1.png" /></a>
+        </li>
+        <li>
+          <a href="#"><img src="img/2.png" /></a>
+        </li>
+        <li>
+          <a href="#"><img src="img/3.png" /></a>
+        </li>
+        <li>
+          <a href="#"><img src="img/4.png" /></a>
+        </li>
+      </ul>
+      <!----小圆点-->
+      <ul class="dot">
+        <li class="on"></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+      <div class="arrow">
+        <span class="prev">&it;</span><span class="next">&gt;</span>
+      </div>
     </div>
     <script>
-        $(function(){
-            var width = 958;
-            var firstimg = $('.hot.li').first().clone();
-            $('.hot').append(firstimg).width($('.hot.li').length * width);
-        })   //复制第一个结点
-        var timer = null;
-        var delay = 1000;
-        timer = setInterval(img_change,delay);
-        var i = 0;
-        function imgChange(){
-            ++i;
-            isCrack();
-            dotChange();
-
+      $(function () {
+        var width = 958;
+        var firstimg = $(".hot.li").first().clone();
+        $(".hot")
+          .append(firstimg)
+          .width($(".hot.li").length * width);
+      }); //复制第一个结点
+      var timer = null;
+      var delay = 1000;
+      timer = setInterval(img_change, delay);
+      var i = 0;
+      function imgChange() {
+        ++i;
+        isCrack();
+        dotChange();
+      }
+      var speed = 400;
+      function isCrack() {
+        if (i == $(".hot.li").length) {
+          i = 1;
+          $(".hot").css({ left: 0 });
         }
-        var speed = 400;
-        function isCrack(){
-            if(i == $('.hot.li').length){
-                i = 1;
-                $('.hot').css({left:0});
-            }
-            $('.hot').stop().animate({left:-i * width},speed);
+        $(".hot")
+          .stop()
+          .animate({ left: -i * width }, speed);
+      }
+      function dotChange() {
+        if (i == $(".hot.li").length - 1) {
+          $(".dot.li").eq(0).addClass("on").siblings().removeClass("on");
+        } else {
+          $(".dot.li").eq(1).addClass("on").siblings().removeClass("on");
         }
-        function dotChange(){
-            if(i == $('.hot.li').length - 1){
-                $('.dot.li').eq(0).addClass('on').siblings().removeClass('on');
-            }else {
-                $('.dot.li').eq(1).addClass('on').siblings().removeClass('on');
-            }
+      }
+      $(".banner").hover(
+        function () {
+          // hover() 规定鼠标指针
+          //用timer的到setInterval的返回值，然后让他停止
+          clearInterval(timer); //悬停在被选元素上是要运行的两个函数
+        },
+        function () {
+          timer = setInterval(imgChange, delay);
         }
-        $('.banner').hover(function(){  // hover() 规定鼠标指针
-            //用timer的到setInterval的返回值，然后让他停止
-            clearInterval(timer);       //悬停在被选元素上是要运行的两个函数
-        },function(){
-            timer = setInterval(imgChange,delay);
-        })
-        $('.dot li').mouseover(function(){
-            i = $(this).index();
-            $('.hou').stop().animate({left:-i * width},200);
-            dotChange();
-        })
-        $('.banner').hover(function(){
-            $('.arrow').show();
-        },function(){
-            $('.arrow').hide();
-        });
-        $('.next').click(function(){
-            imgChange();
-        });
-        $('.prev').click(function(){
-            i--;
-            if(i == -1){
-                i = $('.hot li').length - 2;
-                $('.hot').css({left:-($('.hot li').length - 1) * width});
-            }
-            $('.hot').stop().animate({left:-i * width},speed);
-            dotChange();
-        })
+      );
+      $(".dot li").mouseover(function () {
+        i = $(this).index();
+        $(".hou")
+          .stop()
+          .animate({ left: -i * width }, 200);
+        dotChange();
+      });
+      $(".banner").hover(
+        function () {
+          $(".arrow").show();
+        },
+        function () {
+          $(".arrow").hide();
+        }
+      );
+      $(".next").click(function () {
+        imgChange();
+      });
+      $(".prev").click(function () {
+        i--;
+        if (i == -1) {
+          i = $(".hot li").length - 2;
+          $(".hot").css({ left: -($(".hot li").length - 1) * width });
+        }
+        $(".hot")
+          .stop()
+          .animate({ left: -i * width }, speed);
+        dotChange();
+      });
     </script>
-    
-</body>
+  </body>
 </html>
