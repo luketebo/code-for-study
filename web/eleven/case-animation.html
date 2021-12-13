@@ -37,12 +37,12 @@
                 $('.small').animate(params, settings); 
             })
         })
-        $('bt').click(function(){
+        $('#bt').click(function(){
             var top = 0 + "px";
             var left = 0 + "px";
-            console.log(top);
-            console.log(left);
-            $('.small').html("top"+top, "left"+left);
+            var params = {top:top,left:left};
+            var settings = $.speed(2000,'linear');
+            $('.small').animate(params,settings);
         })
        
     </script></body>
