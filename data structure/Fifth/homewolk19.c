@@ -7,6 +7,7 @@
 #include <string.h>
 #include <stdlib.h>
 typedef char ElemType;
+//创建二叉树
 typedef struct
 {
     ElemType data;
@@ -77,7 +78,7 @@ void LevOrder(BiTree T)
     Queue Q;
     BiTree e;
     InitQueue(Q);
-    EnQueue(Q,T);
+    EnQueue(Q,T);   //这样进队有毛病
     printf("%c ",T->data);
     int a = 0;
     while (a == EmptyQueue(Q))
