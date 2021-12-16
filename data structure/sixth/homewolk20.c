@@ -161,6 +161,7 @@ void InsertArc(AMGraph *t, int weight, int v)
             target = i;
         }
     }
+    
 }
 //4.删除一条边<v,w> DeleteArc(G,v,w)
 void DeleteArc(AMGraph *t, int v, int weight)
