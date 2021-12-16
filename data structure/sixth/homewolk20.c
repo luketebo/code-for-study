@@ -152,21 +152,51 @@ void DeleteVex(AMGraph *t, int v)
     }
     t->vexnum--;
 }
-//3.增加一条边<v,w> InsertArc(G,v,w)  //一个顶点怎么可能确定一条边？
-void InsertArc(AMGraph *t, int weight, int v)
+//3.增加一条边<v,w> InsertArc(G,v,w)  //一个顶点怎么可能确定一条边？ w 是顶点，不是权
+void InsertArc(AMGraph *t, char v, char w)
 {
-    int target = 0;
-    for(int i = 0; i < t->vexnum; i++){
-        if(v == t->vexs[i]){
-            target = i;
+    int weight = 0;
+    printf("please the weight\n");
+    scanf("%d", &weight);
+
+    int target_x = 0;
+    int target_y = 0;
+    // 获取v and w 的位置
+    for (int i = 0; i < t->vexnum; i++)
+    {
+        if (v == t->vexs[i])
+        {
+            target_x = i;
+        }
+        if (w == t->vexs[i])
+        {
+            target_y = i;
         }
     }
-    
+    t->arcs[target_x][target_y] = weight;
+    // 无向图
+    t->arcs[target_y][target_x] = weight;
 }
 //4.删除一条边<v,w> DeleteArc(G,v,w)
-void DeleteArc(AMGraph *t, int v, int weight)
+void DeleteArc(AMGraph *t, int v, int w)
 {
-
+    int target_x = 0;
+    int target_y = 0;
+    // 获取v and w 的位置
+    for (int i = 0; i < t->vexnum; i++)
+    {
+        if (v == t->vexs[i])
+        {
+            target_x = i;
+        }
+        if (w == t->vexs[i])
+        {
+            target_y = i;
+        }
+    }
+    t->arcs[target_x][target_y] = MaxInt;
+    // 无向图
+    t->arcs[target_y][target_x] = MaxInt;
 }
 //5.分开显示该图的顶点表和邻接矩阵表
 void Display(AMGraph *t)
@@ -194,10 +224,13 @@ int main()
     CreateGraph(&t);
     Display(&t);
     char d;
+    char a;
     printf("please input the the insert vex\n");
-    scanf("%c", &d);
-  //  Insert(&t, d);
-    DeleteVex(&t,d);
+    scanf("%c %c", &a,&d);
+    Insert(&t, d);
+    DeleteVex(&t, d);
+    DeleteVexInsertArc(&t,a,d);
+    DeleteArc(&t,a,d);
     Display(&t);
 
     return 0;
