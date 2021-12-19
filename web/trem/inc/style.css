@@ -1,153 +1,199 @@
 * {
-    font-family: 宋体;
-    padding: 0;
-    margin: 0;
+  font-family: "微软雅黑";
+  padding: 0;
+  margin: 0;
 }
 
 body {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .logo {
-    background-image: url(http://www.qingmings.com/images/logo.png);
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: contain;
-    height: 15vh;
-    width: 100vw;
-    transform: scale(0.6);
+  background-image: url(http://www.qingmings.com/images/logo.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+  height: 15vh;
+  width: 100vw;
+  transform: scale(0.6);
 }
 
 #center {
-    width: 100%;
-    display: flex;
-    padding: auto;
-    margin: 0 auto;
-    flex-direction: column;
-    align-items: center;
-    border:7px solid black;
+  width: 100%;
+  display: flex;
+  padding: auto;
+  margin: 0 auto;
+  flex-direction: column;
+  align-items: center;
+  border: 7px solid black;
 }
 
 ::selection {
-    background-color: #ab8c40;
-    color: #fff;
+  background-color: #ab8c40;
+  color: #fff;
 }
 
-#royal>img {
-    width: 100%;
-    overflow: hidden;
+#royal > img {
+  width: 100%;
+  overflow: hidden;
 }
 
 ul {
-    list-style: none;
+  list-style: none;
 }
 
 a {
-    text-decoration: none;
-    color: #000;
+  text-decoration: none;
+  color: #000;
 }
 
 a:hover {
-    color: #ab8c40;
+  color: #ab8c40;
 }
 
 .now {
-    color: #ab8c40;
+  color: #ab8c40;
 }
 
 #fz {
-    border-top: 1px solid #a3a3a3af;
-    /* border: 1px solid #727272; */
-    width: 100vw;
-    display: flex;
-    justify-content: center;
+  border-top: 1px solid #a3a3a3af;
+  /* border: 1px solid #727272; */
+  width: 100vw;
+  display: flex;
+  justify-content: center;
 }
 
 #navigate {
-    font-weight: bold;
-    font-size: 2vh;
-    padding: 1vh 0 1vh 0;
-    width: 56vw;
-    display: flex;
-    justify-content: space-between;
+  font-weight: bold;
+  font-size: 2vh;
+  padding: 1vh 0 1vh 0;
+  width: 56vw;
+  display: flex;
+  justify-content: space-between;
 }
 
 #banner {
-    height: 28vh;
-    background-image: url(http://www.qingmings.com/images/banner_sm.jpg);
-    background-position: center center;
-    background-repeat: no-repeat;
-    width: 100vw;
-    overflow: hidden;
+  height: 28vh;
+  background-image: url(http://www.qingmings.com/images/banner_sm.jpg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  width: 100vw;
+  overflow: hidden;
 }
 
 #container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 #bottom {
-    width: 90vw;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  width: 90vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 #contact {
-    font-size: 10px;
+  font-size: 10px;
 }
 
 #inform {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
 }
 
 #call {
-    font-size: 28px;
+  font-size: 28px;
 }
 
 #wtime {
-    font-size: 13px;
-    padding: 7px;
-    border: 2px solid #000;
-    border-radius: 6px;
+  font-size: 13px;
+  padding: 7px;
+  border: 2px solid #000;
+  border-radius: 6px;
 }
-#container{
-    border:4px solid black;
-    width: 100%;
-    padding: 0px;
-    margin: 0px;
+#container {
+  border: 4px solid black;
+  width: 100%;
+  padding: 0px;
+  margin: 0px;
+}
+.container-bar {
+  height: 60px;
+  width: 100%;
+  border: 1px red solid;
+  font-size: 24px;
+}
+.row {
+  border: 1px solid black;
+  width:100%;
+  height: 300px;
+  position: relative;
 
 }
-.container-bar{
-    height: 60px;
-    width: 100%;
-    border:1px red solid;
-    font-size: 24px;
+.col-md-8 {
+  position: relative;
+  top:-270px;
+  left:33%;
+  width: 51%;
+  border: 1px solid blue;
+  height: 200px;
+  
 }
-li{
-    border:1px solid black;
-    padding: auto;
-    margin: 0px;
+.col-md-4 img {
+  height: 250px;
+  width: 350px;
+  margin: 0px;
+  padding: 25px 100px;
 }
-.col-md-8{
-    position: relative;
-    float: right;
-    border:1px solid black;
-    
+.song{
+    padding: 2px 10px 10px 0px;
+    font-weight: normal;
+}
+.en{
+    font-family: "微软雅黑";
+    color:rgb(146, 146, 141);
+}
+.label{
+    background-color:red;
+}
+.label-info{
+    background-color: rgba(0, 195, 255, 0.856);
+    font-weight: bold;
+    padding: 0px 2px;
+    border-radius: 3px;
+    color: white;
+    font-family: "Helvetica Neue";
+}
+.label-success{
+    background-color: rgb(36, 182, 55);
+    font-weight: bold;
+    padding: 0px 2px;
+    border-radius: 3px;
+    color: white;
+    font-family: "Helvetica Neue";
+}
+.ani_button{
+    border:1px solid #dda004c5!important;
+    position:absolute;
+    padding: 5px;
+    top:60%;
+    left:3%;
+    border-radius:6px;
+    width:200px;
+    color:#ab8c40;
+} 
+.ani_button_y{
 
-}
-.col-md-4 img{
-    height:200px;
-    width:300px;
-    margin: 0px;
-
+} 
+.qsong{
+ 
 }
