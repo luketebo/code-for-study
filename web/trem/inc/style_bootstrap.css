@@ -4,8 +4,8 @@ body{
 }
 .header{
     top:5%;
-    position: absolute;
-    float:right;
+    position: absolute;  
+     
 }
 /*
 .header img{
