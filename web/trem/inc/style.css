@@ -9,9 +9,10 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  
 }
 
-.logo {
+#logo {
   background-image: url(http://www.qingmings.com/images/logo.png);
   background-repeat: no-repeat;
   background-position: center center;
@@ -64,6 +65,7 @@ a:hover {
   width: 100vw;
   display: flex;
   justify-content: center;
+  
 }
 
 #navigate {
