@@ -5,7 +5,7 @@ function $(a) {
 
 var po = $("fz").offsetTop;
 
-var po = document.getElementById("fz").offsetTop;
+
 
 $("fz").style.position = "fixed";
 $("fz").style.top = $("logo").offsetHeight + "px";
@@ -17,7 +17,8 @@ function stay(ss) {
   else objS.top = -1 * ss + $("logo").offsetHeight - 2 + "px";
   console.log(objY);
 }
-
+*/
+/*
 window.addEventListener("scroll", function () {
   var top = window.pageYOffset || 0;
   window.requestAnimationFrame(function () {
@@ -46,17 +47,10 @@ $("#container")
     }
   }); 
   */
- /*
-$(".col-md-4 img").css({
-  width: "300px",
-  height: "200px"
-});
-*/
-$(function() {
-  var r = document.body.offsetWidth / window.screen.availWidth;
-  $(document.body).css("-webkit-transform","scale(" + r + ")");
-  });
-  $(window).resize(function() {
-  var r = document.body.offsetWidth / window.screen.availWidth;
-  $(document.body).css("-webkit-transform","scale(" + r + ")");
-});
+
+var ele = $("imgs");
+var w = ele.offsetWidth;
+var h = ele.offsetHeight;
+console.log("imgs " + w + " 高 " + h);
+
+

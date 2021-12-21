@@ -9,7 +9,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  
+
 }
 
 #logo {
@@ -30,6 +30,7 @@ body {
   flex-direction: column;
   align-items: center;
   border: 7px solid black;
+  justify-content: space-between;
 }
 
 ::selection {
@@ -89,8 +90,8 @@ a:hover {
 #container {
   display: flex;
   align-items: center;
-  justify-content: center;
   flex-direction: column;
+  justify-content: space-between;
 }
 
 #bottom {
@@ -127,6 +128,7 @@ a:hover {
   width: 100%;
   padding: 0px;
   margin: 0px;
+  min-width: 1500px;
 }
 .container-bar {
   height: 60px;
@@ -186,16 +188,51 @@ a:hover {
 .ani_button{
     border:1px solid #dda004c5!important;
     position:absolute;
-    padding: 5px;
+    padding: 7px;
+    padding-left: 20px;
     top:60%;
     left:3%;
     border-radius:6px;
     width:200px;
     color:#ab8c40;
+   
+
 } 
+.container-bar{
+  min-width: 1500px;
+  
+}
+.container-news{
+  color:#ab8c40;
+  width:15%;
+  font-family: "宋体";
+  border:1px solid red;
+  margin-left: 110px;
+  margin-top:7px;
+}
+.container-alt {
+  display: line-block;
+  
+  height:40px;
+  color:#ab8c40;
+  margin-left: 35%;
+  margin-top: -42px;
+  position: absolute;
+  float:top;
+  width: 100%;
+  border:1px solid #dda004c5!important;
+}
+.container-alt a{
+  color:#ab8c40;
+  padding: 1%;
+
+}
 .ani_button_y{
 
 } 
 .qsong{
+  background-image: url(arrows.png);
+  background-repeat: no-repeat;
+  background-position: 140px center;
  
 }
