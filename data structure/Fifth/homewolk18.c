@@ -49,9 +49,11 @@ void Change(BiTree T){
     if(T){
         BiNode * a = NULL;  // 创建一个新指针用来进行交换数据      
         a = T->lchild;
+        
         T->lchild = T->rchild;
         T->rchild = a;
-        
+        Change(T->lchild);
+        Change(T->rchild);
     }
 }
 
@@ -60,7 +62,7 @@ int main(void)
     BiTree T = NULL;
     CreateBiTree(&T);
     PreOrder(T);
-    Change(T);
+    Change(&T);
     printf("\n");
     PreOrder(T);
     return 0;

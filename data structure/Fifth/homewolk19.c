@@ -3,6 +3,7 @@
  * 宽度本来是指什么？那就用层次遍历
  */
 #define MAXSIZE 20
+// #define int width[10] = {0}
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -73,6 +74,8 @@ void CreateBiTree(BiTree *T)
     }
 }
 // 层次遍历
+/*
+
 void LevOrder(BiTree T)
 {
     Queue Q;
@@ -93,9 +96,123 @@ void LevOrder(BiTree T)
         }
     }
 }
+*/
+/*
+int GetMaxWidth(BiTree pointer)
+{
+    // 这个数应该被赋为常数
+    int width[10]; //加入这棵树的最大高度不超过10
+    for (int i = 0; i < 10; i++)
+    {
+        width[i] = 0;
+    }
+    int maxWidth = 0;
+    int floor = 1;
+    printf("floor: %d and root: %c\n",floor,pointer->data);
+    if (pointer)
+    {
+        if (floor == 1)
+        { //如果访问的是根节点的话，第一层节点++;
+            width[floor]++;
+              printf("a %d %d\n",width[floor],floor);
+            floor++;
+            if (pointer->lchild)
+                width[floor]++;
+                printf("b %d %d\n",width[floor],floor);
+            if (pointer->rchild)
+                width[floor]++;
+                printf("c %d %d\n",width[floor],floor);
+        }
+        else
+        {
+            floor++;
+            if (pointer->lchild)
+                width[floor]++;
+            if (pointer->rchild)
+                width[floor]++;
+        }
+        if (maxWidth < width[floor])
+            maxWidth = width[floor];
+        //printf("abc  %d\n", maxWidth);
+        GetMaxWidth(pointer->lchild);
+        floor--; //记得退回一层，否则会出错。因为已经Get过了，所以要及时的返回。
+        GetMaxWidth(pointer->rchild);
+    }
+    return maxWidth;
+}
+*/
+int LevelWidth(BiTree root, int level) //find the width of a level(amounts of nodes in the level).
+{
+    // printf("root: %c\n", root->data);
+    if (!root)
+        return 0;
+    else
+    {
+        if (level == 1)
+            return level;
+        printf("root: %c\n", root->data);  
+        level = (LevelWidth(root->lchild, level - 1) + LevelWidth(root->rchild, level - 1));
+    }
+    //printf("level-end: %d\n",level);
+    return level;
+}
+int Depth(BiTree T)
+{
+    int rightdep = 0;
+    int leftdep = 0;
+
+    if (T == NULL)
+        return -1;
+
+    if (T->lchild != NULL)
+        leftdep = Depth(T->lchild);
+    else
+        leftdep = -1;
+
+    if (T->rchild != NULL)
+        rightdep = Depth(T->rchild);
+    else
+        rightdep = -1;
+
+    return (rightdep > leftdep) ? rightdep + 1 : leftdep + 1;
+}
+int Width(BiTree root) //find the maximum width of the btree.
+{
+    int width = 0, i;
+    int w[20];
+    for (i = 0; i < 20; i++)
+        w[i] = 0;
+    if (!root)
+        width = 0;
+    else
+    {
+        for (i = 0; i <= Depth(root); i++)
+        {
+            w[i] = LevelWidth(root, i + 1);
+            printf("w[%d] = %d\n", i, w[i]);
+        }
+    }
+    // printf("root depth: %d\n",Depth(root));
+    i = 0;
+    while (w[i])
+    {
+        if (w[i] > width)
+        {
+            width = w[i];
+        }
+        // printf("width: %d and w[%d]: %d\n", width, i, w[i]);
+        i++;
+
+        //printf("width: %d\n" ,width);
+    }
+    return width;
+}
 int main()
 {
     BiTree t;
     CreateBiTree(&t);
-    LevOrder(&t);
+    char cho;
+    while ((cho = getchar()) != '\n' && cho != EOF);
+    int a = Width(t);
+    printf("%d", a);
 }
