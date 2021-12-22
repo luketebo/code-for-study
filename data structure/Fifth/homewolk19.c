@@ -3,6 +3,7 @@
  * 宽度本来是指什么？那就用层次遍历
  */
 #define MAXSIZE 20
+
 // #define int width[10] = {0}
 #include <stdio.h>
 #include <string.h>
@@ -144,15 +145,24 @@ int GetMaxWidth(BiTree pointer)
 int LevelWidth(BiTree root, int level) //find the width of a level(amounts of nodes in the level).
 {
     // printf("root: %c\n", root->data);
+    int a = 0;
+    int b = 0;
     if (!root)
         return 0;
     else
     {
+        printf("root: %c level: %d\n", root->data, level); 
+        /*
         if (level == 1)
-            return level;
-        printf("root: %c\n", root->data);  
-        level = (LevelWidth(root->lchild, level - 1) + LevelWidth(root->rchild, level - 1));
+            return 1; 
+        */
+       // level = (LevelWidth(root->lchild, level - 1) + LevelWidth(root->rchild, level - 1));
+        a = LevelWidth(root->lchild,level - 1);
+        b = LevelWidth(root->rchild,level - 1);
+       
     }
+    printf("1: %d 2: %d\n",a,b);
+    level = a + b;
     //printf("level-end: %d\n",level);
     return level;
 }

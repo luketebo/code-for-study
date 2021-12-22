@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <style>
+      #info {
+        width: 100px;
+        height: 100px;
+        background-color: #ff0000;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    </style>
+    <div id="info"></div>
+    <script>
+      // 捕获鼠标点击位置并将元素移动到该位置
+      window.onload = function () {
+        document.onclick = processClick;
+      };
+      // 创建点击动作，调用元素移动这个函数实现操作
+      function processClick(evt) {
+        evt = evt || window.event; // 判断对象是否为空，为空就有window.event为他赋值，否则就用原来的
+        var x = 0;
+        var y = 0;
+        if (evt.pageX) {
+          // 主要是获取位置
+          x = evt.pageX;
+          y = evt.pageY;
+        } else if (evt.clientX) {
+          var offsetX = 0;
+          var offsetY = 0;
+          if (document.documentElement.scrollLeft) {
+            offsetX = document.documentElement.scrollLeft; // 设置水平偏移
+            offsetY = document.documentElement.scrollTop; // 设置垂直偏移
+          } else if (document.body) {
+            offsetX = document.body.scrollLeft;
+            offsetY = document.body.scrollTop;
+          }
+          x = evt.clientX + offsetX; // clientX 事件属性返回当事件被触发时鼠标指针相对于浏览器页面（或客户区）的水平坐标。
+
+          y = evt.clientX + offsetY;
+        }
+        // var style = "left:" + x + "px";"top :" + y + "px";   // 怎么设置css样式呀
+
+        // var style = classList.add({"left" : x + "px","top " : y + "px"});
+        
+
+
+        var style;
+        style.offsetTop = x + "px";
+        style.offsetLeft = y + "px";
+        var box = document.getElementById("info");
+        box.setAttribute("style", style); // 添加指定属性
+        
+        
+    }
+    </script>
+  </body>
+</html>

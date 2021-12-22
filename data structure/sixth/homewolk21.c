@@ -31,24 +31,34 @@ int LocateVex(ALGraph *G, char v)
     {
         if (v == G->vertices[i].data)
         {
+            printf("i: %d\n", i);
             return i;
+
         }
     }
+    printf("%c\n",v);
     return -1;
 }
 // 用邻接表表示法创建无向图
 void CreateUDG(ALGraph *G)
 {
     char v1, v2;
-    printf("please input the vexnum and arcnum");
+    printf("please input the vexnum and arcnum\n");
     scanf("%d %d", &G->vexnum, &G->arcnum);
+    char ch;
+    while((ch = getchar()) != EOF && ch != '\n');
     //输入顶点，构造顶点表
+    printf("please input the vexnum\n");
     for (int i = 0; i < G->vexnum; i++)
     {
         scanf("%c", &G->vertices[i].data);
         G->vertices[i].firstarc = NULL;
     }
+    while((ch = getchar()) != EOF && ch != '\n');
+    // 忘了c语言一个很重要的东西，那就是清除键盘缓冲区
+    
     // 输入各边，构造邻接表
+    printf("please input the arcnum\n");
     for (int k = 0; k < G->arcnum; k++)
     {
         scanf("%c %c", &v1, &v2);
@@ -59,6 +69,7 @@ void CreateUDG(ALGraph *G)
             printf("the vexnum is wrong\n");
             exit(0);
         }
+
         // 创建一个新的边界点 进行数据交换
         ArcNode *p1 = (ArcNode *)malloc(sizeof(ArcNode));
         p1->adjvex = i;
@@ -68,6 +79,8 @@ void CreateUDG(ALGraph *G)
         p2->adjvex = j;
         p2->nextarc = G->vertices[j].firstarc;
         G->vertices[j].firstarc = p2;
+        // 每一次都需要清除键盘缓冲区，c语言有一点点麻烦呀
+        while((ch = getchar()) != EOF && ch != '\n');
     }
     return;
 }
@@ -75,6 +88,7 @@ void CreateUDG(ALGraph *G)
 void DFS_AL(ALGraph *G, int v)
 {
     // 图G 为邻接表类型，从n个顶点出发深度优先遍历图G
+    // 深度遍历只有我需要打印出来
     bool visit[MVNum]; //  通过stdbool.h 引用
     printf("%d\n", v);
     visit[v] = true;
@@ -84,12 +98,18 @@ void DFS_AL(ALGraph *G, int v)
     while (p != NULL)
     {
         //  ArcNode *w = (ArcNode *)malloc(sizeof(ArcNode)); // w is v 邻接点
-        int w = p->adjvex;
+        int w = p->adjvex;  // 这一句有点点问题，w是v的邻接点
         if (!visit[w])
             DFS_AL(G, w);
         p = p->nextarc;
     }
 }
-int main(){
-    
+int main()
+{
+    ALGraph G;
+    CreateUDG(&G);
+    int v = 0;
+    printf("please input the number you want to visit first\n");
+    scanf("%d", &v);
+    DFS_AL(&G, v);
 }

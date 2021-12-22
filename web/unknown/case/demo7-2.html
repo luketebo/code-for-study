@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        #one{
+            width:100px;
+            height:100px;
+            background-color:#0f0;
+        }
+        #two{
+            width:50px;
+            height:50px;
+            background-color:#f000;
+        }
+        #stop{
+            display:block;
+        }
+    </style>
+    <script>
+        // 阻止一个事件在嵌套元素之间传播  事件还会传播吗？
+        // 标志取消事件传播的全局变量
+        var stopPropagation = false;
+        function listenEvent(eventTarget,evenType,eventHandler){
+            
+        }
+    </script>
+</body>
+</html>

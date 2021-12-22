@@ -49,8 +49,8 @@ $("#container")
   */
 
 var ele = $("imgs");
-var w = ele.offsetWidth;
-var h = ele.offsetHeight;
-console.log("imgs " + w + " 高 " + h);
+ele.offsetHeight = 30 + "px";
+ele.offsetWeight = 30 + "px";
+console.log("imgs " + ele.offsetHeight + " 高 " + ele.offsetWeight);
 
 
