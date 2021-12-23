@@ -142,28 +142,41 @@ int GetMaxWidth(BiTree pointer)
     return maxWidth;
 }
 */
+int count[MAXSIZE];
+int max = -1;
+int widthlevel(BiTree root, int level)
+{
+    if (root == NULL)
+        return 0;
+    else count[level]++;
+    if (max < count[level])
+        max = count[level];
+    printf("max: %d root: %c level: %d\n",max,root->data,level);
+    widthlevel(root->lchild, level - 1);
+    widthlevel(root->rchild, level - 1);
+    return max;
+}
 int LevelWidth(BiTree root, int level) //find the width of a level(amounts of nodes in the level).
 {
     // printf("root: %c\n", root->data);
-    int a = 0;
-    int b = 0;
+    // int a = 0;
+    // int b = 0;
     if (!root)
         return 0;
     else
     {
-        printf("root: %c level: %d\n", root->data, level); 
-        /*
+        printf("root: %c level: %d\n", root->data, level);
+
         if (level == 1)
-            return 1; 
-        */
-       // level = (LevelWidth(root->lchild, level - 1) + LevelWidth(root->rchild, level - 1));
-        a = LevelWidth(root->lchild,level - 1);
-        b = LevelWidth(root->rchild,level - 1);
-       
+            return 1;
+
+        level = (LevelWidth(root->lchild, level - 1) + LevelWidth(root->rchild, level - 1));
+        // a = LevelWidth(root->lchild,level - 1);
+        // b = LevelWidth(root->rchild,level - 1);
     }
-    printf("1: %d 2: %d\n",a,b);
-    level = a + b;
-    //printf("level-end: %d\n",level);
+    //printf("1: %d 2: %d\n",a,b);
+    // level = a + b;
+    printf("level-end: %d\n", level);
     return level;
 }
 int Depth(BiTree T)
@@ -198,7 +211,8 @@ int Width(BiTree root) //find the maximum width of the btree.
     {
         for (i = 0; i <= Depth(root); i++)
         {
-            w[i] = LevelWidth(root, i + 1);
+            w[i] = widthlevel(root,i + 1);
+            //w[i] = LevelWidth(root, i + 1);
             printf("w[%d] = %d\n", i, w[i]);
         }
     }
@@ -222,7 +236,8 @@ int main()
     BiTree t;
     CreateBiTree(&t);
     char cho;
-    while ((cho = getchar()) != '\n' && cho != EOF);
+    while ((cho = getchar()) != '\n' && cho != EOF)
+        ;
     int a = Width(t);
     printf("%d", a);
 }
