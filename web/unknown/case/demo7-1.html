@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
   </head>
   <body>
     <style>
@@ -46,20 +47,16 @@
 
           y = evt.clientX + offsetY;
         }
-        // var style = "left:" + x + "px";"top :" + y + "px";   // 怎么设置css样式呀
+        var style = { left: + x + "px", top: + y + "px" }; // 怎么设置css样式呀
 
         // var style = classList.add({"left" : x + "px","top " : y + "px"});
-        
-
-
-        var style;
-        style.offsetTop = x + "px";
-        style.offsetLeft = y + "px";
-        var box = document.getElementById("info");
-        box.setAttribute("style", style); // 添加指定属性
-        
-        
-    }
+        console.log("x " + x + ", y " + y);
+        $("#info").css(style);
+        // style.offsetTop = x + "px";
+        // style.offsetLeft = y + "px";
+        //  var box = document.getElementById("info");
+        //  box.setAttribute("style",{"left": + x + "px","top" : + y + "px"}); // 添加指定属性
+      }
     </script>
   </body>
 </html>
