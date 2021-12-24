@@ -22,75 +22,110 @@ typedef struct
     ElemType data;      // 数据域
     struct LNode *next; // 指针域
 } LNode, *LinkList;
-void InitList(LinkList t)
+// 初始化链表 初始化有问题，但是我大概知道
+void InitList(LNode *t)
 {
-    // 生成新结点作为头结点，用头指针指向头结点
     t = (LNode *)malloc(sizeof(LNode));
-    t->next = NULL;
+    //t->next = NULL;
+}
+// 对链表进行赋值
+void CreateList(LNode *t)
+{
+    LNode *p; // 创建两个指针 一个指前面
+    LNode *r; // 一个值后面
+    r = t;
+    int i = 0;
+    int j;
+    while (i != -1)
+    {
+        scanf("%d", &j);
+        if (j != 0)
+        {
+            p = (LNode *)malloc(sizeof(LNode)); // 一个结点
+            p->data = j;
+            r->next = p;
+            r = p;
+        }
+        else
+        {
+            i = -1;
+            r->next = NULL;
+        }
+    }
+}
+// 打印链表
+void Print_List(LNode *t)
+{
+    printf("the printf:\n");
+    LNode *q = t->next;
+    if (q == NULL)
+    {
+        printf("the list is null\n");
+        return;
+    }
+    // 重要部分
+    while (q != NULL)
+    {
+        printf("%d ", q->data);
+        q = q->next;
+    }
+}
+// 对单链表进行分离  分隔标准 以 0 为界  单链表分隔的时候麻烦的很
+void Divide_List(LNode *a, LNode *l, LNode *r)
+{
+    // 因为有头结点的存在，所以我要把这三个头结点通通跳过
+
+    LNode *t = a->next;
+    LNode *ti = a;
+    LNode *li = l;
+    LNode *ri = r;
+    if (t == NULL)
+    {
+        printf("the list is null\n");
+        return;
+    }
+    // 原题没有给出等于0的情况，我们这里就不作讨论
+    while (t != NULL)
+    {
+        if (t->data > 0)
+        {
+
+            //li = (LNode *)malloc(sizeof(LNode));   // 创建新的结点？ 无必要
+            li->next = t; // 将t连接到li单链表末尾
+            li = t;
+            t = t->next; //  t 指针后移
+                         // 最后面结点并没有断开，懂我意思吗?
+        }
+        else if (t->data < 0)
+        {
+            ri->next = t;
+            ri = t;
+            t = t->next;
+        }
+        // 现在最后结点已经被我断开了， 这算是一个关键点
+        li->next = NULL;
+        ri->next = NULL;
+    }
     return;
-}
-// 采用后插法，保证我输入元素的顺序没错
-/**
- * 后插法，我是照着书上写得，走不动也很正常
- */
-// 我自己来写一个后插创建单链表
-void CreateLNode(LinkList *t) // 指向LNode 的指针
-{
-    t = (LNode *)malloc(sizeof(LNode));
-    (*t)->next = NULL;
-    LinkList r;
-    r = t;
-    
-}
-/*
-void CreateLNode(LinkList *t)
-{
-    // 这里的头结点，我有疑惑，为什么要这么创建
-    t = (LNode *)malloc(sizeof(LNode)); // 创建一个带头结点的空链表
-    (*t)->next = NULL;
-    LinkList r;
-    r = t;
-    int n = 0;
-    printf("please input the element numbers\n");
-    scanf("%d", &n);
-    // 清空键盘缓冲区
-    char ch;
-    while ((ch = getchar()) != EOF && ch != '\n')
-        ;
-    for (int i = 0; i < n; i++)
-    {
-        LinkList p = (LNode *)malloc(sizeof(LNode));
-        printf("please input the element\n");
-        scanf("%d", &p->data);
-        // 清空键盘缓冲区
-        while ((ch = getchar()) != EOF && ch != '\n')
-            ;
-        p->next = NULL;
-        r->next = p;
-        r = p;
-    }
-}
-*/
-// b and c 利用a表中的结点
-/**
- * 那只要创建两个链表，然后对a表中的元素进行分类，如果怎么怎么的，就加入另一个b 或者 c 链表中，反正也只是
- * 改变指针就可以咯
- */
-void DivideLNode()
-{
-}
-void Print_List(LinkList *p)
-{
-    while (p)
-    {
-        printf("%d ", (*p)->data);
-        p = (*p)->next;
-    }
-    printf("\n");
 }
 int main()
 {
-    LinkList a;
-    CreateLNode(&a);
-    Print_List(&a);
+    LNode *t, *r, *l;
+    // 初始化
+    /*
+    InitList(t);
+    InitList(l);
+    InitList(r);
+    */
+    t = (LNode *)malloc(sizeof(LNode));
+    r = (LNode *)malloc(sizeof(LNode));
+    l = (LNode *)malloc(sizeof(LNode));
+    CreateList(t);
+    Print_List(t);
+    printf("\n");
+    Divide_List(t, l, r);
+    Print_List(r);
+    printf("\n");
+    Print_List(l);
+    return;
 }

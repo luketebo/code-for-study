@@ -2,6 +2,7 @@
  * 单链表的最大元素 p53 2(6)  第二章
  *  设计一个算法，通过一趟遍历能够确定长度为n的单链表中值最大的结点
  *  确实需要创建头结点，但是可以不用通过初始化
+ *  基本完成但是有一点点小问题
  */
 #include "stdio.h"
 #include "stdlib.h"
@@ -43,7 +44,7 @@ void Print_List(LNode *l)
 {
     LNode *p = l->next;
     printf("该链表的内容为：");
-    while (p->next != NULL)  // p->next 改成了 p->data 就可以了,并没有。还是有问题，目前还没解决，打印有点点问题
+    while (p != NULL)  // p->next 改成了 p->data 就可以了,并没有。还是有问题，目前还没解决，打印有点点问题
     {
         printf("%d ", p->data);  // 怎么指向头结点之后的首元结点
         p = p->next;
