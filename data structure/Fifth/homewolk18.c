@@ -1,6 +1,7 @@
 /**作业：18 交换二叉树结点的左孩子和右孩子
  * 我有点点搞不懂这个循环递归的操作，还是太高大上了，直呼太难
  * 我还不如自己想一个创建二叉树的方法，他那么创建，实在是太强了
+ * 案例 ab##c##
  */
 #include "stdio.h"
 #include "stdlib.h"
@@ -28,9 +29,10 @@ void CreateBiTree(BiTree *T)
         CreateBiTree(&(*T)->rchild);
     }
 }
-void func(char t){
+void func(char t)
+{
 
-    printf("%c",t);
+    printf("%c", t);
 }
 // 遍历二叉树
 void PreOrder(BiTree T)
@@ -45,16 +47,18 @@ void PreOrder(BiTree T)
         PreOrder(T->rchild);
     }
 }
-void Change(BiTree T){
-    if(T){
-        BiNode * a = NULL;  // 创建一个新指针用来进行交换数据      
-        a = T->lchild;
-        
+void Change(BiTree T)
+{
+    BiTree temp;
+    if (T->lchild == NULL && T->rchild == NULL)
+        return;
+    else{
+        temp = T->lchild;
         T->lchild = T->rchild;
-        T->rchild = a;
-        Change(T->lchild);
-        Change(T->rchild);
-    }
+        T->rchild = temp;
+    }// 交换左右孩子？
+    Change(T->lchild);
+    Change(T->rchild);
 }
 
 int main(void)
@@ -62,7 +66,7 @@ int main(void)
     BiTree T = NULL;
     CreateBiTree(&T);
     PreOrder(T);
-    Change(&T);
+    Change(T);
     printf("\n");
     PreOrder(T);
     return 0;
