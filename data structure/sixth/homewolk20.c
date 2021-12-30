@@ -228,9 +228,9 @@ int main()
     printf("please input the the insert vex\n");
     scanf("%c %c", &a,&d);
     Insert(&t, d);
-    DeleteVex(&t, d);
-    DeleteVexInsertArc(&t,a,d);
-    DeleteArc(&t,a,d);
+  //  DeleteVex(&t, d);
+   // InsertArc(&t,a,d);
+    //DeleteArc(&t,a,d);
     Display(&t);
 
     return 0;

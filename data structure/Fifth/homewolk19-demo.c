@@ -55,10 +55,10 @@ int Width(BiTree bt)//求二叉树bt的最大宽度
 			    last=rear;
 				if(temp>maxw) maxw=temp;//last指向下层最右元素, 更新当前最大宽度
 				temp=0;
-		  }//if    
-	  }//while
+		  }   
+	  }
      return (maxw);
-}//结束width
+}
 
 }
 int main()

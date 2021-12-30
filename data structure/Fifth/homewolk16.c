@@ -6,7 +6,7 @@ typedef struct
     ElemType data;
     struct BiNode *lchild, *rchild;
 } BiNode, *BiTree;
-//创建一棵二叉树,tmd 为撒子跳不出去，我日，马勒戈壁
+//创建一棵二叉树
 void CreateBiTree(BiTree *T)
 {
     char ch;

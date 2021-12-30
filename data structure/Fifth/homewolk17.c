@@ -17,8 +17,7 @@ void CreateBiTree(BiTree *T)
 {
     char ch = NULL;
     scanf("%c", &ch); //缓存区问题，这里面有一个回车
-    //%c 为什么可以输入一大串字符？
-    //这个键盘缓冲区我该怎么解决？
+   
 
     if (ch == '#')
     {
@@ -40,7 +39,6 @@ void function(char t)
 {
     printf("%c ", t);
 }
-//检索二叉树 我感觉单纯检索就不需要传递一个指针，只要把值传递了就可以
 void PreOrder(BiTree T)
 {
     if (T)
@@ -81,11 +79,11 @@ int main()
     printf("\n");
     printf("now create the second bitree\n");
     //创建的时候出了问题，他给我生成了一个结点
-    //他已经给我创建了一个根结点了，阿哲
+    //他已经给我创建了一个根结点了，
     char cho;
     while ((cho = getchar()) != '\n' && cho != EOF);
 
-    //终于把键盘缓冲区给干掉了，气死了，啊啊啊啊
+    
     CreateBiTree(&R);
     PreOrder(R);
     printf("\n");
