@@ -60,6 +60,7 @@
 			a="";
 			document.getElementById('end').innerText="0";
 		}
+		
 	</script>
 </head>
 <body>
@@ -101,5 +102,12 @@
 			<td><button class="butt">/</button></td>
 		</tr>
 	</table>
+	<div class = "aa" style = "border: 1px solid red;">aa</div>
+	<button class = "ab">aa</button>
+	<script>
+		document.getElementsByClassName("aa")[0].onmouseover = function(){
+			alert("123");
+		}
+	</script>
 </body>
 </html>

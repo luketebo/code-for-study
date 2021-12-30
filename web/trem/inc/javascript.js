@@ -1,56 +1,30 @@
-/*
-function $(a) {
-  return document.getElementById(a);
-}
+// 横栏的固定
+// 顶部的一些小动画
+var bar = document.getElementById("fz");
+// 我没有找到fz
+console.log(bar);
+console.log(bar.offsetHeight, bar.offsetWidth);
 
-var po = $("fz").offsetTop;
-
-
-
-$("fz").style.position = "fixed";
-$("fz").style.top = $("logo").offsetHeight + "px";
-
-function stay(ss) {
-  var objY = $("fz").offsetTop;
-  var objS = $("fz").style;
-  if (ss >= $("logo").offsetHeight) objS.top = 0;
-  else objS.top = -1 * ss + $("logo").offsetHeight - 2 + "px";
-  console.log(objY);
-}
-*/
-/*
-window.addEventListener("scroll", function () {
-  var top = window.pageYOffset || 0;
-  window.requestAnimationFrame(function () {
-      stay(top);
-      ticking = false;
+$(function () {
+  var navH = $("#fz").offset().top;
+  //滚动事件
+  $(window).scroll(function () {
+    //获取滚动条的滑动距离
+    var scroH = $(this).scrollTop();
+    if (scroH >= navH) {
+      $("#fz").css({ position: "fixed", top: 0, left: 0 });
+    } else if (scroH < navH) {
+      $("#fz").css({ position: "static", margin: "0,auto" });
+    }
+    console.log(scroH == navH);
   });
 });
-*/
-/*
-$("#container")
-  .find("img")
-  .each(function () {
-    var img = this;
-    if (img.width > 30) {
-      img.style.width = "30px";
-      img.style.height = "30px";
-      //$(img).removeAttr('height');
-      
-      var aTag = document.createElement('a');
-      aTag.href = img.src;
-            aTag.target="_blank";
-      $(aTag).addClass('bPic')
-      .insertAfter(img).append(img)
-      .lightBox(options);
-     
-    }
-  }); 
-  */
-
-var ele = $("imgs");
-ele.offsetHeight = 30 + "px";
-ele.offsetWeight = 30 + "px";
-console.log("imgs " + ele.offsetHeight + " 高 " + ele.offsetWeight);
-
-
+var bg = $(".qsong");
+console.log(bg);
+var x = 80;
+function polling() {
+  bg.animate({"background-position-x":x+"%"},320,function(){
+  bg.animate({"background-position-x":85+"%"},320,polling());
+  })
+}
+polling();

@@ -28,7 +28,6 @@ body {
   margin: 0 auto;
   flex-direction: column;
   align-items: center;
-  border: 7px solid black;
   justify-content: space-between;
 }
 
@@ -63,17 +62,23 @@ a:hover {
   border-top: 1px solid #a3a3a3af;
   /* border: 1px solid #727272; */
   width: 100vw;
-  display: flex;
+  height: 39px;
+  display:flex;
   justify-content: center;
+  background-color: white;
+  z-index:99;
+  box-shadow:  4px 0px 6px 2px #0000003d;
 }
 
 #navigate {
   font-weight: bold;
-  font-size: 2vh;
+  font-size: 1.6vh;
   padding: 1vh 0 1vh 0;
-  width: 56vw;
+  width: 45vw;
   display: flex;
   justify-content: space-between;
+  background-color: white;
+  z-index:99;
 }
 
 #banner {
@@ -118,11 +123,9 @@ a:hover {
 #wtime {
   font-size: 13px;
   padding: 7px;
-  border: 2px solid #000;
   border-radius: 6px;
 }
 #container {
-  border: 4px solid black;
   width: 100%;
   padding: 0px;
   margin: 0px;
@@ -131,13 +134,9 @@ a:hover {
 .container-bar {
   height: 60px;
   width: 100%;
-  
-  border: 1px red solid;
-  
   font-size: 24px;
 }
 .row {
-  border: 1px solid black;
   width: 100%;
   height: 300px;
   position: relative;
@@ -147,7 +146,6 @@ a:hover {
   top: -270px;
   left: 33%;
   width: 51%;
-  border: 1px solid blue;
   height: 200px;
 }
 .col-md-4 img {
@@ -203,13 +201,11 @@ a:hover {
   color: #ab8c40;
   width: 15%;
   font-family: "宋体";
-  border: 1px solid red;
   margin-left: 110px;
   margin-top: 7px;
 }
 .container-alt {
   display: line-block;
-
   height: 40px;
   color: #ab8c40;
   margin-left: 35%;
@@ -217,7 +213,6 @@ a:hover {
   position: absolute;
   float: top;
   width: 25%;
-  border: 1px solid #dda004c5 !important;
 }
 .container-alt a {
   /* 
@@ -229,7 +224,7 @@ a:hover {
 }
 .ani_button_y {
 }
-.qsong {
+.qsong{
   background-image: url(arrows.png);
   background-repeat: no-repeat;
   background-position: 140px center;
@@ -238,7 +233,7 @@ a:hover {
   height: 26px;
   width: 970px;
   padding:20px;
-  border: 1px solid #dda004c5 !important;
+  
 }
 .text-center {
   text-align: center;
@@ -252,6 +247,9 @@ a:hover {
   border: 1px solid #dda004c5;
   border-radius: 4px;
 
+}
+#cacb{
+  color: #dda004c5;
 }
 .pagination-lg{
   padding-left: 30%;
