@@ -21,71 +21,28 @@ $(function () {
     console.log(scroH == navH);
   });
 });
-//图片运动
-//var bg = document.getElementsByClassName(".qsong");
-/*
+
 var bg = $(".qsong");
 console.log(bg);
 var x = 80;
 function polling() {
-  bg.animate({"background-position-x":x+"%"},320,function(){
-  bg.animate({"background-position-x":85+"%"},320,polling());
-  })
-}
-function fy(){
-  var ch = document.getElementsByClassName("qsong").mouseover = function (){
-    ch.animate({"background-position-x":x+"%"},320,function(){
-    ch.animate({"background-position-x":85 + "%"},320,polling());
-    })
-  }
- // polling();
-}
-*/
-/*
-var bg = document.getElementsByClassName(".qsong");
-var mouse = document.getElementById("mouse");
-document.onclick = function(){
-  var event = event | window.event;
-}
-*/
-/*
-var x = 80;
-var cg = document.getElementsByClassName("qsong");
-console.log(cg);
-for (var i = 0; i < cg.length; i++) {
-  var x = 80;
-  cg[i].onmouseover = function polling() {
-    cg[i].animate({ "background-position-x": x + "%" }, 320, function () {
-      cg[i].animate({ "background-position-x": 85 + "%" }, 320, polling());
-    });
-  };
-  //console.log(cg[i]);
-}
-*/
-/*
-for(var ch in cg){
-  ch.onmouseover = function(){
-    alert("123");
-  }
-  console.log(ch);
-}
-*/
-var bg = $(".qsong");
-console.log(bg);
-var x = 80;
-function polling() {
-  bg.animate({"background-position-x":x+"%"},320,function(){
-  bg.animate({"background-position-x":85+"%"},320,polling())
-  })
+  bg.animate({ "background-position-x": x + "%" }, 320, function () {
+    bg.animate({ "background-position-x": 85 + "%" }, 320, polling());
+  });
 }
 polling();
 // 图片缩放
 var mg = $("img");
 console.log(mg);
-for(var i = 0;i<mg.length;i++){
-    mg[i].onmouseover = function(){
-     
-      $(this).css({"border-radius":4000})
-    }
+$(function(){
+  var w = $("img").width();
+  var h = $("img").height();
+  var w2 = w + 20;
+  var h2 = h + 20;
+  $("img").hover(function(){
+    $(this).stop().animate({height:h2,width:w2,left:"-5px",top:"-5px"},400);
+  },function(){
+    $(this).stop().animate({height:h,width:w,left:"0",top:"0"},400);
+  });
+})
 
-}
