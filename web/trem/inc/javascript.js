@@ -2,7 +2,6 @@
 // 小横条的动画
 // 顶部的一些小动画
 var bar = document.getElementById("fz");
-// 我没有找到fz
 console.log(bar);
 // 我现在要获取fz目前所处的位置
 console.log(bar.offsetHeight, bar.offsetWidth);
@@ -39,6 +38,7 @@ $(function(){
   var h = $("img").height();
   var w2 = w + 20;
   var h2 = h + 20;
+  //stop 是jQuery中用于控制页面动画效果的方法。运行之后立刻结束当前页面上的动画效果。
   $("img").hover(function(){
     $(this).stop().animate({height:h2,width:w2,left:"-5px",top:"-5px"},400);
   },function(){

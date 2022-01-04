@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css">
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <!-- <script src="js/jquery-1.12.4.min.js"></script> -->
+    <!-- <link rel="stylesheet" type="text/css" href="js/main.js"> -->
+<!--    <link rel="stylesheet" type="text/css" href="css/bootstrap/css/bootstrap.min.css">-->
+<!--    <link href='http://fonts.useso.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css'>-->
+</head>
+<body>
+<div id="header" class="header">
+    <div class="top-header">
+        <div class="container">
+            <div class="nav-top-links">
+                <a class="first-item" href="#"><i class="fa fa-phone"></i> 00-62-658-658</a>
+            </div>
+            <div class="top-bar-social">
+                <a href="#" title="Facebook"><i class="fa fa-facebook"></i></a>
+                <a href="#" title="Twitter"><i class="fa fa-twitter"></i></a>
+                <a href="#" title="Youtube"><i class="fa fa-youtube"></i></a>
+                <a href="#" title="QQ"><i class="fa fa-qq"></i></a>
+                <a href="#" title="wechat"><i class="fa fa-wechat"></i></a>
+            </div>
+            <div class="language ">
+                <div class="dropdown">
+                    <a class="dropdown-show" id="dropdown-show" href="#">
+<!--                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"-->
+                        <img alt="email" src="img/images/fr.jpg" />French
+
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#"><img alt="email" src="img/images/en.jpg" />English</a></li>
+                        <li><a href="#"><img alt="email" src="img/images/fr.jpg" />French</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="support-link">
+                <a href="#">Login</a>
+                <a href="#">Register</a>
+                <a href="#">Wishlist</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function(){
+        $('.dropdown').hover(function() {
+            $('.dropdown-menu').show();
+        });
+    })
+    var a=$('.dropdown');
+    console.log(a);
+    console.log($('.dropdown-menu'));
+</script>
+</body>
+
+</html>
