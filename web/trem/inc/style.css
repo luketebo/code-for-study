@@ -72,7 +72,7 @@ a:hover {
 
 #navigate {
   font-weight: bold;
-  font-size: 1.6vh;
+  font-size: 1.8vh;
   padding: 1vh 0 1vh 0;
   width: 45vw;
   display: flex;
@@ -249,9 +249,10 @@ a:hover {
 
 }
 #cacb{
-  color: #dda004c5;
+  color: #ab8c40;
 }
 .pagination-lg{
   padding-left: 30%;
 
 }
+

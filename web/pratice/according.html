@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>手风琴效果</title>
+    <style>
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      div {
+        width: 1200px;
+        height: 400px;
+        margin: 50px auto;
+        overflow: hidden;
+      }
+      div li {
+        width: 240px;
+        height: 400px;
+        float: left;
+      }
+    </style>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+  </head>
+  <body>
+    <div id="box">
+      <ul>
+        <li><img src="images/1.jpg" /></li>
+        <li><img src="images/2.jpg" /></li>
+        <li><img src="images/3.jpg" /></li>
+        <li><img src="images/4.jpg" /></li>
+        <li><img src="images/5.jpg" /></li>
+      </ul>
+    </div>
+    <script>
+      // 使用havor实现
+      $("#box>ul>li").hover(
+        function () {
+            // siblings() 方法返回被选元素的所有同级元素。
+          $(this).siblings("li").css("width", "60.5px");
+          $(this).css("width", "958px");
+        },
+        function () {
+          $("#box>ul>li").css("width", "240px");
+        }
+      );
+      /*
+      $('#box>ul>li').on({
+        mouseover: function () {
+          // 当前的li的所有的兄弟元素，并修改其宽度
+          $(this).siblings('li').css('width', '60.5px');
+          // 将当前li的宽度设置为图片的宽度
+          $(this).css('width', '958px');
+        },
+        mouseout: function () {
+          // 显示所有li的部分图片内容
+          $('#box>ul>li').css('width', '240px');
+        }
+      });
+      */
+    </script>
+  </body>
+</html>
