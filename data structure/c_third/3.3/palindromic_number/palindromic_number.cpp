@@ -1,4 +1,4 @@
-//试写一个算法判断字符数列是否为回文数（将一半字符入栈）
+//作业9：试写一个算法判断字符数列是否为回文数（将一半字符入栈）
 #include<iostream>
 using namespace std;
 #define maxsize 100;

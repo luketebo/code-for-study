@@ -38,11 +38,11 @@
       $("#box>ul>li").hover(
         function () {
             // siblings() 方法返回被选元素的所有同级元素。
-          $(this).siblings("li").css("width", "60.5px");
-          $(this).css("width", "958px");
+          $(this).siblings("li").css("width", "60.5px"); // 没有被选中就变成缩小的状态
+          $(this).css("width", "958px");   // 被选中元素就变成最大值
         },
         function () {
-          $("#box>ul>li").css("width", "240px");
+          $("#box>ul>li").css("width", "240px");  // 已出之后就变成原来的模样
         }
       );
       /*

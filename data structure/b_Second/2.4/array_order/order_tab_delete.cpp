@@ -1,4 +1,4 @@
-//顺序表的删除操作,也是用链表来做的吗？
+//作业5：顺序表的删除操作,也是用链表来做的吗？
 #include<iostream>
 #include<vector>
 using namespace std;

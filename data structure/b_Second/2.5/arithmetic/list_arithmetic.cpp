@@ -1,4 +1,4 @@
-//用链表实现两个集合的差运算
+//作业7：用链表实现两个集合的差运算
 #include<iostream>
 using namespace std;
 typedef struct Node{

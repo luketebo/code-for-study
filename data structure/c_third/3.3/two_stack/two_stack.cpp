@@ -1,4 +1,4 @@
-//试编写双栈初始化，判断栈空，栈满，进栈和出栈等算法的函数
+//作业8：试编写双栈初始化，判断栈空，栈满，进栈和出栈等算法的函数
 #define max 10;
 #include <iostream>
 using namespace std;

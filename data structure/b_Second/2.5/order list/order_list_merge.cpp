@@ -1,4 +1,4 @@
-//合并有序链表
+//作业6：合并有序链表
 //我可以创建两个简单的链表呀
 #include<iostream>
 using namespace std;

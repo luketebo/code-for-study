@@ -1,3 +1,4 @@
+//作业5：顺序表的删除
 #include <stdio.h>
 #include <stdlib.h>
 struct link

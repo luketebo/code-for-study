@@ -1,10 +1,11 @@
+//作业2：
 //在一维数组a中顺序查找某个值等于e的元素，并返回其所在的下标
 #include<iostream>
 using namespace std;
 int main()
 {
     int a[5];
-    cout<<"请输入a数组中的值："<<endl;
+    cout<<"请输入a数组中的值:"<<endl;
     for(int i=0;i<5;i++){
         cin>>a[i];
     }

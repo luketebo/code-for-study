@@ -1,4 +1,4 @@
-//一元多项式的运算
+//作业3：一元多项式的运算
 #include <iostream>
 using namespace std;
 int main()

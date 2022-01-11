@@ -1,4 +1,4 @@
-//求两个n阶矩阵的乘积算法
+// 作业1:求两个n阶矩阵的乘积算法
 #include <iostream>
 using namespace std;
 
@@ -16,7 +16,7 @@ int main ()
 	cin>>a>>b;
 	if(a>10||b>10||m>10||n>10) {
 		cout<<"行数出现错误"<<endl;
-		cout<<"请重新输入："<<endl;
+		cout<<"请重新输入:"<<endl;
 	}else break;
 	}
     if(n != a)

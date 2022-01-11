@@ -1,4 +1,4 @@
-//疏松多项式的运算
+//作业4：疏松多项式的运算
 #include <iostream>
 using namespace std;
 typedef struct Node
