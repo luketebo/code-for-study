@@ -5,8 +5,8 @@ $(function () {
     var width = 958;     // 每张图片的宽度
     var speed = 400;     // 动画时间
     // 复制列表中的第一个图片，追加到列表最后，设置ul的宽度为图片张数 * 图片宽度
-    var firstimg = $('.hot li').first().clone();
-    $('.hot').append(firstimg).width($('.hot li').length * width);
+    var firstImg = $('.hot li').first().clone();
+    $('.hot').append(firstImg).width($('.hot li').length * width);
     // 1. 设置周期计时器，实现图片自动切换
     timer = setInterval(imgChange, delay);
     // 2. 鼠标移入，暂停自动播放，移出，开始自动播放
@@ -15,6 +15,7 @@ $(function () {
     }, function () {
         timer = setInterval(imgChange, delay);
     });
+    /*
     // 3. 鼠标划入圆点
     $('.dot li').mouseover(function () {
         i = $(this).index();
@@ -41,11 +42,12 @@ $(function () {
         $('.hot').stop().animate({ left: -i * width }, speed);
         dotChange();
     });
+    */
     // 自动切换图片
     function imgChange() {
         ++i;
         isCrack();
-        dotChange();
+      //  dotChange();
     }
     // 无缝轮播
     function isCrack() {
@@ -55,6 +57,7 @@ $(function () {
         }
         $('.hot').stop().animate({ left: -i * width }, speed);
     }
+    /*
     // 自动切换对应的圆点
     function dotChange() {
         if (i == $('.hot li').length - 1) {
@@ -63,4 +66,5 @@ $(function () {
             $('.dot li').eq(i).addClass('on').siblings().removeClass('on');
         }
     }
+    */
 });

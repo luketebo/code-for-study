@@ -39,6 +39,27 @@
        * 1.选取对象，然后使用Hover或者onmouseover,onmouseout两个函数
        * 2.重要的是函数中的siblings函数
        */
+        $("#box>ul>li").hover(function(){
+          $(this).siblings("li").css("width","60.5px");
+          $(this).css("width","958px");
+        },function(){
+          $("#box>ul>li").css("width","60px");
+        })
+        // $("#box>ul>li").on({
+        //   mouseover:function(){
+        //     $(this).siblings("li").css("width","60.5px");
+        //     $(this).css("width","958px");
+        //   },
+        //   mouseout:function(){
+        //     $("#box>ul>li").css("width","240px");
+        //   }
+        // })
+
+
+
+
+
+
       /*
       $("#box>ul>li").hover(function(){
         // 鼠标移入效果

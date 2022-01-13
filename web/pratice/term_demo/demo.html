@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+  </head>
+  <style>
+    div {
+      width: 50px;
+      height: 50px;
+      border: 1px solid;
+    }
+  </style>
+  <body>
+    <div></div>
+    <p><button id="btn">change</button></p>
+  </body>
+  <script>
+    // 编写一个将用户输入的信息输出到网页
+    // var inputs = prompt("请输入信息: ");
+    // document.write(inputs);
+
+    // 编写1~100的素数 (只能被自身和1整除)  判断条件一直除下去
+    // for(var n = 1;n<=100;n++){
+    //     if(n == 1){
+    //         continue;
+    //     }else{
+    //         var flag = true;
+    //         for(var j = 2;j<n;j++){
+    //             if(n%j==0){
+    //                 flag = false;
+    //             }
+    //         }
+    //     }
+    //     if(flag){
+    //         document.write("100以内的素数:"+n+"<br/>");
+    //     }
+    // }
+
+    // 求红白球的个数
+    // for (var red = 0; red <= 25; red++) {
+    //   for (var white = 0; white <= 31; white++) {
+    //     for (var black = 0; black <= 28; black++) {
+    //       if (red + white == 25 && white + black == 31 && red + black == 28) {
+    //         document.write(
+    //           "red:" + red + ",white:" + white + ",black:" + black
+    //         );
+    //       }
+    //     }
+    //   }
+    // }
+
+    // 编程实现单击change按钮，为div元素添加红色双线的边框
+    // var btn = document.getElementById("btn");
+    // var div = document.getElementsByTagName("div")[0];
+    // btn.onclick = function() {
+    //     div.style.border = "double red";
+    // }
+    // // 利用String 对象的属性和方法实现过滤字符串前后空格
+    // String.prototype.trim = function(){
+    //     return this.replace(/(^\s*)|(\s*$)/g, '');
+    // };
+    // String.prototype.ltrim = function(){
+    //     return this.replace(/(^\s*)/g, '');
+    // }
+    // String.prototype.rtrim = function(){
+    //     return this.replace(/(\s*$)/g, '');
+    // }
+    // 编写代码模拟object.create()的功能
+    // Object.prototype.create = function (obj) {
+    //   if (Object.prototype.create) {
+    //     return Object.prototype.create;
+    //   }
+    //   function F() {}
+    //   F.prototype = obj;
+    //   return new F();
+    // };
+    //
+    // 利用HTML DOM实现全选，全不选，反选功能
+    
+  </script>
+  <script src="demo.js"></script>
+</html>
