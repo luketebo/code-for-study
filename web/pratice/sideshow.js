@@ -3,7 +3,8 @@ $(function () {
   var width = 958;
   var firstimg = $(".hot li").first().clone();
   $(".hot")
-    .append(firstimg)
+    .append(firstimg)  
+    //append ()函数用于向每个匹配元素内部的末尾位置追加指定的内容。
     .width($(".hot li").length * width);
 });
 // 实现图片自动切换
@@ -15,9 +16,11 @@ function img_change() {
   ++i;
   isCrack();
   dotChange();
+ // console.log(i);
 }
 var speed = 400;
 var width = 958;
+console.log($(".hot li").length);
 function isCrack() {
   if (i == $(".hot li").length) {
     i = 1;
@@ -27,8 +30,12 @@ function isCrack() {
     .stop()
     .animate({ left: -i * width }, speed);
 }
+// 为图片添加小圆点
 function dotChange() {
   if (i == $(".hot li").length - 1) {
+    //eq (index) 方法将匹配元素集缩减值指定 index 上的一个。
+    //整数，指示元素的位置（最小为 0）。
+    //如果是负数，则从集合中的最后一个元素往回计数
     $(".hot li").eq(0).addClass("on").siblings().removeClass("on");
   } else {
     $(".hot li").eq(i).addClass("on").siblings().removeClass("on");

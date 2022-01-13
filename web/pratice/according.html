@@ -34,7 +34,41 @@
       </ul>
     </div>
     <script>
+      /**
+       * 总结：手风琴
+       * 1.选取对象，然后使用Hover或者onmouseover,onmouseout两个函数
+       * 2.重要的是函数中的siblings函数
+       */
+      /*
+      $("#box>ul>li").hover(function(){
+        // 鼠标移入效果
+       // console.log(this);
+       // $(this) 为什么要这么用？ $("this") 这又是个什么玩意？
+      //  var a = ("this");
+      //  console.log(a);  什么都不是的玩意儿
+        $(this).siblings("li").css("width","60.5px");
+        $(this).css("width","958px");
+      },function(){
+        //这样就把每一个都拉伸了
+       // $(this).siblings("li").css("width","240px");
+        $("#box>ul>li").css("width","240px");
+        //console.log(this);
+
+      })
+      // 不使用haver
+      $("#box>ul>li").on({
+        mouseover:function(){
+          $(this).siblings("li").css("width","60.5px");
+          $(this).css({"width":"958px"});
+        },
+        mouseout:function(){
+          $("#box>ul>li").css("width","240px");
+
+        }
+      });
+      */
       // 使用havor实现
+      /*
       $("#box>ul>li").hover(
         function () {
             // siblings() 方法返回被选元素的所有同级元素。
@@ -45,7 +79,8 @@
           $("#box>ul>li").css("width", "240px");  // 已出之后就变成原来的模样
         }
       );
-      /*
+      */
+      
       $('#box>ul>li').on({
         mouseover: function () {
           // 当前的li的所有的兄弟元素，并修改其宽度
@@ -58,7 +93,7 @@
           $('#box>ul>li').css('width', '240px');
         }
       });
-      */
+      
     </script>
   </body>
 </html>
