@@ -1,0 +1,40 @@
+/**
+ * @file list.c++
+ * @author your name (you@domain.com)
+ * @brief 
+ * @version 0.1
+ * @date 2022-01-14
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
+/* 将两个递增的有序链表合并为一个递增的有序链表，要求结果使用原来的
+ * 两个链表的存储空间
+ */
+void MergeList(LinkList &la,LinkList &Lb,LinkList &Lc){
+    // 创建几个新指针
+    LinkList pa,pb,pc;
+    pa = la->next;
+    pb = lb->next;
+    lc=pc=la;
+    while(pa && pb){
+        if(pa->data < pb->data){
+            pc->next = pa;
+            pc = pa;
+            pa = pa->next;
+        }else if(pa->data > pb->data){
+            pc->next = pb; 
+            pc = pb;
+            pb = pb->next;
+        }else {
+            pc->next = pa;
+            pc = pa;
+            pa = pa->next;
+            q=pb->next;
+            delete pb;
+            pb = q;
+        }
+    }
+    pc->next = pa ? pa : pb;
+    delete lb;
+}

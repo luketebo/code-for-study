@@ -25,4 +25,4 @@ typedef struct {
     char *base;
     char *top;
     int stacksize;
-}Sqstack;
+}SqStack;
