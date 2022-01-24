@@ -2,7 +2,6 @@
 *.class
 .vscode/
 *.json
-*.md
 *.txt
 *.jpg
 *.png
