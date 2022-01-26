@@ -1,7 +1,6 @@
 *.exe
 *.class
 .vscode/
-*.json
 *.txt
 *.jpg
 *.png
