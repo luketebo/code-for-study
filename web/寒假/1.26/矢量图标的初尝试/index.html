@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/font.css">
+    <title>Document</title>
+</head>
+<style>
+    *{
+        padding: 0;
+        margin: 0;
+        text-decoration: none;
+    }
+    body{
+        display: flex;
+        height: 100vh;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+    #icon{
+        background-color: aquamarine;
+        height: 600px;
+        width: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        flex-direction:column;
+        position: absolute;
+        transition: .3s;
+        overflow: hidden;
+    }
+    #icon:hover{
+        width: 160px;
+
+    }
+    #icon:hover .box{
+        margin-left: 0px;
+    }
+    #icon div{
+        padding: 0px;
+        margin: 5px;
+        padding-top: 13px;
+        /* margin-top: 22px; */
+        /* margin-bottom: 16px; */
+        margin-left: 120px;
+        /* margin-left: 9px; */
+        width: 140px;
+        height: 100px;
+        position: relative;
+        display: flex;
+        border-radius: 10px;
+        transition: .3s;     
+    }
+    .ch{
+        padding: 1px;
+        margin-left: 15px;
+        transition: .1s;
+        opacity: 0;
+    }
+    #icon:hover .ch{
+        opacity: 1;
+    }
+    .box:hover{
+            background-color: rgba(36, 134, 141, 0.89);
+    }
+    .box:hover{
+        color:white;
+    }
+</style>
+<body>
+<div id = "icon">
+    <div class = "box"><span class="iconfont">&#xe752;</span><a class = "ch">Search</a></div>
+    <div class = "box"><span class="iconfont">&#xe600;</span><a class = "ch">Folder</a></div>
+    <div class = "box"><span class="iconfont">&#xe636;</span><a class = "ch">Sun</a></div>
+    <div class = "box"><span class="iconfont">&#xe6b8;</span><a class = "ch">moon</a></div>
+    <div class = "box"><span class="iconfont">&#xeb67;</span><a class = "ch">Manager</a></div>
+    <div class = "box"><span class="iconfont">&#xe620;</span><a class = "ch">person</a></div>
+    <div class = "box"><span class="iconfont">&#xe608;</span><a class = "ch">Setting</a></div>
+    <div class = "box"><span class="iconfont">&#xe61b;</span><a class = "ch">Document</a></div>
+    <div class = "box"><span class="iconfont">&#xe614;</span><a class = "ch">Massage</a></div>
+    <div class = "box"><span class="iconfont">&#xe604;</span><a class = "ch">Download</a></div>
+</div>
+</body>
+</html>
