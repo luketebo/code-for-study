@@ -1,0 +1,17 @@
+@font-face {
+    font-family: 'iconfont';
+    src: url('../font_3187589_m1ca5ud1ilf/iconfont.woff2') format('woff2'),
+         url('../font_3187589_m1ca5ud1ilf/iconfont.woff') format('woff'),
+         url('../font_3187589_m1ca5ud1ilf/iconfont.ttf') format('truetype');
+  }
+  .iconfont {
+    font-family: "iconfont" !important;
+    font-size: 36px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    cursor: pointer;
+  }
+  .icon{
+    font-size:27px;
+  }
