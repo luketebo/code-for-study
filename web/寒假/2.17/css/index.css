@@ -1,0 +1,43 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+body{
+    display: flex;
+    justify-self: center;
+    align-items: center;
+    height: 100vh;
+    /* width: 100vh; */
+}
+.total{
+    border: 1px solid red;
+    height: 100vh;
+    width: 170vh;
+    background-color: gray;
+    margin-left: 25vh;
+}
+.topBar{
+    border: 1px solid red;
+    height: 4vh;
+}
+.changeBar{
+    border: 1px solid red;
+    height: 6vh;
+}
+.centerBar{
+    border: 1px solid red;
+    height: 89vh;
+}
+.leftOperateBar{
+    border: 1px solid red;
+    height: 89vh;
+    width: 30vh;
+}
+.rightOperateBar{
+    border: 1px solid black;
+    /* background-color: black; */
+    height: 89vh;
+    margin-left: 30vh;
+    margin-top: -89vh;
+    width: 140vh;
+}
