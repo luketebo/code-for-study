@@ -1,4 +1,6 @@
 *.exe
+*.out
+*.o
 *.class
 .vscode/
 *.txt
