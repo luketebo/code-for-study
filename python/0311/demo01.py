@@ -24,9 +24,9 @@ def demo02():
 
 def demo03():
     for i in range(1,10):
-        for j in range(i,i+1):
-            print("{}+{}={:2}".format(j,i,j+i),end='')
-    print('')
+        for j in range(1,i+1):
+            print("{}*{}={:2}".format(j,i,j+i),end=' ')
+        print(' ')
         
 
 ## 计算1 + 2！ + 3！ ...... 10!的结果
@@ -89,5 +89,4 @@ def demo08():
     end_fill()
     done()
 
-demo08()
 
