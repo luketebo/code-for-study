@@ -20,46 +20,48 @@ int n = 10;
 std::mutex mtx;
 void Producer()
 {
-    while(1){
-    mtx.lock();
-    if (n >= 10)
+    while (1)
     {
-        cout << "Producer stop!!" << endl;
-
-        
-    }
-    else
-    {
-        n++;
-        cout << "Producer: Product " << n << endl;
-    }
-    mtx.unlock();
-    Sleep(100);
-
+        mtx.lock();
+        if (n >= 10)
+        {
+            cout << "Producer stop!!" << endl;
+        }
+        else
+        {
+            n++;
+            cout << "Producer: Product " << n << endl;
+        }
+        mtx.unlock();
+        Sleep(100);
     }
 }
 void Consumer()
 {
-    while(1){
-    mtx.lock();
-    if (n <= 0)
+    while (1)
     {
-        cout << "Consumer stop!!!" << endl;
-    }
-    else
-    {
-        n--;
-        cout << "Consumer: Consume " << n << endl;
-    }
-    mtx.unlock();
-    Sleep(60);
+        mtx.lock();
+        if (n <= 0)
+        {
+            cout << "Consumer stop!!!" << endl;
+        }
+        else
+        {
+            n--;
+            cout << "Consumer: Consume " << n << endl;
+        }
+        mtx.unlock();
+        Sleep(60);
     }
 }
-void Test_and_Set(){
-    while(n < 10){
-        if(n <= 0){
-            cout<<"Consumer stop!!"<<endl;
-        } 
+void Test_and_Set()
+{
+    while (n < 10)
+    {
+        if (n <= 0)
+        {
+            cout << "Consumer stop!!" << endl;
+        }
     }
 }
 int main()
@@ -67,11 +69,10 @@ int main()
 
     thread thread1(Producer);
     thread thread2(Consumer);
-    
+
     thread1.join();
 
     thread2.join();
-   
 
     return 0;
 }
