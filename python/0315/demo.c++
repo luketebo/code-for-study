@@ -9,5 +9,5 @@ int main(){
     {
         count *= i;
     }
-   count << count << endl;
+   count << count;
 }
