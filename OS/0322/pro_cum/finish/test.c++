@@ -16,7 +16,7 @@
 #include <mutex>  // std::mutex 加锁
 #include <chrono> // std::chrono::seconds()
 using namespace std;
-int n = 10;
+int n = 10;   // 信号量
 std::mutex mtx;
 void Producer()
 {
