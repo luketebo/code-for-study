@@ -16,21 +16,26 @@
 #include <mutex>  // std::mutex 加锁
 #include <chrono> // std::chrono::seconds()
 using namespace std;
-int n = 10;   // 信号量
+const int N = 10;
+int empty = N;
+int full = 0;
+int mutex = 1;
 std::mutex mtx;
 void Producer()
 {
     while (1)
     {
+        int num = 0;
         mtx.lock();
-        if (n >= 10)
+        if (full != N)
         {
-            cout << "Producer stop!!" << endl;
+            cout << "Producer : product " << ++num << endl;
+            full++;
+            empty--;
         }
         else
         {
-            n++;
-            cout << "Producer: Product " << n << endl;
+            cout << "Producer : product stop!!!" << endl;
         }
         mtx.unlock();
         Sleep(100);
@@ -38,30 +43,22 @@ void Producer()
 }
 void Consumer()
 {
+
     while (1)
     {
         mtx.lock();
-        if (n <= 0)
+        int num = 0;
+        if (empty != N)
         {
-            cout << "Consumer stop!!!" << endl;
-        }
-        else
-        {
-            n--;
-            cout << "Consumer: Consume " << n << endl;
+            cout << "Consumer : consume : " << ++num << endl;
+            empty++;
+            full--;
+
+        }else{
+            cout << "Consumer stop!! "<<endl;
         }
         mtx.unlock();
-        Sleep(60);
-    }
-}
-void Test_and_Set()
-{
-    while (n < 10)
-    {
-        if (n <= 0)
-        {
-            cout << "Consumer stop!!" << endl;
-        }
+        Sleep(99);
     }
 }
 int main()
