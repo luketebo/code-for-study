@@ -55,8 +55,11 @@ int main()
 {
     thread thread1(reader);
     thread thread2(writer);
-    
+    thread thread3(reader);
+
+
     thread1.join();
     thread2.join();
+    thread3.join();
     return 0;
 }
