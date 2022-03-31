@@ -15,8 +15,11 @@
 #include <future>
 #include <mutex>
 #include <chrono>
-void philosopher(){
 
+void philosopher(){
+    while(true){
+
+    }
 }
 int main(){
 
