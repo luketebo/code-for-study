@@ -37,7 +37,6 @@ void reader()
         { // 如果是最后一个读者
             wtx.unlock();
         }
-        cout << "readcount :" << readcount << endl;
         rtx.unlock();
         Sleep(100);
     }
