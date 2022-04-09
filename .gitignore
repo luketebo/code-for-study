@@ -3,7 +3,7 @@
 *.o
 *.class
 .vscode/
-*.txt
+# *.txt
 *.jpg
 *.png
 /demo/
