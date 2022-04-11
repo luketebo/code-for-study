@@ -2,7 +2,9 @@ from pkg_resources import working_set
 
 
 def getText():
-    txt = open("hamlet.txt", "r").read()
+    # txt = open("hamlet.txt", "r").read()
+    with open("hamlet.txt","r") as f:
+        txt = f.read()
     txt = txt.lower()
     for ch in '!"#$%()*+,-./:;<=>?@[\\]^_"{|}~':
         txt = txt.replace(ch, " ")
