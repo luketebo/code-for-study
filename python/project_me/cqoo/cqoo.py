@@ -294,6 +294,16 @@ class AutoCompletPapers():
         :return:
         """
         info = self.get('http://www.cqooc.com/user/session?xsid=' + cookie_xsid).json()
+        print(info)
+        """
+        get:mid error
+        """
+        print(self.courseId)
+        print(self.get(f'http://www.cqooc.net/json/mcs?ownerId={info["id"]}&courseId={self.courseId}&ts={getTs()}',
+                       headers={
+                           "Referer":f'http://www.cqooc.net/learn/mooc/structure?id={self.courseId}'
+                       }).json())
+        print('Fuck you')
         self.mid = self.get(f'http://www.cqooc.net/json/mcs?ownerId={info["id"]}&courseId={self.courseId}&ts={getTs()}',
                        headers={
                            "Referer": f'http://www.cqooc.net/learn/mooc/structure?id={self.courseId}'
@@ -399,7 +409,7 @@ class AutoCompleteOnlineCourse:
         try:
             print('Login ID:', info['username'])
         except:
-            input("xsid有误，请检查！")
+            input("xsid有误，请检查！") 
             return
         self.ownerId = info['id']
         self.username = info['username']
