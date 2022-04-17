@@ -296,14 +296,16 @@ class AutoCompletPapers():
         info = self.get('http://www.cqooc.com/user/session?xsid=' + cookie_xsid).json()
         print(info)
         """
+        info = {'id': 1509038, 'username': '106372020051615325', 'email': '106372020051615325@example.cqooc.com', 'phone': '17623427854', 'group': ['student'], 'profile': {}}
         get:mid error
         """
         print(self.courseId)
+        ## courseId = 334569828
         print(self.get(f'http://www.cqooc.net/json/mcs?ownerId={info["id"]}&courseId={self.courseId}&ts={getTs()}',
                        headers={
                            "Referer":f'http://www.cqooc.net/learn/mooc/structure?id={self.courseId}'
-                       }).json())
-        print('Fuck you')
+                       }))
+        ## return 502  请求错误
         self.mid = self.get(f'http://www.cqooc.net/json/mcs?ownerId={info["id"]}&courseId={self.courseId}&ts={getTs()}',
                        headers={
                            "Referer": f'http://www.cqooc.net/learn/mooc/structure?id={self.courseId}'
