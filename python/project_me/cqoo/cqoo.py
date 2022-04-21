@@ -302,7 +302,7 @@ class AutoCompletPapers():
         print(self.courseId)
         ## courseId = 334569828
         print(self.get(f'http://www.cqooc.net/json/mcs?ownerId={info["id"]}&courseId={self.courseId}&ts={getTs()}',
-                       headers={
+                       headers={    
                            "Referer":f'http://www.cqooc.net/learn/mooc/structure?id={self.courseId}'
                        }))
         ## return 502  请求错误
