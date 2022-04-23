@@ -1,12 +1,12 @@
 /**
  * @file problem_01.cpp
  * @author Luke Tebo (you@domain.com)
- * @brief 
+ * @brief
  * @version 0.1
  * @date 2022-04-18
- * 
+ *
  * @copyright Copyright (c) 2022
- * 
+ *
  * 集合划分问题：
  * 问题描述：n个元素的集合{1,2,...,n}可以划分为若干非空子集，例如，当n=4时，可以划分为15个不同的非空子集
  * 算法设计：给定正整数n，计算n个元素的集合{1,2,...,n}可以划分为若干非空子集的个数
@@ -17,26 +17,54 @@
  */
 #include <iostream>
 #include <fstream>
-#include <vector>
+#include <stdlib.h>
 using namespace std;
-// 计算非空子集合数
-int cal_assemble(int input){
-    int out = 0;
-    for(int i = 1; i < input; i++){
-        out *= 2;
-    }
-    out -= 1; 
-    return out;
+// 计算非空集合
+int F(int n, int m)
+{
+    if (n <= 2)
+        return 1;
+    if (m == 1 || n == m)
+        return 1;
+    else
+        return F(n - 1, m - 1) + m * F(n - 1, m);
 }
-int main(){
-
-    ifstream fin("input.txt");
-    ofstream fout("output.txt");
+int main()
+{
     int n;
-    fin >> n;
-    int assemble = cal_assemble(n);
-    fout << assemble << endl;
+    char end;
+    int result = 0;
+    // cout<<"请输入正整数n=";
+    // cin>>n;
+    ifstream fin("input.txt", ios::in);
+    if (!fin)
+    {
+        cout << "文件打开失败！" << endl;
+        return 0;
+    }
+    char buf[1024] = {0};
+    while (fin >> buf)
+    {
+        cout << buf << endl;
+    }
+    // int n = (int) buf;
+   
+    n = atoi(buf);
+
+    ofstream fout("output.txt", ios::out);
+    if (!fout)
+    {
+        cout << "文件打开失败！" << endl;
+        return 0;
+    }
+
+    for (int i = 1; i <= n; i++)
+    {
+        result = result + F(n, i);
+    }
+    fout << result << endl;
+    cout << n << "个元素可划分的非空集合有" << result << "个" << endl;
+    fout.close();
     fin.close();
     return 0;
-
 }

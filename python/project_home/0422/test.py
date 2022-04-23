@@ -1,3 +1,4 @@
+from re import I
 from soupsieve import Dict
 
 
@@ -25,13 +26,24 @@ def remove():
     
 def clear():
     voctionary.clear()
+    print("清空成功")
     
 def recite():
     dic = {}
+    lis_1 = []
+    lis_2 = []
+    flag = True
     for item in voctionary:
         print(item)
-        print(list(item))
-        dic.update(item[0], item[1])  
+        for i in list(item):
+            if flag == True:
+                lis_1.append(i)
+                flag = False
+            else:
+                lis_2.append(i)
+                flag = True
+        
+    dic = dict(zip(lis_1, lis_2))
     for key, value in dic.items():
         answer = input(f"{key}的意思是：")
         if answer == value:
