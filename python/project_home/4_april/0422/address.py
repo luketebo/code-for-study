@@ -7,7 +7,6 @@ print("3. 删除联系人")
 print("4. 修改联系人信息")
 print("5. 查找联系人")
 print("6. 退出通信录")
-print("7. test")
 while True:
     method = int(input("请输入操作序号："))
     if method == 1:
@@ -21,7 +20,7 @@ while True:
         print(address_list)
     elif method == 3:
         name = input("请输入姓名：")
-        if name in address_list.keys:
+        if name in address_list.keys():
             address_list.pop(name)
             print("删除成功")
         else:
@@ -29,7 +28,7 @@ while True:
         
     elif method == 4:
         name = input("请输入姓名：")
-        if name in address_list.keys:
+        if name in address_list.keys():
             address_list[name]['phone'] = input("请输入电话：")
             address_list[name]['email'] = input("请输入邮箱：")
             address_list[name]['address'] = input("请输入地址：")
@@ -39,7 +38,7 @@ while True:
         
     elif method == 5:
         name = input("请输入姓名：")
-        if name in address_list.keys:
+        if name in address_list.keys():
             print("姓名：{0}".format(name))
             print("电话：{0}".format(address_list[name]['phone']))
             print("邮箱：{0}".format(address_list[name]['email']))
@@ -47,7 +46,6 @@ while True:
         else:
             print("没有这个人")
     elif method == 6:
-        for name in address_list.keys:
-            print(name)
+        break
     else:
-        break  
+        print("输入错误，请重新输入")  
