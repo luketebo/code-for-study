@@ -1,0 +1,74 @@
+/**计数器的颜色样式*/
+div .AC-CounterT{
+  background: #FD9999;
+}
+/**百度样式区域**/
+body[baidu] {
+  position: relative;
+  background-color: white;
+
+  
+  /**右侧栏的样式-其实不开启更好看一些*/
+  #content_right{
+    padding: 20px 15px 15px;
+    border-radius: 5px;
+    background-color: #fff;
+    box-sizing: border-box;
+    box-shadow: 0 0 20px 2px rgba(0, 0, 0, .1);
+    -webkit-box-shadow: 0 0 20px 2px rgba(0, 0, 0, .1);
+    -moz-box-shadow: 0 0 20px 2px rgba(0, 0, 0, .1);
+  }
+
+  &:before{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    content: '';
+    background-image: url('https://img.tujidu.com/image/620210010b2cd.jpg');
+    background-size: 100% auto;
+    opacity: 0.6; /*背景图透明度=0.8，最大1*/
+  }
+  
+  /**隐藏首页的大图标-修复可能导致外援样式异常**/
+  #s_lg_img_new{
+    display:none !important;
+  }
+  
+  .c-container{
+    border-radius: 5px;
+    background-color: rgba(255,255,255, 0.6) !important; /*百度搜索块体的颜色；透明度=0.1，最大1*/
+    
+    h3{
+      background-color: rgba(248,248,248, 0.6) !important; /*百度搜索块体 - 标题的颜色；透明度=0.1，最大1*/
+    }
+  }
+}
+body[google] {
+
+  &:before {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    content: '';
+    background-image: url('https://img.tujidu.com/image/620210010b2cd.jpg');
+    background-size: 100% auto;
+    opacity: 0.8; /*背景图透明度=0.8，最大1*/
+  }
+  
+  #rso .g, .sfbg, .f6F9Be, .k8XOCe {
+    background-color: rgba(248,248,248, 0.6) !important; 
+  }
+  
+  .sfbg{
+    margin-top: -10px;
+  }
+  
+  .yg51vc{
+    background-color: transparent !important; 
+  }
+}
+
