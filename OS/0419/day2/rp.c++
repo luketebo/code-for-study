@@ -7,11 +7,12 @@
  *
  * @copyright Copyright (c) 2022
  *
- * 算法选择：RP 时间片轮转算法
+ * 算法选择：RR 时间片轮转算法
  */
 #include <iostream>
 #include <stdio.h>
 #include <vector>
+#include <queue>
 #include <windows.h>
 typedef unsigned int uint32;
 /*常量和状态定义*/
@@ -155,39 +156,51 @@ void RP(std::vector<PCB> &process_list)
     boolean flag = false;
     boolean flag2 = false;
     uint32 min_time = process_list[0].get_use_time();
-
+    std::queue<PCB> prepare_process_queue; // 就绪队列
     while (count < process_list.size())
     {
         uint32 i = 0;
-        std::vector<int> min_time_index(0);   // 存取进程完成之后最小进程的use_time
-        std::vector<int> min_time_index_temp(0);  // 存取进程完成之后use_time最小的进程的下标
+        std::vector<int> min_time_index(0);      // 存取进程完成之后最小进程的use_time
+        std::vector<int> min_time_index_temp(0); // 存取进程完成之后use_time最小的进程的下标
         //  为每一次进程调度做准备 设置这个进程的状态，是否能够执行
-        for (i = 0; i < process_list.size(); i++)
+        if (count == 0)
         {
-            if (time >= process_list[i].get_arrive_time() && process_list[i].get_status() == 0 && (i == time || i == time % process_list.size()))
+            for (i = 0; i < process_list.size(); i++)
             {
-                printf("first %d\n", i);
-                flag = true;
-                // printf("%c\n", flag);
-                process_list[i].set_status(1); // 设置为就绪状态 可以运行
+                if (time >= process_list[i].get_arrive_time() && process_list[i].get_status() == 0 && (i == time || i == time % process_list.size()))
+                {
+                    
+                    flag = true;
+                    // printf("%c\n", flag);
+                    process_list[i].set_status(1); // 设置为就绪状态 可以运行
+                }
             }
         }
-
-        for (i = 0; i < process_list.size(); i++)
+        else if (count > 0)
         {
-
-            if (process_list[i].get_status() == 2 && process_list[(i + 1) % process_list.size()].get_use_time() < process_list[(i + 1) % process_list.size()].get_serve_time() && !flag)
+            for (i = 0; i < min_time_index.size(); i++)
             {
-                // printf("second %d\n", i + 1);
-                min_time_index.push_back(process_list[i + 1].get_use_time());
-                min_time_index_temp.push_back(i + 1);
-                flag2 = true;
-                // process_list[i + 1].set_status(1);
+                min_time_index[i] = 0;
             }
-        }
+            for (i = 0; i < min_time_index_temp.size(); i++)
+            {
+                min_time_index_temp[i] = 0;
+            }
 
-        if (flag2)
-        {
+            for (i = 0; i < process_list.size(); i++)
+            {
+
+                if (process_list[i].get_status() != 2)
+                {
+                    // printf("second %d\n", i + 1);
+                    min_time_index.push_back(process_list[i].get_use_time());
+                    min_time_index_temp.push_back(i);
+                    // flag2 = true;
+                    // process_list[i + 1].set_status(1);
+                }
+            }
+
+            std::cout << "满足条件的下标: " << std::endl;
             for (i = 0; i < min_time_index.size(); i++)
             {
                 std::cout << min_time_index[i] << " ";
@@ -210,17 +223,14 @@ void RP(std::vector<PCB> &process_list)
                 }
             }
 
-            process_list[min_time_index_temp[0]].set_status(2);
+            process_list[min_time_index_temp[0]].set_status(1); // 设置为就绪状态
 
             printf("third %d\n", min_time_index_temp[0]);
         }
 
-        time++;
         // 如果当前没有进程被标记为就绪状态，则继续执行下一个时间片
 
-        // if(!flag){
-        //     time--;
-        // }
+       
         // 通过时间片 开始执行
         for (i = 0; i < process_list.size(); i++)
         {
@@ -231,9 +241,9 @@ void RP(std::vector<PCB> &process_list)
                 if (process_list[i].get_use_time() == process_list[i].get_serve_time())
                 {
                     process_list[i].set_status(2); // 设置为完成状态
-                    process_list[i].set_finish_time(time);
+                    process_list[i].set_finish_time(time + 1);
                     count++;
-                    process_list[i].set_turn_around_time(time - process_list[i].get_arrive_time());
+                    process_list[i].set_turn_around_time(time + 1 - process_list[i].get_arrive_time());
                 }
                 else
                 {
@@ -241,15 +251,11 @@ void RP(std::vector<PCB> &process_list)
                 }
             }
         }
-        printf("------%d------\n", time);
+        time++;
+        
         print_process(process_list);
 
-        // 判断是否所有进程都已经运行完成
-        // for(i = 0; i < process_list.size(); i++){
-        //     if(process_list[i].get_serve_time() == process_serve_time[i]){
-        //         process_list[i].set_status(2); // 设置为完成状态
-        //     }
-        // }
+       
         flag = false;
         flag2 = false;
         Sleep(80);
