@@ -101,6 +101,7 @@ int main(){
     for (int i = 0; i < p.size() - 1; i++) {
         cin >> p[i];
     }
+
     for (int i = 0; i < q.size() - 1; i++) {
         cin >> q[i];
     }
