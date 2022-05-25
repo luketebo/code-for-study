@@ -1,0 +1,12 @@
+
+*{
+    /* 消除布局 */
+    margin: 0;
+    padding: 0;
+}
+.sign{
+    /* 外边距 */
+    margin-top: 10%;
+    padding: 0 20%;
+    z-index: -1;
+}

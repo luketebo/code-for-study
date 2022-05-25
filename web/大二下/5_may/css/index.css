@@ -1,0 +1,10 @@
+*{
+     /* 消除布局 */
+     padding: 0;
+     margin: 0;
+}
+#search{
+    flex-direction: row;
+    flex-flow: left;
+    margin-right: -70rem; 
+}
