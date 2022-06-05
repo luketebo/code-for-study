@@ -1,15 +1,49 @@
-#include "disk.h"
+/**
+ * @file demo_01.cpp
+ * @author your name (you@domain.com)
+ * @brief
+ * @version 0.1
+ * @date 2022-06-05
+ *
+ * @copyright Copyright (c) 2022
+ *
+ */
 #include <iostream>
 #include <iomanip>
 #include <vector>
 using namespace std;
 #define MaxNumber 2710
 #define MaxTrackNum 0x64
+class Disk
+{
+private:
+    int TrackNum;             // 磁道数
+    int StartTrack;           // 开始磁道
+    int TrackOrder[MaxTrackNum];   // 初始磁道顺序
+    int VisitedOrder[MaxTrackNum]; // 被访问的磁道顺序
+    int Sum_Distance;         // 总寻道距离
+    int MoveDistance[MaxTrackNum]; // 每个磁道移动距离
+    bool IsVisited[MaxTrackNum];   // 是否被访问
+    int Average_Distance;     // 平均寻道距离
+public:
+    Disk();
+    ~Disk();
+    void Initialize();          // 初始化
+    void Enter();               // 输入初始数据
+    void Print();               // 打印结果
+    int Distance(int a, int b); // 计算距离
+    void FCFS();                // 先来先服务
+    void SSTF();                // 最短寻道时间优先
+    void SCAN();                // 扫描磁道
+    void CSCAN();               // 循环扫描
+};
 Disk::Disk()
 {
+    cout << "Disk()" << endl;
 }
 Disk::~Disk()
 {
+    cout << "~Disk()" << endl;
 }
 /* 初始化 */
 void Disk::Initialize()
@@ -77,7 +111,8 @@ void Disk::FCFS()
         MoveDistance[i] = Distance(StartTrack, TrackOrder[i]);
         StartTrack = TrackOrder[i];
     }
-    Average_Distance = Sum_Distance * (0x01 / 0x0A) / TrackNum;
+
+    Average_Distance = Sum_Distance * 1.0 / TrackNum;
 }
 /* 最短寻道时间优先 */
 void Disk::SSTF()
@@ -86,7 +121,7 @@ void Disk::SSTF()
     cout << "SSTF" << endl;
     int CurrentTrack = StartTrack;
     int i, j, pointMin;
-    vector<int> disTemp(MaxTrackNum);
+    int disTemp[MaxTrackNum];
 
     for (i = 0; i < TrackNum; i++)
     {
@@ -120,7 +155,7 @@ void Disk::SSTF()
         IsVisited[pointMin] = true;
     }
 
-    Average_Distance = Sum_Distance * (0x01 / 0x0A) / TrackNum;
+    Average_Distance = Sum_Distance * 1.0 / TrackNum;
 }
 /* 循环隧道 */
 void Disk::CSCAN()
@@ -130,7 +165,7 @@ void Disk::CSCAN()
     cout << "CSCAN" << endl;
     cin >> direction;
 
-    vector<int> SortTrackOrder(MaxTrackNum);
+    int SortTrackOrder[MaxTrackNum];
     int i, j, temp, tempIndex;
     for (i = 0; i < TrackNum; i++)
     {
@@ -200,7 +235,7 @@ void Disk::CSCAN()
     {
         Sum_Distance += MoveDistance[i];
     }
-    Average_Distance = Sum_Distance * (0x01 / 0x0A) / TrackNum;
+    Average_Distance = Sum_Distance * 1.0 / TrackNum;
 }
 /* 扫描隧道 */
 void Disk::SCAN()
@@ -212,7 +247,7 @@ void Disk::SCAN()
     cin >> direction;
 
     int i, j, temp, tempIndex;
-    vector<int> SortTrackOrder(MaxTrackNum);
+    int SortTrackOrder[MaxTrackNum];
     for (i = 0; i < TrackNum; i++)
     {
         SortTrackOrder[i] = TrackOrder[i];
@@ -286,5 +321,21 @@ void Disk::SCAN()
         Sum_Distance += MoveDistance[i];
     }
 
-    Average_Distance = Sum_Distance * (0x01 / 0x0A) / TrackNum;
+    Average_Distance = Sum_Distance * 1.0 / TrackNum;
+}
+
+int main()
+{
+    Disk disk;
+    disk.Enter();
+    disk.Initialize();
+    // disk.FCFS();
+    // disk.Print();
+    disk.SSTF();
+    disk.Print();
+    // disk.SCAN();
+    // disk.Print();
+    // disk.CSCAN();
+    // disk.Print();
+    return 0;
 }

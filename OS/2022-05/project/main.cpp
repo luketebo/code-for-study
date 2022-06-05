@@ -1,7 +1,8 @@
 #include "disk.h"
 #include <iostream>
 using namespace std;
-int main(){
+int main()
+{
     Disk disk;
     disk.Initialize();
     disk.Enter();

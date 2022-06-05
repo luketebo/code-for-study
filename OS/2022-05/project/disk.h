@@ -13,8 +13,8 @@
  * SCAN： 扫描磁道
  * CSCAN：循环扫描
  */
-#include <iostream>
-#include <iomanip>
+#ifndef DISK_H
+#define DISK_H
 #include <vector>
 using namespace std;
 class Disk
@@ -40,3 +40,4 @@ public:
     void SCAN();                // 扫描磁道
     void CSCAN();               // 循环扫描
 };
+#endif // DISK_H
