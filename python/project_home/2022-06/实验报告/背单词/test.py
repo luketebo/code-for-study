@@ -8,7 +8,7 @@ root = ttk.Window()
 root.geometry("700x450")
 root.title("不背单词")
 
-word = {"":""} # 单词
+word = {} # 单词
 
 frame_1 = ttk.Frame(root, bootstyle="info", width=800, height=100)
 frame_1.pack(side="top")
@@ -37,7 +37,8 @@ frame_3_2.pack_propagate(0)
 
 import random
 label_3_2_word_1 = ttk.StringVar()
-label_3_2_word_1.set(random.sample(word.keys(), 1))
+# if word == {}:
+    # label_3_2_word_1.set("")
 label_3_2_word_2 = ttk.StringVar()
 
 label_3_2_1 = ttk.Label(frame_3_2, text="Remember Words", font=("宋体", 15))
@@ -46,7 +47,7 @@ label_3_2_1.place(x = 150, y = 0)
 label_3_2_2 = ttk.Label(frame_3_2, text="单词", font=("微软雅黑"))
 label_3_2_2.place(x = 20, y = 50 )
 
-label_3_2_3 = ttk.Label(frame_3_2, textvariable=label_3_2_word_1, font=("微软雅黑"), bootstyle="inverse",width=10)
+label_3_2_3 = ttk.Label(frame_3_2, textvariable=label_3_2_word_1, font=("微软雅黑"), bootstyle="success",width=10)
 label_3_2_3.place(x = 80, y = 50)
 
 label_3_2_4 = ttk.Label(frame_3_2, text="翻译", font=("微软雅黑"))
@@ -59,14 +60,16 @@ frame_3_2_1 = ttk.LabelFrame(frame_3_2, width=450, height=250, bootstyle=SUCCESS
 frame_3_2_1.place(x= 20, y = 100)
 
 def remember_word():
-    print(word)
-    print(label_3_2_word_1)
-    one = label_3_2_word_1  # key
-    two = str(entry_3_2_1.get())
+    one = label_3_2_word_1.get()  # key
+    two = str(label_3_2_word_2.get())
+    print(one)
+    print(two)
     if word[one] == two:
         label_3_2_5 = ttk.Label(frame_3_2_1, text=f"{one} : {two} 记忆成功", font=("微软雅黑", 10)) 
         label_3_2_5.pack(padx=10, pady=10)
-        label_3_2_word_1.set(random.sample(word.keys(), 1))
+        a,b = random.choice(list(word.items()))
+        label_3_2_word_1.set(a)
+        label_3_2_word_2.set("")
     else:
         label_3_2_5 = ttk.Label(frame_3_2_1, text=f"{one} : {two} 记忆错误", font=("微软雅黑", 10)) 
         label_3_2_5.pack(padx=10, pady=10)
@@ -108,8 +111,11 @@ entry_3_3_1.pack(side="left", padx=10, pady=10, anchor='nw')
 
 
 def submit():
-    
-    word[label_3_3_3.get()] = entry_3_3_1.get()
+    if label_word_1.get() != "":
+        word[label_word_1.get()] = label_word_2.get()
+        
+    label_word_1.set("")
+    label_word_2.set("")
     # label_3_3_5 = ttk.Label(frame_3_3, text=f"{label_3_3_3.get()} : {entry_3_3_1.get()} 添加成功", font=("微软雅黑", 10))
     # label_3_3_5.pack(padx=10, pady=10)
 
@@ -131,13 +137,22 @@ frame_3_4.pack_propagate(0)
 
 ## 创建label
 
+label_3_4_word_1 = ttk.StringVar()
+
 label_3_4_1 = ttk.Label(frame_3_4, text="请输入要删除的单词", font=("宋体", 15))
 label_3_4_1.pack(side="left", padx=10, pady=10)
 
-entry_3_4_1 = ttk.Entry(frame_3_4, width=10)
+entry_3_4_1 = ttk.Entry(frame_3_4, width=10, textvariable=label_3_4_word_1)
 entry_3_4_1.pack(side="left", padx=10, pady=10)
 
 
+def delete_word():
+    one = label_3_4_word_1.get()
+    del word[one]
+    
+
+button_3_4_1 = ttk.Button(frame_3_4, text="提交", bootstyle="success", command=delete_word)
+button_3_4_1.pack(side="left", padx=10, pady=10)
 # frame_3_5 清空单词
 frame_3_5 = ttk.Frame(frame_3, width=580, height=100)
 frame_3_5.pack_propagate(0)
@@ -145,14 +160,18 @@ frame_3_5.pack_propagate(0)
 label_3_5_1 = ttk.Label(frame_3_5, text="单词已清空", font=("宋体", 15))
 label_3_5_1.pack(side="left", padx=10, pady=10)
 
-
+label_3_2 = ttk.Label(frame_3_1, font=("微软雅黑", 10))
 
 # function
 def show():
     frame_3_1.pack()
     for key, value in word.items():
-        label_3_2 = ttk.Label(frame_3_1, text=f"{key}: {value}", font=("微软雅黑", 10))
+        # label_3_2 = ttk.Label(frame_3_1, text=f"{key}: {value}", font=("微软雅黑", 10))
+        label_3_2['text'] = f"{key}: {value}"
         label_3_2.pack(side="left", padx=10, pady=10)
+    # if word == {}:
+    #     label_3_2 = ttk.Label(frame_3_1, text="暂无单词", font=("微软雅黑", 10))
+    #     label_3_2.pack(side="left", padx=10, pady=10)
     frame_3_2.pack_forget()
     frame_3_3.pack_forget()
     frame_3_4.pack_forget()
@@ -161,7 +180,13 @@ def show():
 def remember():
     frame_3_1.pack_forget()
     frame_3_2.pack()
-    remember_word()
+    a,b = random.choice(list(word.items()))
+    print(a, b)
+    # remember_word()
+    if word != {}:
+        label_3_2_word_1.set(a)
+    else:
+        label_3_2_word_1.set("暂无单词")
     frame_3_3.pack_forget()
     frame_3_4.pack_forget()
     frame_3_5.pack_forget()
@@ -175,6 +200,7 @@ def add():
 
 def delete():
     frame_3_1.pack_forget()
+    label_3_2["text"] = ""
     frame_3_2.pack_forget()
     frame_3_3.pack_forget()
     frame_3_4.pack()
@@ -185,7 +211,9 @@ def clear():
     frame_3_2.pack_forget()
     frame_3_3.pack_forget()
     frame_3_4.pack_forget()
+    word.clear()
     frame_3_5.pack()
+    label_3_2['text'] = "单词已清空"
 
 # frame_1
 label_1 = ttk.Label(frame_1, text="不    背    单    词", font=("宋体",25))

@@ -1,6 +1,6 @@
 /**
  * @file demo_01.cpp
- * @author your name (you@domain.com)
+ * @author 杨昌松 (2020051615325@cqnu.edu.cn)
  * @brief
  * @version 0.1
  * @date 2022-06-05
@@ -96,7 +96,7 @@ void Disk::Print()
     }
     cout << endl;
     // 总距离
-    cout << "Sum_Distance:" << Sum_Distance << endl;
+    // cout << "Sum_Distance:" << Sum_Distance << endl;
     // 平均寻道距离
     cout << "Average_Distance:" << Average_Distance << endl;
 }
@@ -331,11 +331,11 @@ int main()
     disk.Initialize();
     // disk.FCFS();
     // disk.Print();
-    disk.SSTF();
-    disk.Print();
+    // disk.SSTF();
+    // disk.Print();
     // disk.SCAN();
     // disk.Print();
-    // disk.CSCAN();
-    // disk.Print();
+    disk.CSCAN();
+    disk.Print();
     return 0;
 }
