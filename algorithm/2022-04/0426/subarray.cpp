@@ -43,6 +43,7 @@ public:
                 }
             }
         }
+        printf("%d\n", sum);
         return sum;
     }
     // 分治法
@@ -78,6 +79,8 @@ public:
         {
             std::cout << dp[i] << " ";
         }
+        std::cout << std::endl;
+        std::cout << sum << std::endl;
         return sum;
     }
 };
@@ -86,6 +89,7 @@ int main()
 
     std::vector<int> nums{-2, 11, -4, 13, -5, -2};
     Solution s;
-    s.maxSubArray_dp(nums);
+    // int ac = s.maxSubArray_dp(nums);
+    s.maxSubArray(nums);
     return 0;
 }
