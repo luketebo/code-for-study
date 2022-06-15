@@ -28,6 +28,9 @@ data = {
         }
     }
 }
+'''
+    我要通过tey返回的数据来制造事件
+'''
 
 print(list(data["Scheme"]))
 listOne = list(data["Scheme"])
