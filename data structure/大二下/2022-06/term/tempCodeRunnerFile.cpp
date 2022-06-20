@@ -1,2 +1,0 @@
-arrrange;
-    arrrange.main();
