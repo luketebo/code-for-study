@@ -1,5 +1,6 @@
 #include <iostream>
 using namespace std;
+#define MAX 100
 
 #ifndef MERGE_H
 #define MERGE_H
@@ -12,13 +13,33 @@ public:
     // void merge(int *arr, int beg, int mid, int end);
     int main()
     {
-        int arr[8] = {3, 5, 6, 8, 1, 2, 4, 0};
-        merge_sort(arr, 1, 8);
-        for (int i = 0; i < 8; i++)
+        // int arr[8] = {3, 5, 6, 8, 1, 2, 4, 0};
+        cout << "算法简介" << endl;
+        cout << "1. 申请空间，使其大小为两个已经排序序列之和，该空间用来存放合并后的序列\n2. 设定两个指针，最初位置分别为两个已经排序序列的起始位置；\n3. 比较两个指针所指向的元素，选择相对小的元素放入到合并空间，并移动指针到下一位置；\n4. 重复步骤 3 直到某一指针达到序列尾；\n5. 将另一序列剩下的所有元素直接复制到合并序列尾。" << endl;
+        int arr[MAX];
+        int count = 0;
+        cout << "input the array's length: ";
+        cin >> count;
+        cout << "input the array: " << endl;
+        for (int i = 0; i < count; i++)
+        {
+            cin >> arr[i];
+        }
+        merge_sort(arr, 1, count);
+        for (int i = 0; i < count; i++)
         {
             cout << arr[i] << " ";
         }
+        
         return 0;
+    }
+    void print(int arr[], int beg, int end){
+        cout << endl;
+        for (int i = beg; i < end; i++)
+        {
+            cout << arr[i] << " ";
+        }
+        cout << endl;
     }
     void merge_sort(int *arr, int beg, int end)
     {
@@ -27,6 +48,7 @@ public:
         {
             return;
         }
+
         int mid = beg + (end - beg) / 2;
         merge_sort(arr, beg, mid);
         merge_sort(arr, mid + 1, end);

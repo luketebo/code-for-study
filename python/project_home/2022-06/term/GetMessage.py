@@ -1,44 +1,46 @@
+from os import stat
 import random
-from re import I
-# data = {
-#     "Map":[
-#             [0,2,5,-1,-1,-1,-1,-1,-1,-1],
-#             [2,0,-1,2,3,-1,3,-1,-1,-1],
-#             [5,-1,0,4,-1,-1,-1,3,-1,-1],
-#             [-1,2,4,0,-1,-1,1,-1,2,-1],
-#             [2,3,-1,-1,0,10,-1,-1,-1,3],
-#             [-1,-1,-1,-1,10,0,1,-1,-1,-1],
-#             [-1,3,-1,1,-1,1,0,-1,-1,2],
-#             [-1,-1,3,-1,-1,-1,-1,0,-1,-1],
-#             [-1,-1,-1,2,-1,-1,-1,-1,-1,-1],
-#             [-1,-1,-1,-1,3,-1,2,-1,-1,0]
-#         ],
-#     "Scheme":{
-#         "101":{
-#             "Path":[0,1,4,5],
-#             "Time":["9:30","9:50","10:00","10:15"]
-#         },
-#         "102":{
-#             "Path":[8,3,6,9,4],
-#             "Time":["9:50","10:00","10:15","10:30"]
-#         },
-#         "103":{
-#             "Path":[7,2,3,1],
-#             "Time":["9:30","10:00","10:30","11:00"]
-#         }
-#     }
+import math
+from re import S
+from turtle import position
+
+
+# 站点映射，坐标和实际地名 一一对应
+Station = {
+    "0": "菜市场",
+    "1":  "中心小学",
+    "2": "加油站",
+    "3": "医院",
+    "4": "幸福小区",
+    "5": "长途车站",
+    "6": "汽车站",
+    "7": "桃花镇",
+    "8": "荷花镇",
+    "9": "政府",
+    "菜市场": "0",
+    "中心小学": "1",
+    "加油站": "2",
+    "医院": "3",
+    "幸福小区": "4",
+    "长途车站": "5",
+    "汽车站": "6",
+    "桃花镇": "7",
+    "荷花镇": "8",
+    "政府": "9"
+}
+# 各种数据杂糅
 Data = {
-    "Station":{
-        "A": "3,5",
-        "B": "3,4",
-        "C": "2,4",
-        "D": "3,3",
-        "E": "5,4",
-        "F": "5,1",
-        "G": "4,2",
-        "H": "1,4",
-        "I": "2,1",
-        "J": "5,3"
+    "Station": {
+        "0": "3,5",
+        "1": "3,4",
+        "2": "2,4",
+        "3": "3,3",
+        "4": "5,4",
+        "5": "5,1",
+        "6": "4,2",
+        "7": "1,4",
+        "8": "2,1",
+        "9": "5,3"
     },
     "Scheme": {
         "101": {
@@ -72,36 +74,39 @@ Data = {
         }
     }
 }
-
+# 站点发车信息
 Time = {
-    "0" : ["9:30", "12:00", "14:00"],
-    "1" : ["9:50", "12:20", "14:20"],
-    "2" : ["10:00", "12:10", "14:10"],
-    "3" : ["10:15", "10:30", "12:25", "13:00", "14:25", "15:00"],
-    "4" : ["10:00", "12:30", "14:30"],
-    "5" : ["11:00", "13:10", "15:10"],
-    "6" : ["10:30", "11:00", "12:40", "13:00", "14:40", "15:30"],
-    "7" : ["9:50", "12:00", "14:00"],
-    "8" : ["11:15", "13:15", "15:15"],
-    "9" : ["10:30", "13:00", "15:00"]
+    "0": ["9:30", "12:00", "14:00"],
+    "1": ["9:50", "12:20", "14:20"],
+    "2": ["10:00", "12:10", "14:10"],
+    "3": ["10:15", "10:30", "12:25", "13:00", "14:25", "15:00"],
+    "4": ["10:00", "12:30", "14:30"],
+    "5": ["11:00", "13:10", "15:10"],
+    "6": ["10:30", "11:00", "12:40", "13:00", "14:40", "15:30"],
+    "7": ["9:50", "12:00", "14:00"],
+    "8": ["11:15", "13:15", "15:15"],
+    "9": ["10:30", "13:00", "15:00"]
 }
-# c^2 = (x1 - x2) ^ 2 + (y1 - y2) ^ 2  两点之间的距离
-import math
+# 公交路线信息
+Bus = {
+    "101": ["菜市场", "中心小学", "医院", "荷花镇"],
+    "102": ["桃花镇", "加油站", "医院", "汽车站", "长途车站"],
+    "103": ["菜市场", "幸福小区", "政府", "汽车站"]
+}
 
-def NearestStation(Data, x, y):
-    """返回最近的站点
+
+def NearestStation(x, y):
+    """返回最近站点信息
 
     Args:
-        Data (dict)): 全局数据
+        Data (dict): 全局数据
         x (str): x坐标
         y (str): y坐标
     """
-    # a : key   b : value
-    # a, b = random.choice(list(data.items()))
-    print(Data["Station"])
     min = 100
     A = 0
     B = 0
+    position = 0
     for i in Data["Station"]:
         a = int(Data["Station"][i].split(",")[0])
         b = int(Data["Station"][i].split(",")[1])
@@ -110,10 +115,22 @@ def NearestStation(Data, x, y):
             min = tmp # 记录最小值
             A = a # 记录最小值的坐标
             B = b # 记录最小值的坐标
-    print(A, B) # 最近站点坐标
+            position = i
+    print(f"最近的站点：\n{Station[position]}")
+    # 发车信息
+    print(f"发车信息：\n{Time[position]}")
+    # 经过路线
+    print("经过路线：")
+    temp_p = Station[position]
+    for item in Bus:
+        for i in Bus[item]:
+            if temp_p == i:
+                for i in Bus[item]:
+                    print(i, end=" ")
+    
 
 
-def GetDownTime(Time, up_time, station):
+def GetDownTime(up_time, station):
     """输入当前时间 返回合理的上车时间
 
     Args:
@@ -121,9 +138,10 @@ def GetDownTime(Time, up_time, station):
         up_time (str): 上车时间
         station (str): 上车的站点
     """
+    station = Station[station] # 转换
     beg = int(up_time.split(":")[0])
     end = int(up_time.split(":")[1])
-    print(Time[station])
+    print(f"该站点发车时间：\n{Time[station]}")
     min = 10000000
     tempA = 0
     tempB = 0
@@ -138,34 +156,37 @@ def GetDownTime(Time, up_time, station):
             tempB = tmp_end
     if tempB == 0:
         tempB = str(tempB) + "0"
-    print(tempA, tempB) # 合理的上车时间
+    print(f"最近一班车时间: \n{tempA}:{tempB}") # 合理的上车时间
 
 
-Station = {
-    "101" : [0, 1, 3, 8],
-    "102" : [7, 2, 3, 6, 5],
-    "103" : [0, 4, 9, 6]
-}
-
-
-def GetStationMessage(Time, Station, station):
+def GetStationMessage(station):
     """得到站点信息
-    
+
     Args:
         Time (dict): 全局数据
         Station (dict): 全局数据
         station (str): 上车的站点
     """
     # 打印发车时间
-    print(Time[station])
-    station = int(station)
-    for item in Station:
-        for i in Station[item]:
+    station = Station[station]
+    print(station)
+    print("发车时间：")
+    for item in Time[station]:
+        print(item, end=" ")
+
+    print("\n")
+    station = Station[station]
+    # station = int(station)
+    for item in Bus:
+        for i in Bus[item]:
             if station == i:
-                print(Station[item])
+                for it in Bus[item]:
+                    print(it, end="→")
+    pass
 
 
 if __name__ == "__main__":
-    # NearestStation(data, 5, 5)
-    # GetDownTime(Time, "10:30", "6")
-    GetStationMessage("0")
+    # NearestStation(1, 1)
+    GetDownTime("11:00", "桃花镇")
+    # GetStationMessage("桃花镇")
+    pass

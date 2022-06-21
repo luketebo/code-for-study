@@ -26,6 +26,10 @@ void Insert_sort(element arr[],int count){
         // 从 i 个元素之前循环
         for(int j = i - 1; j >= 0; j--){
            if(temp < arr[j]){
+            /**
+             * @brief 
+             * 这个交换有点点优秀 
+             */
                int b = 0;
                 b = arr[j];
                 arr[j] = temp;
