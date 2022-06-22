@@ -25,6 +25,7 @@ public:
         {
             cin >> arr[i];
         }
+        cout << "归并排序" << endl;
         merge_sort(arr, 1, count);
         for (int i = 0; i < count; i++)
         {
@@ -53,6 +54,7 @@ public:
         merge_sort(arr, beg, mid);
         merge_sort(arr, mid + 1, end);
         // 进行合并
+        cout << "分割点: " << mid << endl;
         merge(arr, beg, mid, end);
     }
     // 进行归并的分为两个区，beg -> mid , mid + 1 -> end
@@ -94,6 +96,11 @@ public:
                 j++;
             }
         }
+        cout << "合并操作 " << endl;
+        for (k = beg; k <= end; k++) {
+            cout << arr[k - 1] << " ";
+        }
+        cout << endl;
     }
 };
 #endif
