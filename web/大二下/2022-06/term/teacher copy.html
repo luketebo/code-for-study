@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>十月 好久不见</title>
+    <link rel="stylesheet" href="./bootstrap-5.1.3-dist/css/bootstrap.css" />
+  </head>
+  <body>
+    <!-- 头部 -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <img
+            src="./image/paidaxing.svg"
+            alt=""
+            width="40"
+            height="34"
+            class="d-inline-block align-text-top"
+            style="padding-right: 10px"
+          />Luke Tebo</a
+        >
+        <!-- 当是手机界面时 的缩放按钮 -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <a class="nav-link" href="#">Features</a>
+            <a class="nav-link" href="#">Pricing</a>
+            <a
+              class="nav-link disabled"
+              href="#"
+              tabindex="-1"
+              aria-disabled="true"
+              >Disabled</a
+            >
+          </div>
+        </div>
+        <div class="dropdown" style="padding-right: 80px;">
+          <a
+            class="dropdown-toggle nav-link"
+            href="#"
+            id="dropdownMenuLink"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            ><img src="./image/paidaxing.svg" alt="" width="30" height="24" />
+          </a>
+
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+
+            <li><a class="dropdown-item" href="#"><img src="./icon/gear.svg" style="padding-right: 8px">设置</a></li>
+            <li><a class="dropdown-item" href="#">测试</a></li>
+            <li><a class="dropdown-item" href="#"><img src="./icon/box-arrow-right.svg" style="padding-right: 8px">退出</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- 内容 -->
+    <div class="container-fluid" style="margin-top: 10px">
+      <div class="row">
+        <div class="col-md-2">
+          <div class="card">
+            <div class="card-header">
+              <h3>老师管理</h3>
+            </div>
+            <div class="accordion" id="accordionFlushExample">
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingOne">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#flush-collapseOne"
+                    aria-expanded="false"
+                    aria-controls="flush-collapseOne"
+                  >
+                    首页
+                  </button>
+                </h2>
+                <div
+                  id="flush-collapseOne"
+                  class="accordion-collapse collapse"
+                  aria-labelledby="flush-headingOne"
+                  data-bs-parent="#accordionFlushExample"
+                >
+                  <div
+                    class="accordion-body"
+                    style="margin: -5px 0px -20px 0px"
+                  >
+                    <ul style="list-style: none">
+                      <li><a class="dropdown-item" href="#">概览</a></li>
+                      <li>
+                        <a class="dropdown-item" href="#">分数统计图</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingTwo">
+                  <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#flush-collapseTwo"
+                    aria-expanded="false"
+                    aria-controls="flush-collapseTwo"
+                  >
+                    管理
+                  </button>
+                </h2>
+                <div
+                  id="flush-collapseTwo"
+                  class="accordion-collapse collapse"
+                  aria-labelledby="flush-headingTwo"
+                  data-bs-parent="#accordionFlushExample"
+                >
+                  <div class="accordion-body">
+                    <div
+                      class="accordion-body"
+                      style="margin: -15px -25px -40px -30px"
+                    >
+                      <ul style="list-style: none">
+                        <li><a class="dropdown-item" href="#">布置作业</a></li>
+                        <li>
+                          <a class="dropdown-item" href="#">审核作业</a>
+                        </li>
+                        <li>
+                          <a class="dropdown-item" href="#">查看作业</a>
+                        </li>
+                        <li>
+                          <a class="dropdown-item" href="#">创建班级</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="dropdown-item" style="padding-top: 10px; padding-left: 20px">
+              <a><p>留言板</p></a>
+            </div>
+          </div>
+          <!-- <div class="card">
+            <div class="card-header">
+              <h3></h3>
+          </div> -->
+        </div>
+        <!-- 表格 -->
+        <div class="col-md-10">
+          <div class="container-fluid">
+            
+            <div class="col-md-3" style="margin: 10px 0px 10px 0px">
+              <form class="d-flex">
+                <input
+                  class="form-control me-2"
+                  type="search"
+                  placeholder="Search"
+                  aria-label="Search"
+                />
+                <button class="btn btn-outline-success" type="submit">
+                  Search
+                </button>
+              </form>
+            </div>
+            <div class="col-md-2" style="margin-bottom: 10px;">
+                <button class="btn btn-outline-success">Add</button>
+            </div>
+            
+
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Class</th>
+                  <th scope="col">C++</th>
+                  <th scope="col">Python</th>
+                  <th scope="col">Java</th>
+                  <th scope="col">img</th>
+                  <th scope="col">操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>Mark</td>
+                  <td>Otto</td>
+                  <td>@mdo</td>
+                </tr>
+                <tr>
+                  <th scope="row">2</th>
+                  <td>Jacob</td>
+                  <td>Thornton</td>
+                  <td>@fat</td>
+                </tr>
+                <tr>
+                  <th scope="row">3</th>
+                  <td colspan="2">Larry the Bird</td>
+                  <td>@twitter</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-center">
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">4</a></li>
+            <li class="page-item"><a class="page-link" href="#">5</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </body>
+  <script
+    type="text/javascript"
+    src="./js/bootstrap.js"
+  ></script>
+</html>
