@@ -43,13 +43,19 @@ public:
         cout << "初始化 w 和 e 数组: " << endl;
         cout << "w: " << endl;
         for (int i = 1; i <= n + 1; ++i)
+        {
             for (int j = 1; j <= n + 1; ++j)
-                cout << w[i][j] << " ";
+                cout << w[i][j] << "\t";
+            cout << endl;
+        }
         
         cout << endl << "e: " << endl;
         for (int i = 1; i <= n + 1; ++i)
+        {
             for (int j = 1; j <= n + 1; ++j)
-                cout << e[i][j] << " ";
+                cout << e[i][j] << "\t";
+            cout << endl;
+        }
 
         cout << "开始填表: " << endl;
         for (int len = 1; len <= n; ++len)

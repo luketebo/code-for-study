@@ -20,7 +20,7 @@ public:
         int count = 0;
         cout << "input the array's length: ";
         cin >> count;
-        cout << "input the array: " << endl;
+        cout << "input the array: ";
         for (int i = 0; i < count; i++)
         {
             cin >> arr[i];
@@ -100,6 +100,7 @@ public:
         for (k = beg; k <= end; k++) {
             cout << arr[k - 1] << " ";
         }
+        cout << endl;
         cout << endl;
     }
 };

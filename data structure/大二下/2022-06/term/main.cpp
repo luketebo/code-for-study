@@ -13,6 +13,7 @@ int main()
     cout << endl;
     cout << "                        Hello, data structure!                 " << endl;
     while(true){
+        cout << endl;
         cout << "***************************************************************"<< endl;
         cout << "* 1. 全排列\t 2. 归并排序\t         3. 最优二叉搜索树    *" << endl;
         cout << "* 4. 最大字段和\t 5. 最大公共子序列长度\t 6. 抢劫问题          *" << endl;
@@ -35,11 +36,11 @@ int main()
                 break;
             }
             case 4:
-                SQLIST l;
+                SQLISTC l;
                 l.main();
                 break;
             case 5:
-                SQLISTC lc;
+                SQLIST lc;
                 lc.main();
                 break;
             case 6:
