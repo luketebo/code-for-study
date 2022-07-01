@@ -3,8 +3,8 @@
 #include "lst/lst.hpp"
 #include "longest/longest.hpp"
 #include "matrix/matrix.hpp"
-#include "BSB.hpp"
-#include "LOOT.hpp"
+#include "bsb/BSB.hpp"
+#include "loot/LOOT.hpp""
 #include <iostream>
 using namespace std;
 int main()
