@@ -10,7 +10,6 @@
  * BFS: 单源最短路劲问题
  */
 #include <stdio.h>
-
 int main()
 {
     int i, j, m, n;
