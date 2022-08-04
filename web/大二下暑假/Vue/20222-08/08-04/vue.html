@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <style>
+      li {
+        list-style: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="counter">
+      {{message}}
+      <br />
+      <span v-bind:title="message"> Counter: </span>
+      <hr />
+      <ol>
+        <li v-for="todo in todos">{{ todo.text }}</li>
+      </ol>
+    </div>
+    <script type="text/javascript">
+      const app = {
+        data() {
+          return {
+            message: "hhhhhhhhhh",
+            todos: [{ text: "Y" }, { text: "C" }, { text: "S" }],
+          };
+        },
+      };
+      Vue.createApp(app).mount("#counter");
+    </script>
+  </body>
+</html>
