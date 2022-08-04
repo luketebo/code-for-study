@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>demo</title>
+    <script src="https://unpkg.com/vue@next"></script>
+  </head>
+  <body>
+    <div id="counter">
+      <ol>
+        <todo-item v-for="item in todos" v-bind:todo="item"></todo-item>
+      </ol>
+    </div>
+
+    <script type="text/javascript">
+      // 创建组件
+      const TodoItem = {
+        //可以接受一些参数，参数从父组件传递
+        props: ["todo"],
+        template: "<li>{{ todo.text }}</li>",
+      };
+
+      const app = Vue.createApp({
+        // 组件
+        components: {
+          TodoItem,
+        },
+        // 数据
+        data() {
+          return {
+            todos: [{ text: "java" }, { text: "python" }, { text: "c++" }]
+          };
+        },
+      });
+
+      app.mount("#counter");
+    </script>
+  </body>
+</html>

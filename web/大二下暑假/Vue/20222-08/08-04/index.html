@@ -4,21 +4,51 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>index</title>
     <script src="https://unpkg.com/vue@next"></script>
   </head>
   <body>
     <div id="counter">
-        Counter: {{ counter }}
-        <span v-bind:title="message"></span>
-        <button v-on:click="plus_">plus</button>
+      <ol>
+        <todo-item></todo-item>
+      </ol>
+      <hr>
+      <ol>
+        <li v-for="todo in todos">{{ todo.text }}</li>
+      </ol>
+      <hr />
+      <span v-if="seen">测试</span>
+      <br />
+      <button v-on:click="seen = !seen">隐藏</button>
+      <hr />
+      Counter: {{ counter }}
+      <span v-bind:title="message"></span>
+      <br />
+      <button v-on:click="plus_">plus</button>
+      <hr />
+      <p>{{ message }}</p>
+      <input v-model="message" />
     </div>
     <script>
+
+      const TodoItem = {
+        template: "<li>This is a todo</li>"
+      }
+
       const Counter = {
+        components: {
+          TodoItem
+        },
         data() {
           return {
             counter: 0,
-            message: "fuck vue"
+            message: "fuck vue",
+            seen: true,
+            todos: [
+              {text: "java"},
+              {text: "c++"},
+              {text: "python"}
+            ]
           };
         },
         mounted() {
@@ -27,10 +57,10 @@
           }, 1000);
         },
         methods: {
-            plus_(){
-                this.counter += 10;
-            }
-        }
+          plus_() {
+            this.counter += 10;
+          },
+        },
       };
 
       Vue.createApp(Counter).mount("#counter");
