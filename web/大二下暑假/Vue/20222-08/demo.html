@@ -6,14 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://unpkg.com/vue@next"></script>
+    <style>
+        .active{
+            width: 100px;
+            height: 100px;
+            color: red;
+        }
+    </style>
 </head>
 <body>
-    <div id="counter"></div>
+    <div id="counter">
+        <div :class="{active: isActive}">good</div>
+        <button @click="change">变化</button>
+
+    </div>
     <script type="text/javascript">
         const app = {
             data(){
                 return {
-
+                    isActive: true,
+                }
+            },
+            methods: {
+                change(){
+                    this.isActive = !this.isActive;
                 }
             }
         };
