@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <style type="text/css">
+        
+    </style>
+</head>
+<body>
+   <div id="counter">
+    <h1 v-if="awesome">Vue is awesome!</h1>
+    <hr>
+    <button @click="awesome = !awesome">Toggle</button>
+    <h1 v-if="awesome">Vue is awesome!</h1>
+    <h1 v-else>Oh no </h1>
+   </div> 
+
+   <script type="text/javascript">
+    const app = {
+        data() {
+            return {
+                awesome: true,
+
+            }
+
+        },
+        methods: {
+
+        },
+        components: {
+
+        },
+        computed: {
+
+        },
+    };
+    const Root = Vue.createApp(app);
+    const vm = Root.mount("#counter");
+   </script>
+</body>
+</html>
