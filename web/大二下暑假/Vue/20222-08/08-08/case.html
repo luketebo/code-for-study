@@ -7,11 +7,56 @@
     <title>Document</title>
     <script src="https://unpkg.com/vue@next"></script>
     <style type="text/css">
-        
+       .demo{
+        list-style: none;
+       } 
     </style>
 </head>
 <body>
    <div id="counter">
+    <ul>
+        <li v-for="(key, value, index) in myObject" :class="demoY">
+            {{index}} : {{key}} - {{value}} ⭐⭐⭐⭐⭐
+        </li>
+    </ul>
+    <hr>
+    <ul>
+        <li v-for="(key, value) in myObject" :class="demoY">
+            {{key}} : {{value}}  ⭐⭐⭐
+        </li>
+    </ul>
+   <hr> 
+    <ul>
+        <li v-for="value in myObject" :class="demoY">
+            {{value}} ⭐⭐⭐
+        </li>
+    </ul>
+    <hr>
+    <li v-for="(item, index) in cases" :class="demoY">
+       {{index}} - {{item.message}}
+    </li>
+    <hr>
+    <li v-for="item in items" :class="demoY">
+        {{item.message}}
+    </li>
+    <hr>
+    <li v-for="item in items" :class="{demo: demo}">
+        {{item.message}}
+    </li>
+    <hr>
+    <h1 v-show="ok">Hello !</h1>
+    <hr>
+    <template v-if="ok">
+        <h1>title</h1>
+        <p>paragraph 1</p>
+        <p>paragraph 2</p>
+    </template>
+    <hr>
+    <div v-if="type == 'A'">A</div>
+    <div v-else-if="type == 'B'">B</div>
+    <div v-else-if="type == 'C'">C</div>
+    <div v-else>Not A/B/C</div>
+    <hr>
     <h1 v-if="awesome">Vue is awesome!</h1>
     <hr>
     <button @click="awesome = !awesome">Toggle</button>
@@ -20,10 +65,36 @@
    </div> 
 
    <script type="text/javascript">
+    const parentMessage = 'Parent';
+    const demos = [
+    {message: 'java'},{message: 'good'}
+    ];
+    demos.forEach((item, index) => {
+        console.log(parentMessage, item.message, index)
+    });
+  //  -------------------------------
     const app = {
         data() {
             return {
                 awesome: true,
+                type: 'x',
+                ok: true,
+                items: [
+                {message: 'bar'},
+                {message: "foo"}
+                ],
+                demo: true,
+                demoY: 'demo',
+                cases: [
+                {message: 'java'},
+                {message: 'python'}
+                ],
+                myObject: {
+                    title: "How to do lists in vue",
+                    author: 'you',
+                    publishedAt: '2022-08-09'
+                }
+
 
             }
 
