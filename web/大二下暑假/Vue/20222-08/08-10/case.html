@@ -11,8 +11,47 @@
     </style>
 </head>
 <body>
+    <div id="counter">
+    <input @keyup.enter="submit" />
+    <br>
+    <input @keyup.page-down="onPageDown" />
+    <hr>
+    <!-- 事件处理 -->
+    <!-- 单击事件将停止传递 -->
+    <a @click.stop="doThis">doThis</a>
+    <br>
+    <!-- 提交事件将不再重新加载页面 -->
+    <form @submit.prevent="onSubmit">onSubmit</form>
+    <br>
+    <!-- 修饰语可以使用链式书写 -->
+    <a @click.stop.prevent="doThat">doThat</a>
+    <br>
+    <!-- 也可以只有修饰符 -->
+    <form @submit.prevent>prevent</form>
+    <br>
+    <!-- 仅当 event.target 是元素本身时才会触发事件处理器 -->
+    <!-- 例如：事件处理器不来自子元素 -->
+    <div @click.self="doThat">...</div>
+    <br>
+    <hr>
+    <!-- 使用特殊的$event变量 -->
+    <button @click="warn('Form cannot be submitted yet.', $event)">submit</button>
+    <br>
+    <!-- 使用内联箭头函数 -->
+    <button @click="(event) => warn('Form cannot be submitted yet.', event)">submit</button>
+    <br>
+    <hr>
+    <button @click="Say('Hello')">Say Hello</button>
+    <br>
+    <button @click="Say('Bye')">Say Bye</button>
+    <br>
+    <hr>
+    <button @click="greet">Greet</button>
+    <hr>
+    <button @click="count++">Add++</button>
+    <p>Count is : {{count}}</p>
     <!-- 列表渲染 -->
-   <div id="counter">
+    <hr>
     <ul v-for="numbers in sets">
         <li v-for="n in even(numbers)">{{ n }}</li>
     </ul>
@@ -37,13 +76,29 @@
                 ],
                 numbers: [1, 2, 3, 4, 5],
                 sets: [[1, 2, 3, 4, 5], [6, 7, 8, 9, 10]],
-
+                count: 0,
+                name: 'vue.js',
             }
 
         },
         methods: {
             even(numbers) {
                 return numbers.filter(number => number % 2 === 0)
+            },
+            greet(even) {
+                alert('hello ' + this.name + ' !');
+                if(even) {
+                    alert(event.target.tagName);
+                }
+            },
+            Say(message) {
+                alert(message);
+            },
+            warn(message, event) {
+                if (event) {
+                    event.preventDefault();
+                }
+                alert(message);
             }
 
         },
