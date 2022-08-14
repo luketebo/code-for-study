@@ -11,11 +11,54 @@
     </style>
 </head>
 <body>
-   <div id="counter"></div> 
+   <div id="counter">
+    <div>Picked: {{ picked }}</div>
+
+    <input type="radio" id="one" value="one" v-model="picked" />
+    <label for="one">one</label>
+    
+    <input type="radio" id="two" value="two" v-model="picked" />
+    <label for="two">two</label>
+    <hr>
+    <div>Checked names: {{ checkedNames }}</div>
+    <input type="checkbox" id="jack" value="jack" v-model="checkedNames">
+    <label for="jack">jack</label>
+    
+    <input type="checkbox" id="john" value="john" v-model="checkedNames">
+    <label for="john">john</label>
+
+    <input type="checkbox" id="mike" value="mike" v-model="checkedNames">
+    <label for="mike">mike</label>
+    <hr>
+    <input type="checkbox" id="checkbox" v-model="checked">
+    <label for="checkbox">{{ checked }}</label>
+    <hr>
+    <p>Multiline Message is</p>
+    <p style="white-space: pre-line">{{ message }}</p>
+    <textarea v-model="message"></textarea>
+    <br>
+    <textarea>{{message}}</textarea>
+    <hr>
+    <p>Message is {{message}}</p>
+    <input v-model="message" placeholder="what this is?">
+    <hr>
+    <input 
+    :value="text"
+    @input="event => text = event.target.value">
+    <hr>
+    <input v-model="text">
+
+   </div> 
    <script type="text/javascript">
     const app = {
         data() {
             return {
+                message: '',
+                checked: false,
+                checkedNames: [],
+                picked: '',
+
+            
 
             }
 
