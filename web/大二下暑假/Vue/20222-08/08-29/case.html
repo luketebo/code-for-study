@@ -1,37 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <script src="https://unpkg.com/vue@next"></script>
     <style type="text/css">
-        
+        html{
+            background-color: black;
+        }
+        .title{
+            background-color: #4db8e7;
+            width: 100vw;
+            height: 4rem;
+        }
     </style>
-</head>
-<body>
-   <div id="counter"></div> 
-   <script type="text/javascript">
-    const app = {
+  </head>
+  <body>
+    <!-- header -->
+    <header class="title">
+        <span></span>
+        <h1>请填写请假信息</h1>
+
+    </header>
+    <div id="counter"></div>
+    <script type="text/javascript">
+      const app = {
         data() {
-            return {
-
-            }
-
+          return {};
         },
-        methods: {
-
-        },
-        components: {
-
-        },
-        computed: {
-
-        },
-    };
-    const Root = Vue.createApp(app);
-    const vm = Root.mount("#counter");
-   </script>
-</body>
+        methods: {},
+        components: {},
+        computed: {},
+      };
+      const Root = Vue.createApp(app);
+      const vm = Root.mount("#counter");
+      // 如果看不懂js写了什么，也不用管，固定写法，写进去就可以用了
+      window.onload = function () {
+        /* 第一个参数是你想让 1rem 等于多少像素，第二个参数是设计稿的宽度 */
+        getRem(50, 750);
+      };
+      window.onresize = function () {
+        getRem(50, 750);
+      };
+      function getRem(prem, pwidth) {
+        var oWidth =
+          document.body.clientWidth || document.documentElement.clientWidth;
+        document.documentElement.style.fontSize =
+          (prem / pwidth) * oWidth + "px";
+      }
+    </script>
+  </body>
 </html>
