@@ -1,6 +1,11 @@
 import math
+import os
+import xlrd
 
-def readExcel():
+def readExcel(path):
+    data = xlrd.open_workbook(path)
+    print(data.sheet_names())
+    table = data.sheets()[0]
     
     pass
 
@@ -29,7 +34,9 @@ def addCore():
 
 
 if __name__ == "__main__":
-    addCore()
+    # addCore()
+    # print(os.getcwd())
+    readExcel("./2022-09/讲学金/gradeCore.xlsx")
     pass
 
 
