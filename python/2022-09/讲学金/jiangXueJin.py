@@ -53,11 +53,14 @@ def readExcel(path):
     data = xlrd.open_workbook(path)
     table = data.sheets()[0]
     df = pd.read_excel(path)
+    x = df.head(5)
+    print(type(x))
+    
     # 学分 xueFen 成绩 chenJi
     xueFen = []
     chenJi = []
-    xueFen_row = ""
-    chenJi_row = ""
+    xueFen_row = 10
+    chenJi_row = 18
     for i in range(df.shape[0]):
         xueFen.append(df.loc[i].values[int(xueFen_row)])
         chenJi.append(df.loc[i].values[int(chenJi_row)])
@@ -102,9 +105,9 @@ def addCore():
 if __name__ == "__main__":
     # addCore()
     # print(os.getcwd())
-    # xueFen, chenJi = readExcel("./2022-09/讲学金/gradeCore.xlsx")
+    xueFen, chenJi = readExcel("./2022-09/讲学金/gradeCore.xlsx")
     # resolveCore(xueFen, chenJi)
-    spider()
+    # spider()
     pass
 
 
