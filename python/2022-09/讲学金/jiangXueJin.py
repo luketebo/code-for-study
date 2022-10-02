@@ -45,28 +45,24 @@ def readExcel(path):
     xueFen_row: 学分所在列
     chenJi_row: 成绩所在列
     Args:
-        path (_type_): _description_
+        path (_type_): file
 
     Returns:
-        _type_: _description_
+        xueFen (list): the all xueFen
+        chenJi (list): the all grades
     """
     data = xlrd.open_workbook(path)
     table = data.sheets()[0]
     df = pd.read_excel(path)
-    x = df.head(5)
-    print(type(x))
-    
     # 学分 xueFen 成绩 chenJi
     xueFen = []
     chenJi = []
-    xueFen_row = 10
-    chenJi_row = 18
+    xueFen_row = ""
+    chenJi_row = ""
     for i in range(df.shape[0]):
         xueFen.append(df.loc[i].values[int(xueFen_row)])
         chenJi.append(df.loc[i].values[int(chenJi_row)])
         
-    print(xueFen)
-    print(chenJi)
     return xueFen, chenJi
 
 def resolveCore(xueFen, chenJi):
@@ -96,10 +92,6 @@ def addCore():
         # up = float(Core[1][0]) + up
         xueFen = float(Core[i][1]) + xueFen
         up = float(Core[i][0]) * float(Core[i][1]) + up
-     
-    print(up)
-    print(xueFen)
-    print(up / xueFen)
 
 
 if __name__ == "__main__":

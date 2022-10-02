@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <style type="text/css">
+        
+    </style>
+</head>
+<body>
+    <!-- 生命周期钩子 -->
+   <div id="counter"></div> 
+   <p>
+    Ask a yes/no question:
+    <input v-model="question" />
+   </p>
+   <div>{{answer}}</div>
+   <script type="text/javascript">
+    export default {
+        data() {
+            return {
+                question: "",
+                answer: "question usually contain a question mark"
+            }
+        },
+        watch: {
+            question(newQuestion, oldQuestion) {
+                if (newQuestion.includes('?')) {
+                    this.getAnswer()
+                }
+            }
+        },
+        methods: {
+            async getAnswer() {
+                this.answer = "thinking ....."
+                try {
+                    const res = await fetch('https:/yesno.wtf/api')
+                    this.answer = (await res.json()).answer
+                } catch (error) {
+                    this.answer = 'Error! Could not reach the api.' + error
+                }
+            }
+        }
+    }
+
+   </script>
+
+</body>
+</html>

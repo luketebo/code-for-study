@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+    <style>
+        .active{
+            width: 100px;
+            height: 100px;
+            color: red;
+        }
+        .text-danger{
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+    <div id="counter">
+        <div :style="{color: activeColor, fontSize: fontSize + 'px'}">momoo</div>
+        <br>
+        <div :style="styleDemo">ohhhhhhhhhh</div>
+        <hr>
+        <demo class="boo"></demo>
+        <hr>
+        <div :class="[activeClass, textDanger]">hello</div>
+        <button @click="ggg">ccc</button>
+        <hr>
+        <div :class="{active: isActive}">good</div>
+        <button @click="change">变化</button>
+        <hr>
+        <div :class="classObject">demo</div>
+        <button @click="exchange">change</button>
+        <hr>
+        <div :class="demoObject">vue</div>
+        
+
+    </div>
+    <script type="text/javascript">
+        const demo = {
+            template: '<p class="active">this is a bar</p>'
+        }
+        const app = {
+            data(){
+                return {
+                    isActive: true,
+                    classObject:{
+                        active: true,
+                    },
+                    activeClass: 'active',
+                    textDanger: 'text-danger',
+                    styleDemo: {
+                        color: 'blue',
+                        fontSize: '55px'
+                    },
+                    activeColor: 'red',
+                    fontSize: 30,
+                }
+            },
+            components: {
+                demo
+            },
+            methods: {
+                change(){
+                    this.isActive = !this.isActive;
+                },
+                exchange(){
+                    this.classObject.active = !this.classObject.active;
+                },
+                ggg(){
+                    this.textDanger = !this.textDanger;
+                }
+            },
+            // 计算属性
+            computed: {
+                demoObject() {
+                    return {
+                        active: this.isActive
+                    }
+                }
+            }
+        };
+
+        const root = Vue.createApp(app);
+        const vm = root.mount("#counter");
+    </script>
+</body>
+</html>

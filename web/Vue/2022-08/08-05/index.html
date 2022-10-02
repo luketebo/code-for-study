@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+   <div id="counter">
+    {{message}}
+    <hr>
+    <span v-once>{{ message }}</span><br>
+    <span >{{messgae}}</span><br>
+    <button @click="change">change</button>
+    <hr>
+    <div>{{rawhtml}}</div>
+    <div v-html="rawhtml"></div>
+    <hr>
+    <button v-bind:disabled="isdisabled">点击</button>
+    <hr>
+    <span v-if="message == 'hello vue'">{{ message}}</span>
+
+
+
+
+   </div> 
+   <script type="text/javascript">
+    const app = {
+        data(){
+            return{
+                message: "hello vue!",
+                rawhtml: '<h1>html</h1>',
+                isdisabled: false
+            }
+        },
+        methods:{
+            change(){
+                this.message="change"
+            }
+        },
+        // 钩子函数
+        beforCreate(){
+            console.log("beforCreate")
+            console.log(this.message)
+        },
+        created(){
+            console.log("created")
+            console.log(this.message)
+
+        },
+        mounted(){
+            console.log("mounted")
+            console.log(this.message)
+        }
+    };
+    Vue.createApp(app).mount("#counter");
+   </script>
+</body>
+</html>
