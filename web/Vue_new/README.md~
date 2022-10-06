@@ -1,0 +1,336 @@
+# Vue 笔记
+
+> 学习进度： 第四节 2022/10/05
+
+## Vue 初识
+
+### 基础配置
+
++ 安装nodejs
++ 安装nvm
+
+### 构建项目
+
++ 简易项目构建
+
+```bash
+npm init vite@latest # 项目构建
+
+cd "项目目录"
+npm install && npm i # 下载依赖
+
+npm run dev # 启动项目
+```
+
++ 完整项目构建
+
+```bash
+npm init vue@latest # 项目构建
+
+cd "项目目录"
+npm install && npm i # 下载依赖
+
+npm run dev # 启动项目
+```
+
+###  代码学习
+
+#### 模板语法 & vue 指令
+
+##### 模板插值语法
+
+> error: 使用el表达式的时候无法获取数据
+
+在script 声明一个变量可以直接在template 使用用法 {{ 变量名称 }}
+
+```vue
+<template>
+	<div>
+        {{ message }}
+    </div>
+</template>
+
+<script setup lang="ts">
+const message = "Luke Tebo"
+</script>
+
+<style>
+
+</style>
+```
+
+模板语法的妙用
+
+```vue
+<template>
+	<div>
+        {{ message == 0 ? "Luke" : "Tebo" }}  // 条件运算
+        {{ message + 1 }} // 算数运算
+        {{ arr.split(',') }}   // 函数调用
+    </div>	
+</template>
+
+<script setup lang="ts">
+    const message:number = 1
+    const arr:string = "Luke, Tebo"
+</script>
+
+<style>
+</style>
+```
+
+
+
+##### 指令
+
+v- 开头都是vue 指令
+
+v-text 用来显示文本
+
+v-html 用来显示富文本
+
+```vue
+<template>
+	<div v-text="message"></div>
+	<div v-show="code"></div>
+</template>
+
+<script setup lang="ts">
+    const message:string = "message"
+    const code:string = "<h1>code</h1>"
+</script>
+
+<style>
+</style>
+```
+
+
+
+v-if 用来控制元素的显示隐藏
+
+v-show 用于控制元素得到显示隐藏
+
+```vue
+<template>
+	<div v-if="flag"> // v-if 更加消耗性能
+        v-if
+    </div>
+	<div v-show="flag">
+        v-show
+    </div>
+</template>
+
+<script setup lang="ts">
+const flag:boolean = true
+    
+</script>
+
+<style>
+
+</style>
+```
+
+
+
+v-on 简写@ 用来给元素添加事件
+
+```vue
+<template>
+	<div>
+        <button @click="clickTap">
+            123
+    </button>
+    </div>
+</template>
+
+<script setup lang="ts">
+const clickTap = () => {
+    console.log("click")
+}
+</script>
+<style></style>
+```
+
+阻止冒泡事件
+
+```vue
+<template>
+	<div @click="parent">
+        <button @click="clickTap"> 123 </button>
+        // 仔细比较 两个按钮在控制台的输出 类似操作较多可自行实践
+        <button @click.stop = "clickTap"> 321 </button>
+    </div>
+</template>
+
+<script setup lang="ts">
+const clickTap = () => {
+    console.log("click");
+}
+const parent = () => {
+    console.log("parent");
+}
+</script>
+```
+
+阻止表单提交
+
+```vue
+<template>
+	<form action="/">
+		// 不刷新
+		<button @click.prevent="submit" type="submit"> submit </button>
+		// 刷新
+		<button @click="submit" type="submit"> submit_ </button>
+	<form>
+</template>
+
+<script setup lang="ts">
+const submit = () => {
+	console.log("child")
+}
+</script>
+
+<style></style>
+```
+
+
+
+v-bind 简写: 用来绑定元素的属性attr
+
+案例1
+
+```vue
+<template>
+	<div :class="[flag ? "a" : "b"]> luke tebo  </div>
+</template>
+
+<script setup lang="ts">
+const flag: boolean = false
+</script>
+
+<style>
+.a {
+color: red;
+}
+
+.b {
+color: blue;
+}
+</style>
+```
+
+案例2
+
+```vue
+<template>
+  <div :class="flag">{{ flag }}</div>
+</template>
+ 
+<script setup lang="ts">
+type Cls = {
+  other: boolean,
+  h: boolean
+}
+const flag: Cls = {
+  other: false,
+  h: true
+};
+</script>
+ 
+<style>
+.active {
+  color: red;
+}
+.other {
+  color: blue;
+}
+.h {
+  height: 300px;
+  border: 1px solid #ccc;
+}
+</style>
+```
+
+v-bind 绑定style
+
+```vue
+<template>
+  <div :style="style">2222</div>
+</template>
+ 
+<script setup lang="ts"> 
+type Style = {
+  height: string,
+  color: string
+}
+const style: Style = {
+  height: "300px",
+  color: "blue"
+}
+</script>
+ 
+<style>
+</style>
+```
+
+
+
+v-for
+
+```vue
+<template>
+	<div :key="item" v-for = "item in Arr">{{ item }}</div>
+</template>
+
+<script setup lang="ts">
+const arr:Array<number> = [1, 2, 3, 4, 5]
+</script>
+
+<style></style>
+```
+
+
+
+v-model
+
+> ref ? 是啥
+
+```vue
+<template>
+  <input v-model="message" type="text" />
+  <div>{{ message }}</div>
+</template>
+ 
+<script setup lang="ts">
+import { ref } from 'vue'
+const message = ref("v-model")
+</script>
+ 
+<style>
+.active {
+  color: red;
+}
+.other {
+  color: blue;
+}
+.h {
+  height: 300px;
+  border: 1px solid #ccc;
+}
+</style>
+```
+
+
+
+#### 虚拟Dom 和 diff算法
+
+> 没搞明白
+
+#### ref 全家桶
+
+> ref isRef shallowRef triggerRef 
+
+vscode 配置 vue 模板输出
+
+
+
