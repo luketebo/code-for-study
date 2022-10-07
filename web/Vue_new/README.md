@@ -3,6 +3,8 @@
 > 学习进度： 第四节 2022/10/05
 >
 > ​				  第七节 2022/10/06
+>
+> ​				  第十一节 2022/10/07
 
 ## Vue 初识
 
@@ -45,7 +47,7 @@ npm run dev # 启动项目
 
 > error: 使用el表达式的时候无法获取数据
 
-在script 声明一个变量可以直接在template 使用用法 {{ 变量名称 }}
+在script 声明一个变量可以直接在template使用，用法：{{ 变量名称 }}
 
 ```vue
 <template>
@@ -116,10 +118,10 @@ v-show 用于控制元素得到显示隐藏
 
 ```vue
 <template>
-	<div v-if="flag"> // v-if 更加消耗性能
+	<div v-if="flag"> // v-if 更加消耗性能，v-if会注释这段代码
         v-if
     </div>
-	<div v-show="flag">
+	<div v-show="flag"> // v-show 会通过调整css 来实现隐藏的效果
         v-show
     </div>
 </template>
@@ -136,7 +138,7 @@ const flag:boolean = true
 
 
 
-v-on 简写@ 用来给元素添加事件
+v-on 简写`@`用来给元素添加事件
 
 ```vue
 <template>
@@ -199,7 +201,7 @@ const submit = () => {
 
 
 
-v-bind 简写: 用来绑定元素的属性attr
+v-bind 简写`: `用来绑定元素的属性attr
 
 案例1
 
@@ -279,7 +281,7 @@ const style: Style = {
 
 
 
-v-for
+v-for 遍历
 
 ```vue
 <template>
@@ -295,7 +297,7 @@ const arr:Array<number> = [1, 2, 3, 4, 5]
 
 
 
-v-model
+v-model 双向绑定
 
 > ref ? 是啥
 
@@ -307,24 +309,13 @@ v-model
  
 <script setup lang="ts">
 import { ref } from 'vue'
-const message = ref("v-model")
+const message = ref("v-model 双向绑定")
 </script>
  
 <style>
-.active {
-  color: red;
-}
-.other {
-  color: blue;
-}
-.h {
-  height: 300px;
-  border: 1px solid #ccc;
-}
+
 </style>
 ```
-
-
 
 #### 虚拟Dom 和 diff算法
 
@@ -522,6 +513,7 @@ customRef使用
 import {customRef} from 'vue'
    
 // 看不懂     大概就是自己定义一个ref对象吧
+    // 自己定义的一个方法 也能够实现ref的效果
 function MyRef<T>(value: T) {
     let timer: any
     return customRef((track, trigger) => {
@@ -530,6 +522,7 @@ function MyRef<T>(value: T) {
                 return value
             },
             set(newVal) {
+                // 防抖
                 clearTimeout(timer)
                 timer = setTimeout(() => {
                     console.log("what")
@@ -558,6 +551,7 @@ ref的妙用 ----->  通过ref获取网页元素对象
 
 ```vue
 <template>
+// 类似于 id class
 <div ref="dom">
     i am dom
     </div>
@@ -606,10 +600,10 @@ reactive 绑定表单元素
 <script setup lang="ts">
 import { reactive } from 'vue'
 
-let form = reactive {
+let form = reactive({
     name: "Luke",
     age: 18
-}    
+})
 const submit = () => {
     console.log(form);
 }
@@ -806,5 +800,677 @@ const _edit_ = () => {
 </style> 
 ```
 
+#### to全家桶
 
+> toRef toRefs toRaw 
+>
+> 解构是啥？
+
+toRef 的使用
+
+> toRef 只针对响应式对象，智能修改响应式对象的值， 对于非响应式对象，试图不会改变
+> 值会改变 
+
+```vue
+<template>
+<div>
+    {{ man }}
+    <hr />
+    {{ man_ }}
+    <hr />
+    <button @click="change">edit</button>
+    </div>
+</template>
+<script setup lang='ts'>
+import { toRef, reactive, toRefs, toRaw } from 'vue'
+
+const man = {name: "Luke", age: 19, like: "programer"} // 非响应式对象
+cosnt man_ = reactive({name: "Luke", age: 19, like: "programer"}) // 响应式对象
+
+const like = toRef(man, "like") // 属性
+const like_ = toRef(man, "like")
+
+const change = () => {
+	like.value = "play game"
+	like_.value = "play game"
+	console.log(like, like_)
+}
+
+</script>
+<style scoped>
+</style>                         
+```
+
+toRefs 的使用
+
+> 适用于解构和赋值 和 toRef有点类似，可以理解为一个复数 `s`
+
+```vue
+<template>
+<div>
+    {{ man }}
+    <hr />
+    <button @click="change">edit</button>
+    </div>
+</template>
+<script setup lang='ts'>
+import { toRef, reactive, toRaw } from 'vue'
+
+cosnt man_ = reactive({name: "Luke", age: 19, like: "programer"}) // 响应式对象
+
+const toRefs = <T extends object>(object: T) => {
+	const map:any = {}
+	
+	for (let key in object) {
+		map[key] = toRef(object, key)
+	}
+	return map
+}
+
+const change = () => {
+	name.value = "Tebo"
+	console.log(name, age, like)
+}
+
+</script>
+<style scoped>
+```
+
+
+toRaw 的使用
+
+```vue
+<template>
+<div>
+    {{ man }}
+    <hr />
+    <button @click="change">edit</button>
+    </div>
+</template>
+<script setup lang='ts'>
+import { toRef, reactive, toRaw } from 'vue'
+
+cosnt man_ = reactive({name: "Luke", age: 19, like: "programer"}) // 响应式对象
+
+
+const change = () => {
+	// Proxy 对象	 object 当不想元素做响应式的时候，可以使用
+	// 需要使用google浏览器查看，不知道为什么edge查看的时候是一样的
+	console.log(man, toRaw(man))
+}
+
+</script>
+<style scoped>
+```
+
+
+#### computed 计算属性
+
+简单使用
+```vue
+<template>
+<div>
+	<input v-model="firstName" type="text" />
+	<input v-model="lastName" type="text" />
+	<div>
+		{{ firstName }} --- {{ lastName }}
+		<hr />
+		{{ name }}
+		<hr />
+		{{ name_ }}
+	</div>
+</div>
+</template>
+
+<script setup lang="ts">
+import { ref, reactive, computed } from 'vue'
+
+let firstName = ref("")
+let lastName = ref("")
+
+// 写法一
+const name = computed(() => {
+	return firstName.value + '-----------' + lastName.value
+})
+
+// 写法二
+const name_ = computed(() => {
+	get() {
+		return firstName.value + lastName.value
+	},
+	set() {
+		firstName.value + lastName.value
+	}
+})
+</script>
+<style scoped>
+</style>
+```
+
+购物车案例
+
+```vue
+// 未使用 computed 可以看出，很多函数被重复调用，很不方便
+<template>
+
+    <div>
+        <table border="1px solid red" style="width: 500px">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Number</th>
+                    <th>Price</th>
+                    <th>Operate</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr :key="index" v-for="(item, index) in data">
+                    <td align="center">{{ item.name }}</td>
+                    <td align="center"><button @click="numChange(index, false)">-</button>{{ item.num }}<button
+                            @click="numChange(index, true)">+</button></td>
+                    <td align="center">{{ item.price * item.num }}</td>
+                    <td align="center"><button @click="del(index)">delete</button></td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td align="center">total: {{total}}</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</template>
+
+<script setup lang='ts'>
+import { isTemplateNode } from '@vue/compiler-core';
+import { ref, reactive, computed } from 'vue'
+type Shop = {
+    name: string,
+    num: number,
+    price: number
+}
+
+let total = ref(0)
+
+const data = reactive<Shop[]>([
+    {
+        name: "LV",
+        num: 1,
+        price: 100
+    },
+    {
+        name: "Nike",
+        num: 1,
+        price: 300
+    },
+    {
+        name: "sonny",
+        num: 1,
+        price: 2499
+    }
+])
+
+const numChange = (index: number, type: boolean) => {
+    // -
+    if (data[index].num > 0 && !type) {
+        data[index].num--
+    }
+    // + 
+    if (type) {
+        data[index].num++
+    }
+    total_()
+}
+
+const total_ = () => {
+    total.value = data.reduce((prev, next) => {
+        return prev + (next.num * next.price)
+    }, 0)
+}
+
+const del = (index: number) => {
+    data.splice(index, 1)
+    total_()
+}
+
+total_()
+
+</script>
+<style scoped>
+
+</style>
+
+-------------------------------------------------------------------
+
+<template>
+
+    <div>
+        <table border="1px solid red" style="width: 500px">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Number</th>
+                    <th>Price</th>
+                    <th>Operate</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr :key="index" v-for="(item, index) in data">
+                    <td align="center">{{ item.name }}</td>
+                    <td align="center"><button @click="numChange(index, false)">-</button>{{ item.num }}<button
+                            @click="numChange(index, true)">+</button></td>
+                    <td align="center">{{ item.price * item.num }}</td>
+                    <td align="center"><button @click="del(index)">delete</button></td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td align="center">total: {{total}}</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</template>
+
+<script setup lang='ts'>
+import { isTemplateNode } from '@vue/compiler-core';
+import { ref, reactive, computed } from 'vue'
+type Shop = {
+    name: string,
+    num: number,
+    price: number
+}
+
+let total = ref(0)
+
+const data = reactive<Shop[]>([
+    {
+        name: "LV",
+        num: 1,
+        price: 100
+    },
+    {
+        name: "Nike",
+        num: 1,
+        price: 300
+    },
+    {
+        name: "sonny",
+        num: 1,
+        price: 2499
+    }
+])
+
+const numChange = (index: number, type: boolean) => {
+    // -
+    if (data[index].num > 0 && !type) {
+        data[index].num--
+    }
+    // + 
+    if (type) {
+        data[index].num++
+    }
+}
+
+total = computed<number>(() => {
+    return data.reduce((prev, next) => {
+        return prev + (next.num * next.price)
+    }, 0)
+})
+
+const del = (index: number) => {
+    data.splice(index, 1)
+    
+}
+
+</script>
+<style scoped>
+
+</style>
+
+```
+
+#### watch 侦听器
+
+>watch 
+
+简单操作一
+
+```vue
+<template>
+
+    <div>
+        	<input v-model="message" type="text" />
+    </div>
+</template>
+
+<script setup lang='ts'>
+import { ref, watch } from "vue"
+
+let message = ref<string>("")
+
+watch(message, (newVal, oldVal) => {
+    console.log("new: " + newVal)
+    console.log("old: " + oldVal)
+})
+
+</script>
+<style scoped>
+
+</style>
+```
+
+简单操作二
+
+```vue
+<template>
+
+    <div>
+        	<input v-model="message" type="text" />
+        	<input v-model="message_" type="text" />
+    </div>
+</template>
+
+<script setup lang='ts'>
+import { ref, watch } from "vue"
+
+let message = ref<string>("")
+let message_ = ref<string>("")
+
+watch([message, message_], (newVal, oldVal) => {
+    console.log("new: " + newVal)
+    console.log("old: " + oldVal)
+})
+
+</script>
+<style scoped>
+
+</style>
+```
+
+简单操作三
+
+```vue
+<template>
+
+    <div>
+        	<input v-model="message" type="text" />
+    </div>
+</template>
+
+<script setup lang='ts'>
+import { ref, watch } from "vue"
+
+let message = ref({
+    nav: {
+        bar: {
+            name: "Luke"
+        }
+    }
+})
+
+
+watch(message, , (newVal, oldVal) => {
+    console.log("new: " + newVal)
+    console.log("old: " + oldVal)
+}, {
+    deep: true // 没有这个参数，正常情况下，是无法监听到数据变化的，但是使用这个参数也有问题，且vue官方尚未解决
+    /* 
+    问题是：当深度监听时，新旧值是一样的，这样很明显不符合要求 
+    */
+})
+
+</script>
+<style scoped>
+
+</style>
+```
+
+简单操作四
+
+```vue
+<template>
+
+    <div>
+        	<input v-model="message.nav.bar.name" type="text" />
+    </div>
+</template>
+
+<script setup lang='ts'>
+import { ref, watch } from "vue"
+
+let message = ref({
+    nav: {
+        bar: {
+            name: "Luke"
+        }
+    }
+})
+
+
+watch(message, , (newVal, oldVal) => {
+    console.log("new: " + newVal)
+    console.log("old: " + oldVal)
+}, {
+    deep: true // 没有这个参数，正常情况下，是无法监听到数据变化的，但是使用这个参数也有问题，且vue官方尚未解决
+    /* 
+    问题是：当深度监听时，新旧值是一样的，这样很明显不符合要求 
+    */
+    immediate: true //  一打开页面就会自动监听
+})
+
+</script>
+<style scoped>
+
+</style>
+```
+
+简单操作五
+
+```vue
+<template>
+
+    <div>
+        	<input v-model="message.name" type="text" />
+        	<input v-model="message.name" type="text" />
+    </div>
+</template>
+
+<script setup lang='ts'>
+import { ref, watch } from "vue"
+
+let message = reactive({
+  name: "Luke",
+  name_: "Tebo"
+})
+
+// 监听两个值变化
+watch(message,  (newVal, oldVal) => {
+    console.log("new: " + newVal)
+    console.log("old: " + oldVal)
+})
+/* 
+监听一个值的变化
+回调函数用的棒
+watch(() => message.name,  (newVal, oldVal) => {
+    console.log("new: " + newVal)
+    console.log("old: " + oldVal)
+})
+*/
+
+</script>
+<style scoped>
+
+</style>
+```
+
+#### watchEffect
+
+简单上手
+
+```vue
+<template>
+    <input v-model="message" type="text" />
+    <br />
+    <input v-model="message_" type="text" />
+
+
+</template>
+
+<script setup lang='ts'>
+import { reactive, ref, watch, watchEffect } from "vue"
+
+let message = ref<string>("Luke")
+
+let message_ = ref<string>("Tebo")
+
+watchEffect(() => {
+    // 非惰性 自动调用
+    console.log("message: ", message.value)
+    console.log("message_: ", message_.value)
+})
+
+</script>
+<style scoped>
+
+</style>
+```
+
+ ```typescript
+ <script setup lang='ts'>
+ import { reactive, ref, watch, watchEffect } from "vue"
+ 
+ let message = ref<string>("Luke")
+ 
+ let message_ = ref<string>("Tebo")
+ 
+ watchEffect((oninvalidate) => {
+     // 非惰性 自动调用
+     console.log("message: ", message.value)
+     console.log("message_: ", message_.value)
+     oninvalidate(() => { 
+          // 在监听之前，执行 可以做一些操作，如防抖，清除接口之类的
+         console.log("before") // 但是是值发生变化的时候，才会触发，最开始不会触发
+     })
+ })
+ 
+ </script>
+ ```
+
+```vue
+<template>
+    <input v-model="message" type="text" />
+    <br />
+    <input v-model="message_" type="text" />
+	<button @click="stopWatch">
+        stop
+    </button>
+
+
+</template>
+
+<script setup lang='ts'>
+import { reactive, ref, watch, watchEffect } from "vue"
+
+let message = ref<string>("Luke")
+
+let message_ = ref<string>("Tebo")
+
+const stop = watchEffect(() => {
+    // 非惰性 自动调用
+    console.log("message: ", message.value)
+    console.log("message_: ", message_.value)
+})
+
+const stopWatch = () => stop() // 实现停止监听
+
+</script>
+<style scoped>
+
+</style>
+```
+
+```vue
+<template>
+    <input id="ipt" v-model="message" type="text" />
+    <br />
+    <input v-model="message_" type="text" />
+
+
+</template>
+
+<script setup lang='ts'>
+import { reactive, ref, watch, watchEffect } from "vue"
+
+let message = ref<string>("Luke")
+
+let message_ = ref<string>("Tebo")
+
+const stop = watchEffect((oninvalidate) => {
+    let ipt: HTMLInputElement = document.querySelector("#ipt") as HTMLInputElement
+    // 非惰性 自动调用
+    console.log(ipt)
+    oninvalidate(() => {
+        // 在监听之前，执行 可以做一些操作，如防抖，清除接口之类的
+        console.log("before");
+    })
+}, {
+    // flush: "post" 当注释这个时 ipt 为null 没有注释ipt在渲染完成后被成功加载 有几种方式
+ 	
+})
+
+const stopWatch = () => stop()
+</script>
+<style scoped>
+
+</style>
+```
+
+|      | sync | post | pre  |
+| ---- | ---- | ---- | ---- |
+|      |      |      |      |
+
+打开调试工具
+
+```vue
+<template>
+    <input id="ipt" v-model="message" type="text" />
+    <br />
+    <input v-model="message_" type="text" />
+
+
+</template>
+
+<script setup lang='ts'>
+import { reactive, ref, watch, watchEffect } from "vue"
+
+let message = ref<string>("Luke")
+
+let message_ = ref<string>("Tebo")
+
+const stop = watchEffect((oninvalidate) => {
+    // 非惰性 自动调用
+    // console.log("message: ", message.value)
+    oninvalidate(() => {
+        // 在监听之前，执行 可以做一些操作，如防抖，清除接口之类的
+        console.log("before");
+    })
+}, {
+    onTrigger (e) {
+        debugger // 调试工具
+    }
+})
+
+const stopWatch = () => stop()
+</script>
+<style scoped>
+
+</style>
+```
 
