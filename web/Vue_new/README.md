@@ -116,6 +116,10 @@ v-if 用来控制元素的显示隐藏
 
 v-show 用于控制元素得到显示隐藏
 
+v-if 可以触发创建和销毁的钩子函数
+
+v-show不可以
+
 ```vue
 <template>
 	<div v-if="flag"> // v-if 更加消耗性能，v-if会注释这段代码
@@ -1473,4 +1477,648 @@ const stopWatch = () => stop()
 
 </style>
 ```
+
+#### 认识组件 & 生命周期
+
+> hook ?  什么是组件
+
+组建的概念：
+
+ 
+
+生命周期
+
+| 名称              | 作用     |
+| ----------------- | -------- |
+| beforeCreate      | 创建之前 |
+| Created           | 创建     |
+| onBeforeMounted   | 挂载之前 |
+| onMounted         | 挂载     |
+| onBeforeUpdate    | 更新之前 |
+| onUpdated         | 更新     |
+| onBeforeUnmount   | 卸载之前 |
+| onUnmounted       | 卸载     |
+| onRenderTracked   |          |
+| onRenderTriggered |          |
+
+*补充*
+
+v-if 和 v-show的区别
+
+v-if 可以触发组件 创建和销毁的钩子，v-show不可以
+
+ ```vue
+ <template>
+ 
+  <div> i am a A</div>
+  <div>Luke</div>
+  <div ref="data">{{ data_ }}</div>
+  <button @click="change">edit</button>
+  <hr />
+ 
+ </template>
+ 
+ <script setup lang='ts'>
+ import { ref, onBeforeMount, onMounted, onBeforeUpdate, onUpdated, onBeforeUnmount, onUnmounted, onRenderTracked, onRenderTriggered} from 'vue'
+ 
+ const data = ref<HTMLDivElement>()
+ const data_ = ref<string>('Luke')
+ 
+ const change = () => {
+     data_.value = "Tebo"
+ }
+ 
+ // beforeCreate created setup 语法糖模式是没有这两个生命周期的 setup去代替
+ console.log("setup")
+ console.log(data_.value)
+ // 挂载  
+ // onBeforeMount 读不到dom onMounted 可以去读dom
+ onBeforeMount(() => {
+     console.log("BeforeMount", data.value)
+ })
+ onMounted(() => {
+     console.log("Mounted", data.value)
+ })
+ // 更新
+ /// onBeforeUpdate 获取更新之前的dom onUpdated 获取更新之后的dom
+ onBeforeUpdate(() => { 
+     // 针对dom元素吗？
+     console.log("BeforeUpdate", data.value?.innerText);
+ })
+ onUpdated(() => {
+     console.log("Updated", data.value?.innerText);
+     
+ })
+ // 卸载
+ onBeforeUnmount(() => {
+     console.log("BeforeUnmount", data.value);
+ })
+ onUnmounted(() => {
+     console.log("Unmounted", data.value)
+ })
+ // 调试作用
+ onRenderTracked((e) => {
+ 
+ })
+ onRenderTriggered((e) => {
+ 
+ })
+ </script>
+ <style scoped>
+ 
+ </style>
+ 
+ ------------------------------------------------
+ 
+ <template>
+     <h1>生命周期</h1>
+     <!-- v-if可以触发 组建的创建和销毁 v-show不可以 -->
+     <A v-if="flag"></A>
+     <button @click="flag = !flag">create -- destroy</button>
+ </template>
+ 
+ <script setup lang='ts'>
+ import { ref, reactive } from 'vue'
+ import A from './components/A.vue'
+ 
+ const flag = ref<Boolean>(false)
+ 
+ </script>
+ <style scoped>
+ 
+ </style>
+ 
+ ```
+
+#### 实操组件&认识less和scoped
+
+安装less
+
+> npm install less less-loader -D
+
+less:
+
+scoped:
+
+案例
+
+设计稿
+
+![](./image-vue/2022-10-08-01.jpg)
+
+项目结构：
+
+![02](./image-vue/2022-10-08-02.jpg)
+
+完成结果
+
+![03](./image-vue/2022-10-08-03.jpg)
+
+layout
+
+```vue
+// index.vue
+<template>
+
+ <div class="layout">
+        <Menu></Menu>
+    <div class="layout-right">
+        <Header></Header>
+        <Content></Content>
+    </div>
+ </div>
+
+</template>
+
+<script setup lang='ts'>
+import {ref, reactive} from 'vue'
+import Menu from './Menu/index.vue'
+import Header from './Header/index.vue'
+import Content from './Content/index.vue'
+
+</script>
+<style scoped lang='less'>
+.layout{
+    display: flex;
+    height: 100%;
+    overflow: hidden;
+    &-right{
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+}
+</style>
+```
+
+```vue
+// header
+<template>
+
+ <div class="header">头部区域</div>
+
+</template>
+
+<script setup lang='ts'>
+import {ref, reactive} from 'vue'
+
+</script>
+<style scoped lang='less'>
+.header{
+    height: 60px;
+    border: 1px solid #ccc;
+}
+
+</style>
+```
+
+```vue
+// content
+<template>
+
+ <div class="content">
+    <div class="content-item" :key="item" v-for="item in 100">
+    {{item}}</div>
+ </div>
+
+</template>
+
+<script setup lang='ts'>
+import {ref, reactive} from 'vue'
+
+</script>
+<style scoped lang='less'>
+.content{
+    flex: 1;
+    margin: 20px;
+    border: 1px solid #ccc;
+    overflow: auto;
+    &-item{
+        padding: 20px;
+        border: 1px solid #ccc;
+    }
+}
+</style>
+```
+
+```vue
+// menu
+<template>
+
+ <div class="menu">菜单区域</div>
+
+</template>
+
+<script setup lang='ts'>
+import {ref, reactive} from 'vue'
+
+</script>
+<style scoped lang='less'>
+.menu{
+    width: 200px;
+    border: 1px solid #ccc;
+}
+</style>
+```
+
+```vue
+// App.vue
+<template>
+    <layout></layout>
+
+</template>
+
+<script setup lang='ts'>
+import { ref, reactive } from 'vue'
+import layout from './layout/index.vue'
+
+</script>
+<style lang="less">
+html, body, #app {
+    height: 100%;
+    overflow: hidden;
+}
+</style>
+```
+
+```css
+<!--style.css-->
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+```
+
+#### 父子组件传参
+
+父组件通过v-bind绑定一个数据，然后子组件通过defineProps接受传过来的值
+
+| 名称         | 作用                       |
+| ------------ | -------------------------- |
+| defineEmits  | 子组件给父组件传参         |
+| defineExpose | 子组件暴露给父组件内部属性 |
+| defineProps  | 子组件接受值               |
+| withDefaults |                            |
+
+父组件传递参数给子组件案例 
+
+字符串
+
+```vue
+// 父组件
+<template>
+    <div class="layout">
+        // 父组件给子组件传递参数 title: string 字符串
+        <!-- title 随便取 -->
+        <Menu title="Luke Tebo"></Menu>
+        <div class="layout-right">
+            <Header></Header>
+            <Content></Content>
+        </div>
+    </div>
+
+</template>
+
+<script setup lang='ts'>
+import { ref, reactive } from 'vue'
+import Menu from './Menu/index.vue'
+import Header from './Header/index.vue'
+import Content from './Content/index.vue'
+
+</script>
+<style scoped lang='less'>
+.layout {
+    display: flex;
+    height: 100%;
+    overflow: hidden;
+    &-right {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+}
+</style>
+```
+
+ ```vue
+ // 子组件
+ <template>
+  <div class="menu">
+     菜单区域
+     <div>
+         {{title}}
+     </div>
+  </div>
+ </template>
+ 
+ <script setup lang='ts'>
+ import {ref, reactive} from 'vue'
+ // 接受父组件传递的值
+ type Props = {
+     title: string
+ }
+ defineProps<Props>()
+ </script>
+ <style scoped lang='less'>
+ .menu{
+     width: 200px;
+     border: 1px solid #ccc;
+ }
+ </style>
+ ```
+
+复杂数据类型
+
+```vue
+// 父组件
+<template>
+    <div class="layout">
+        // 父组件给子组件传递参数 list: number[]
+		// v-bind:data => :data
+        <Menu :data="list"></Menu>
+        <div class="layout-right">
+            <Header></Header>
+            <Content></Content>
+        </div>
+    </div>
+
+</template>
+
+<script setup lang='ts'>
+import { ref, reactive } from 'vue'
+import Menu from './Menu/index.vue'
+import Header from './Header/index.vue'
+import Content from './Content/index.vue'
+const list = reactive<number[]>([1, 2, 3])
+    
+</script>
+<style scoped lang='less'>
+.layout {
+    display: flex;
+    height: 100%;
+    overflow: hidden;
+    &-right {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+}
+</style>
+```
+
+```vue
+// 子组件
+<template>
+ <div class="menu">
+    菜单区域
+    <div>
+        {{data}}
+    </div>
+ </div>
+</template>
+
+<script setup lang='ts'>
+import { stringify } from 'querystring';
+import {ref, reactive} from 'vue'
+// 接受父组件传递的值
+type Props = {
+    data: number[]
+}
+defineProps<Props>()
+</script>
+<style scoped lang='less'>
+.menu{
+    width: 200px;
+    border: 1px solid #ccc;
+}
+</style>
+```
+
+子组件给父组件传值 => 通过事件来进行参数传递
+
+```vue
+// 父组件
+<template>
+ <div class="layout">
+        <Menu @on-click="getList"></Menu>
+        <div class="layout-right">
+            <Header></Header>
+            <Content></Content>
+        </div>
+    </div>
+</template>
+
+<script setup lang='ts'>
+import { stringify } from 'querystring';
+import {ref, reactive} from 'vue'
+// 接收数据
+const getList = (list:number[]) => {
+    console.log(list);
+}
+</script>
+<style scoped lang='less'>
+.menu{
+    width: 200px;
+    border: 1px solid #ccc;
+}
+</style>
+```
+
+```vue
+// 子组件
+<template>
+ <div class="menu">
+    菜单区域
+	<button @click="clickTap">send</button>
+ </div>
+</template>
+
+<script setup lang='ts'>
+import { stringify } from 'querystring';
+import {ref, reactive} from 'vue'
+
+const list = reactive<number[]>([2, 3, 4])
+										// 可以随便命名 defineEmits["on-click", "on-click_", .....]
+const emit = defineEmits(['on-click'])
+// 发送数据
+const clickTap = () => {
+    // 同样可以跟多个数据 类似 emit('on-click', a, b, c, .... )
+    emit('on-click', list)
+}
+</script>
+<style scoped lang='less'>
+.menu{
+    width: 200px;
+    border: 1px solid #ccc;
+}
+</style>
+```
+
+获取子组件的实例
+
+```vue
+// 父组件
+<template>
+ <div class="layout">
+        <Menu ref="menu"></Menu>
+        <div class="layout-right">
+            <Header></Header>
+            <Content></Content>
+        </div>
+    </div>
+</template>
+
+<script setup lang='ts'>
+import { stringify } from 'querystring';
+import {ref, reactive} from 'vue'
+const menu = ref(null)
+// 接收数据
+const getList = (list:number[]) => {
+    console.log(menu.value);
+}
+</script>
+<style scoped lang='less'>
+.menu{
+    width: 200px;
+    border: 1px solid #ccc;
+}
+</style>
+```
+
+```vue
+// 子组件
+<template>
+ <div class="menu">
+    菜单区域
+	<button @click="clickTap">send</button>
+ </div>
+</template>
+
+<script setup lang='ts'>
+import {ref, reactive} from 'vue'
+
+const list = reactive<number[]>([2, 3, 4])
+										// 可以随便命名 defineEmits["on-click", "on-click_", .....]
+const emit = defineEmits(['on-click'])
+// 发送数据
+const clickTap = () => {
+    // 同样可以跟多个数据 类似 emit('on-click', a, b, c, .... )
+    emit('on-click', list)
+}
+// 通过这个参数来使子组件中那些属性暴露，在没有使用这个属性的情况下，子组件中的属性不会在父组件中暴露
+defineExpose({
+    list
+})
+</script>
+<style scoped lang='less'>
+.menu{
+    width: 200px;
+    border: 1px solid #ccc;
+}
+</style>
+```
+
+参数传递是否可选和默认值
+
+```vue
+// 父组件
+<template>
+ <div class="layout">
+        <Menu></Menu>
+     <!--
+<Menu title="Tebo" ></Menu>
+<Menu :data="list"></Menu>
+	-->
+        <div class="layout-right">
+            <Header></Header>
+            <Content></Content>
+        </div>
+    </div>
+</template>
+
+<script setup lang='ts'>
+import {ref, reactive} from 'vue'
+
+</script>
+<style scoped lang='less'>
+.menu{
+    width: 200px;
+    border: 1px solid #ccc;
+}
+</style>
+```
+
+```vue
+// 子组件
+<template>
+ <div class="menu">
+    菜单区域
+	<div>{{ title }}</div>
+    <div>{{ data }} </div>
+ </div>
+</template>
+
+<script setup lang='ts'>
+import {ref, reactive} from 'vue'
+type Props = {
+    // 可选
+    title?: string,
+    data?: number[]
+}
+
+withDefaults(defineProps<Props>(), {
+    title:"默认"，
+    // 特殊的数据，无法直接赋值，可以通过回调函数返回数据
+    data: () => [1, 2, 3, 4]
+})
+
+</script>
+<style scoped lang='less'>
+.menu{
+    width: 200px;
+    border: 1px solid #ccc;
+}
+</style>
+```
+
+#### 全局组件、局部组件、递归组件
+
+
 
