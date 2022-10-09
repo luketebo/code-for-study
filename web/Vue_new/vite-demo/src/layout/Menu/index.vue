@@ -1,38 +1,53 @@
 <template>
 
- <div class="menu">
-    菜单区域
-    <div>
-        {{title}}
+    <div class="menu">
+        菜单区域
+        <Tree :data="data"></Tree>
     </div>
-    <div>
-        {{data}}
-    </div>
-    
- </div>
- 
+
 
 </template>
 
 <script setup lang='ts'>
-import {ref, reactive} from 'vue'
+import { ref, reactive } from 'vue'
+import Tree from '../../components/Tree/index.vue'
 
-// 接受父组件传递的值
-type Props = {
-    // 可选
-    title?: string,
-    data?: number[]
+type TreeList = {
+    name: string,
+    icon?: string,
+    children?: TreeList[] | []
 }
 
-withDefaults(defineProps<Props>(), {
-    title: "默认",
-    // 特殊的数据，无法直接赋值，可以通过回调函数返回数据
-    data: () => [1, 2, 3, 4]
-})
+const data = reactive<TreeList[]>([
+    {
+        name: "no.1",
+        children: [
+            {
+                name: "no.1-1",
+                children: [
+                    {
+                        name: "no.1-1-1"
+                    }
+                ]
+            }
+        ]
+    }, {
+        name: "no.2",
+        children: [
+            {
+                name: "no.2-1"
+            }
+        ]
+    }, {
+        name: "no.3"
+    }
+])
+
+
 
 </script>
 <style scoped lang='less'>
-.menu{
+.menu {
     width: 200px;
     border: 1px solid #ccc;
 }

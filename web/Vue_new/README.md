@@ -5,6 +5,8 @@
 > ​				  第七节 2022/10/06
 >
 > ​				  第十一节 2022/10/07
+>
+> ​				  第十六节 2022/10/08
 
 ## Vue 初识
 
@@ -142,7 +144,7 @@ const flag:boolean = true
 
 
 
-v-on 简写`@`用来给元素添加事件
+v-on 简写`@`用来给元素添加事件 => 事件有哪些？
 
 ```vue
 <template>
@@ -182,12 +184,12 @@ const parent = () => {
 </script>
 ```
 
-阻止表单提交
+阻止表单提交，刷新页面
 
 ```vue
 <template>
 	<form action="/">
-		// 不刷新
+		// 不刷新 有啥好处吗？
 		<button @click.prevent="submit" type="submit"> submit </button>
 		// 刷新
 		<button @click="submit" type="submit"> submit_ </button>
@@ -287,13 +289,15 @@ const style: Style = {
 
 v-for 遍历
 
+有key 和 无key 有区别
+
 ```vue
 <template>
 	<div :key="item" v-for = "item in Arr">{{ item }}</div>
 </template>
 
 <script setup lang="ts">
-const arr:Array<number> = [1, 2, 3, 4, 5]
+const arr:Array<number[]> = [1, 2, 3, 4, 5]
 </script>
 
 <style></style>
@@ -325,11 +329,11 @@ const message = ref("v-model 双向绑定")
 
 > 没搞明白
 
-#### ref 全家桶
+#### ref 全家桶  
 
 > ref isRef shallowRef triggerRef  customRef 
 >
-> 目的是将元素变成响应式
+> 将元素变成响应式
 
 *tips: vscode 配置 vue 模板输出*
 
@@ -487,9 +491,7 @@ triggerRef 使用
 
 const Man = shallowRef({name: "shallowRef"})
 
-
-const change = () => {
-    
+const change = () => {   
     Man.value.name = "Tebo"
     triggerRef(Man) // 当调用这函数的时候，会发现也页面也会跟着改变
  	/*
@@ -517,7 +519,7 @@ customRef使用
 import {customRef} from 'vue'
    
 // 看不懂     大概就是自己定义一个ref对象吧
-    // 自己定义的一个方法 也能够实现ref的效果
+// 自己定义的一个方法 也能够实现ref的效果
 function MyRef<T>(value: T) {
     let timer: any
     return customRef((track, trigger) => {
@@ -622,14 +624,13 @@ reactive 绑定数组
 
 ```vue
 <template>
-
 <div>
     <ul>
         <li v-for="item in list">
     			 {{ item }}
     	</li>
     </ul>
-    <button @click="add">add </button>
+    <button @click="add">add</button>
 </div>
 </template>
 <script setup lang="ts">
@@ -641,7 +642,6 @@ const add = () => {
     list.push("Luke")
 }
 
-
 </script>
 <style scoped>
 
@@ -652,7 +652,6 @@ reactive 绑定数组 （异步）
 
 ```vue
 <template>
-
 <div>
     <ul>
         <li v-for="item in list">
@@ -681,7 +680,7 @@ const add = () => {
     setTimeout(() => {
         let res = ["Lu", "Ke", "Te", "Bo"]
         // 当直接使用 list = res 时，会出现 页面没有改变数据，但是值发生了变化，这是因为破坏了reactive原先的proxy  
-        list.push(...res) // 解构
+        list.push(...res) // 解构  没看懂
         console.log(list)
     }, 200)
 }
@@ -690,7 +689,6 @@ const add = () => {
 /*
 添加一个对象，将数组作为一个属性 
 */
-
 let list_ = reactive<{
     arr: string[]
 }>({
@@ -700,7 +698,7 @@ let list_ = reactive<{
 const add_ = () => {
     setTimeout(() => {
         let res = ["Lu", "Ke", "Te", "Bo"]
-        list.arr = res
+        list_.arr = res
         console.log(res)
     }, 200)
 }
@@ -717,7 +715,6 @@ readonly 的使用
 <template>
 <button @click="show"> show</button>
 <button @click="show_"> show_</button>
-
 </template>
 <script setup lang="ts">
 import { reactive, readonly } from 'vue'
@@ -748,7 +745,6 @@ shallowReactive 使用
 
 ```vue
 <template>
-
     <div>
        reactive {{ obj_}}
        shallowReactive {{ obj }}
@@ -756,12 +752,11 @@ shallowReactive 使用
     <button @click="edit">edit</button>
     <button @click="edit_">edit_</button>
     <button @click="_edit_">_edit_</button>
-
-
 </template>
 
 <script setup lang='ts'>
 import { ref, reactive, readonly, shallowReactive } from 'vue'
+    
 const obj_ = reactive({name: "Luke"})
 
 const obj:any = shallowReactive({
@@ -812,8 +807,7 @@ const _edit_ = () => {
 
 toRef 的使用
 
-> toRef 只针对响应式对象，智能修改响应式对象的值， 对于非响应式对象，试图不会改变
-> 值会改变 
+> toRef 只针对响应式对象，智能修改响应式对象的值， 对于非响应式对象，视图不会改变，值会改变 
 
 ```vue
 <template>
@@ -937,7 +931,7 @@ const name = computed(() => {
 	return firstName.value + '-----------' + lastName.value
 })
 
-// 写法二
+// 写法二  需要复现 get 和 set 方法
 const name_ = computed(() => {
 	get() {
 		return firstName.value + lastName.value
@@ -954,7 +948,7 @@ const name_ = computed(() => {
 购物车案例
 
 ```vue
-// 未使用 computed 可以看出，很多函数被重复调用，很不方便
+// 未使用 computed 可以看出，total函数被重复调用，很不方便
 <template>
 
     <div>
@@ -1029,6 +1023,7 @@ const numChange = (index: number, type: boolean) => {
     total_()
 }
 
+// reduce 函数 不常用 不是很记得
 const total_ = () => {
     total.value = data.reduce((prev, next) => {
         return prev + (next.num * next.price)
@@ -1130,7 +1125,6 @@ total = computed<number>(() => {
 
 const del = (index: number) => {
     data.splice(index, 1)
-    
 }
 
 </script>
@@ -1148,7 +1142,6 @@ const del = (index: number) => {
 
 ```vue
 <template>
-
     <div>
         	<input v-model="message" type="text" />
     </div>
@@ -1219,8 +1212,7 @@ let message = ref({
     }
 })
 
-
-watch(message, , (newVal, oldVal) => {
+watch(message,  (newVal, oldVal) => {
     console.log("new: " + newVal)
     console.log("old: " + oldVal)
 }, {
@@ -1240,7 +1232,6 @@ watch(message, , (newVal, oldVal) => {
 
 ```vue
 <template>
-
     <div>
         	<input v-model="message.nav.bar.name" type="text" />
     </div>
@@ -1336,6 +1327,9 @@ let message_ = ref<string>("Tebo")
 
 watchEffect(() => {
     // 非惰性 自动调用
+    /*
+    watch 需要打开immeditate才能自动调用，watchEffect比watch勤快
+    */
     console.log("message: ", message.value)
     console.log("message_: ", message_.value)
 })
@@ -1358,6 +1352,7 @@ watchEffect(() => {
      // 非惰性 自动调用
      console.log("message: ", message.value)
      console.log("message_: ", message_.value)
+     // 在侦听之前调用
      oninvalidate(() => { 
           // 在监听之前，执行 可以做一些操作，如防抖，清除接口之类的
          console.log("before") // 但是是值发生变化的时候，才会触发，最开始不会触发
@@ -1375,8 +1370,6 @@ watchEffect(() => {
 	<button @click="stopWatch">
         stop
     </button>
-
-
 </template>
 
 <script setup lang='ts'>
@@ -1386,6 +1379,7 @@ let message = ref<string>("Luke")
 
 let message_ = ref<string>("Tebo")
 
+// 返回一个值，能够停止监听
 const stop = watchEffect(() => {
     // 非惰性 自动调用
     console.log("message: ", message.value)
@@ -1795,7 +1789,7 @@ table {
 | defineEmits  | 子组件给父组件传参         |
 | defineExpose | 子组件暴露给父组件内部属性 |
 | defineProps  | 子组件接受值               |
-| withDefaults |                            |
+| withDefaults | 设定默认值                 |
 
 父组件传递参数给子组件案例 
 
@@ -2119,6 +2113,1062 @@ withDefaults(defineProps<Props>(), {
 ```
 
 #### 全局组件、局部组件、递归组件
+
+> 第二次遇到el表达式没有起作用
+
+全局组件
+
+在main.ts当中注册，即可在其他文件上面使用
+
+```ts
+// main.ts
+import Card from './components/Card/index.vue'
+createApp(App).component("Card", Card).mount("#app") // 不能搞错顺序，这个是链式调用
+```
+
+
+
+Card 卡片案例
+
+```vue
+// components/Card/index.vue
+
+<template>
+
+ <div class="card">
+    <div class="card-header">
+        <div>主标题</div>
+        <div>副标题</div>
+    </div>
+    <div class="card-content" v-if="content">
+        {{ content }}
+    </div>
+ </div>
+
+</template>
+
+<script setup lang='ts'>
+import {ref, reactive} from 'vue'
+
+type Props = {
+    content?: string
+}
+
+// 接受父组件传值
+defineProps<Props>()
+
+</script>
+<style scoped lang='less'>
+@border: #ccc;
+.card{
+    border: 1px solid @border;
+    &:hover{
+        box-shadow: 0 0 10px @border;
+    }
+    &-header{
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        border-bottom: 1px solid @border;
+    }
+    &-content{
+        padding: 10px;
+    }
+}
+</style>
+```
+
+局部组件
+
+就相当于引用的
+
+> import A from "......"  这种组件
+
+递归组件
+
+Tree 树案例
+
+```vue
+// 方案一
+// Menu/index.vue  父组件
+<template>
+    <div class="menu">
+        菜单区域
+        <Tree :data="data"></Tree>
+    </div>
+</template>
+
+<script setup lang='ts'>
+import { ref, reactive } from 'vue'
+import Tree from '../../components/Tree/index.vue'
+
+type TreeList = {
+    name: string,
+    icon?: string,
+    children?: TreeList[] | []
+}
+const data = reactive<TreeList[]>([
+    {
+        name: "no.1",
+        children: [
+            {
+                name: "no.1-1",
+                children: [
+                    {
+                        name: "no.1-1-1"
+                    }
+                ]
+            }
+        ]
+    }, {
+        name: "no.2",
+        children: [
+            {
+                name: "no.2-1"
+            }
+        ]
+    }, {
+        name: "no.3"
+    }
+])
+
+</script>
+<style scoped lang='less'>
+.menu {
+    width: 200px;
+    border: 1px solid #ccc;
+}
+</style>
+--------------
+// tree Tree/index.vue 子组件
+
+<template>
+
+ <div :key="index" v-for="(item, index) in data" style="margin-left:10px">
+    {{ item.name }}
+    <!-- 递归第一种 -->
+     // 读取不到的时候 不会报错而是返回undefined 还有 ?? 语法
+    <TreeItem v-if="item?.children?.length" :data="item.children"></TreeItem>
+
+ </div>
+
+</template>
+
+<script setup lang='ts'>
+import {ref, reactive} from 'vue'
+import TreeItem from './index.vue' // 重复引用
+
+type TreeList = {
+    name: string,
+    icon?: string,
+    children?: TreeList[] | []
+}
+
+type Props = {
+    data?: TreeList[]
+}
+
+defineProps<Props>()
+
+</script>
+<!-- 第二种 -->
+<script lang="ts"> /// 有时候上面那个data可能会报错，但是能够使用，但是用下面这个不会报错
+export default {
+    name: "TreeItem"
+}
+</script>
+
+<style scoped lang='less'>
+
+</style>
+```
+
+#### 动态组件
+
+> 什么是动态组件 就是：让多个组件使用同一个挂载点，并动态切换，这就是动态组件
+>
+> 在挂载点使用component标签，然后使用v-bind:is="组件"
+
+动态组件 案例
+
+```vue
+// 主组件
+
+<template>
+    <div  class="content">
+        <div class="tab">
+            <div @click="change(item)" :key="item.name" v-for="item in data">{{ item.name }}</div>
+        </div>
+        <component :is="current.comName"></component>
+    </div>
+
+</template>
+
+<script setup lang='ts'>
+import { ref, reactive, markRaw } from 'vue'
+import A from './A.vue'
+import B from './B.vue'
+import C from './C.vue'
+
+type Tabs = {
+    name: string,
+    comName: any
+}
+
+type Com = Pick<Tabs, "comName">
+
+// proxy 
+const data = reactive<Tabs[]>([
+    {
+        name: "I am A",
+        // comName: "A"
+        comName: markRaw(A) // 跳过代理
+    },
+    {
+        name: "I am B",
+        // comName: "B"
+        comName: markRaw(B)
+    },
+    {
+        name: "I am C",
+        // comName: "C"
+        comName: markRaw(C)
+    }
+])
+
+let current = reactive<Com>({
+    comName:data[0].comName
+})
+
+const change = (item: Tabs) => {
+    current.comName = item.comName
+}
+
+</script>
+<style scoped lang='less'>
+.tab {
+    display: flex;
+    .active{
+        background: skyblue;
+        color: #fff;
+    }
+    div {
+        margin: 10px;
+        border: 1px solid #ccc;
+
+    }
+}
+</style>
+
+---------------------------------------------------
+// A.vue
+<template>
+
+ <div class="a">
+    AAAAAAAAAAAAAAAAAAAAA
+ </div>
+
+</template>
+
+<script setup lang='ts'>
+import {ref, reactive} from 'vue'
+
+</script>
+<style scoped lang='less'>
+.a{
+    background-color: red;
+    
+
+}
+
+</style>
+------------------------------------------------------
+// B.vue
+<template>
+
+ <div class="b">
+    BBBBBBBBBBBBBBBBBBBB
+ </div>
+
+</template>
+
+<script setup lang='ts'>
+import {ref, reactive} from 'vue'
+
+
+</script>
+<style scoped lang='less'>
+.b{
+    background-color: blue;
+}
+</style>
+----------------------------------------------------
+// C.vue
+<template>
+
+ <div class="c">
+    CCCCCCCCCCCCCCCCCCCCCCC
+ </div>
+
+</template>
+
+<script setup lang='ts'>
+import {ref, reactive} from 'vue'
+
+</script>
+<style scoped lang='less'>
+.c{
+    background-color: yellow;
+}
+</style>
+```
+
+#### 插槽管理 slot
+
+> 插槽就是子组件中的提供给父组件使用的一个占位符，用<slot></slot>表示，父组件可以在这个占位符中填充任何模板的代码，如HTML、组件等，填充内容会替换子组件中<slot></slot>标签
+
+有几个操作：
+
+1. `v-slot：`简写为 `#``
+2. ``v-slot`简写为`#default` 
+
+子组件给父组件传值 案例
+
+```vue
+// 子组件 Dialog/index.vue
+<template>
+
+ <div>
+    <header class="header">
+        <slot name="header"></slot>
+    </header>
+    <main class="main">
+        <div :key="item.name" v-for="(item, index) in data">
+            <slot :data="item"></slot>
+        </div>
+    </main>
+    <footer class="footer">
+        <slot name="footer"></slot>
+    </footer>
+ </div>
+
+</template>
+
+<script setup lang='ts'>
+import {ref, reactive} from 'vue'
+
+type names = {
+    name: string,
+    age: number
+}
+
+const data = reactive<names[]>([
+    {
+        name: "Luke",
+        age: 19
+    },
+    {
+        name: "Tebo",
+        age: 20
+    },
+    {
+        name: "Love",
+        age: 21
+    }
+])
+
+</script>
+<style scoped lang='less'>
+.header{
+    height: 200px;
+    background: red;
+    color: #fff;
+}
+.main{
+    height: 300px;
+    background: green;
+    color: #fff;
+}
+.footer{
+    height: 200px;
+    background: blue;
+    color: #fff;
+}
+
+</style>
+----------
+// 父组件 Content/index.vue
+
+<template>
+    <div  class="content">
+        <Dialog>
+            <!-- v-slot: => # -->
+            <template v-slot:header>
+                <div>好刺激</div>
+            </template>
+            <!-- v-slot => #default -->
+            <template v-slot="{data}">
+                <div>
+                    {{data.name}} -- {{data.age}}
+                </div>
+            </template>
+            <template v-slot:footer>
+                <div>
+                    太哈人了
+                </div>
+            </template>
+        </Dialog>
+
+    </div>
+
+</template>
+
+<script setup lang='ts'>
+import { ref, reactive, markRaw } from 'vue'
+import Dialog from '../../components/Dialog/index.vue'
+
+</script>
+<style scoped lang='less'>
+.tab {
+    display: flex;
+    .active{
+        background: skyblue;
+        color: #fff;
+    }
+    div {
+        margin: 10px;
+        border: 1px solid #ccc;
+
+    }
+}
+</style>
+```
+
+#### 异步组件&代码分包&suspense
+
+如何优化白屏， 通过异步组件
+
+vue 打包命令
+
+```bash
+npm run build
+```
+
+操作案例 (未成功)
+
+```vue
+// components/A/index.vue
+<template>
+
+    <div>
+        <div v-for="item in list">
+            {{item}}
+        </div>
+    </div>
+</template>
+
+<script setup lang='ts'>
+import { ref, reactive } from 'vue'
+import { axios } from './server'
+
+const list = await axios('./data.json')
+
+console.log(list)
+
+</script>
+<style scoped lang='less'>
+
+</style>
+// components/A/server.ts
+type NameList = {
+  name: string;
+};
+
+export const axios = (url: string): Promise<NameList[]> => {
+  return new Promise((resolve) => {
+    let xhr: XMLHttpRequest = new XMLHttpRequest();
+
+    xhr.open("GET", url);
+    // 不能使用
+    xhr.onreadystatechange = () => {
+      if (xhr.readyState == 4 && xhr.status == 200) {
+        setTimeout(() => {
+          resolve(JSON.parse(xhr.responseText));
+        }, 200);
+      }
+      
+      xhr.send(null);
+    };
+  });
+};
+--------
+// layout/Content/index.vue
+type NameList = {
+  name: string;
+};
+
+export const axios = (url: string): Promise<NameList[]> => {
+  return new Promise((resolve) => {
+    let xhr: XMLHttpRequest = new XMLHttpRequest();
+
+    xhr.open("GET", url);
+    // 不能使用
+    xhr.onreadystatechange = () => {
+      if (xhr.readyState == 4 && xhr.status == 200) {
+        setTimeout(() => {
+          resolve(JSON.parse(xhr.responseText));
+        }, 200);
+      }
+      
+      xhr.send(null);
+    };
+  });
+};
+
+```
+
+#### teleport传送组件
+
+>
+
+使用案例
+
+```vue
+// component/A/A.vue
+<template>
+
+ <div class="dialog">
+    <header class="header">
+        <div>
+            {{ title }}
+        </div>
+    </header>
+    <main class="main">
+        {{ content }}
+    </main>
+    <footer class="footer">
+        <button @click="fuck(true)" class="footer-but">Cancel</button>
+        <button @click="fuck(false)" class="footer-but">Sure</button>
+    </footer>
+
+ </div>
+
+</template>
+
+<script setup lang='ts'>
+import {ref, reactive} from 'vue'
+
+const content = ref("我是内容")
+const title = ref("我是弹窗")
+
+const fuck = (type:boolean) => {
+    if (type) {
+        content.value = "我是你爹"
+    } else {
+        title.value = "good sum"
+    }
+}
+
+</script>
+<style scoped lang='less'>
+.dialog{
+    height: 300px;
+    border: 1px solid black;
+    background-color: black;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -200px;
+    margin-top: -200px;
+}
+.header{
+    color: white;
+    border-bottom: 1px solid #ccc;
+    height: 25px;
+}
+.main{
+    color: white;
+    flex: 1;
+    border-bottom: 1px solid #ccc;
+    height: 250px;
+}
+.footer{
+    display: flex;
+    padding: 10px;
+    justify-content: end;
+    &-but{
+        border-radius: 3px;
+        background-color: skyblue;
+        margin-right: 10px;
+    }
+}
+
+</style>
+-----------------
+// App.vue
+<template>
+    <!-- <layout></layout> -->
+    <div class="parent">
+        <h1>我是你爸</h1>
+        <Teleport to="body">
+            <A></A>
+        </Teleport>
+
+    </div>
+    <A></A>
+
+</template>
+<script setup lang='ts'>
+import { ref, reactive, watch } from 'vue'
+import layout from './layout/index.vue'
+import A from './components/A/A.vue'
+
+</script>
+<style lang="less">
+html, body, #app {
+    height: 100%;
+    overflow: hidden;
+}
+.parent {
+    background: yellow;
+    height: 50vh;
+    position: relative;
+}
+</style>
+```
+
+#### keep-alive
+
+就是放在里面就可以保存数据，可以存活还有几个可选参数 include, exclude
+
+#### transition 动画组件
+
+主要是用transtion和那些css
+
+过渡的类名
+
+会有六个class切换
+
+v-enter-from
+
+v-enter-active
+
+v-enter-to
+
+v-leave-from
+
+v-leave-active
+
+v-leave-to
+
+操作案例
+
+```vue
+<template>
+    <!-- <layout></layout> -->
+    <div class="parent">
+        <button @click="flag = !flag">switch</button>
+        <transition name="fade">
+            <div v-if="flag" class="box"></div>
+        </transition>
+
+    </div>
+</template>
+<script setup lang='ts'>
+import { ref, reactive, watch } from 'vue'
+import layout from './layout/index.vue'
+
+const flag = ref<boolean>(true)
+
+</script>
+<style lang="less">
+html,
+body,
+#app {
+    height: 100%;
+    overflow: hidden;
+}
+
+.box {
+    width: 200px;
+    height: 200px;
+    background-color: skyblue;
+}
+.fade-enter-from{
+    width: 0;
+    height: 0;
+
+}
+.fade-enter-active{
+    transition: all 1.5s ease;
+}
+// 一般不写
+.fade-enter-to{
+    width: 200px;
+    height: 200px;
+}
+.fade-leave-from{
+    width: 200px;
+    height: 200px;
+}
+.fade-leave-active{
+    transition: all 1.5s ease;
+
+}
+.fade-leave-to{
+    width: 0;
+    height: 0;
+}
+</style>
+```
+
+自定义类名 配合animate.css 实现更多的动效
+
+transition 的属性 
+
+duration 控制显示时间
+
+```vue
+<template>
+    <!-- <layout></layout> -->
+    <div class="parent">
+        <button @click="flag = !flag">switch</button>
+        <transition :duration="{enter: 1000, leave: 20000}"  leave-active-class="animate__animated animate__wobble" enter-active-class="animate__animated animate__swing">
+            <div v-if="flag" class="box"></div>
+        </transition>
+        <transition>
+
+        </transition>
+
+    </div>
+</template>
+<script setup lang='ts'>
+import { ref, reactive, watch } from 'vue'
+import layout from './layout/index.vue'
+import 'animate.css'
+
+const flag = ref<boolean>(true)
+
+</script>
+<style lang="less">
+html,
+body,
+#app {
+    height: 100%;
+    overflow: hidden;
+}
+.box {
+    width: 200px;
+    height: 200px;
+    background-color: skyblue;
+}
+.fade-enter-from{
+    width: 0;
+    height: 0;
+
+}
+.fade-enter-active{
+    transition: all 1.5s ease;
+}
+// 一般不写
+.fade-enter-to{
+    width: 200px;
+    height: 200px;
+}
+.fade-leave-from{
+    width: 200px;
+    height: 200px;
+}
+.fade-leave-active{
+    transition: all 1.5s ease;
+
+}
+.fade-leave-to{
+    width: 0;
+    height: 0;
+}
+</style>
+```
+
+transition 生命周期 8个
+
+```bash
+  @before-enter="beforeEnter" //对应enter-from
+  @enter="enter"//对应enter-active
+  @after-enter="afterEnter"//对应enter-to
+  @enter-cancelled="enterCancelled"//显示过度打断
+  @before-leave="beforeLeave"//对应leave-from
+  @leave="leave"//对应enter-active
+  @after-leave="afterLeave"//对应leave-to
+  @leave-cancelled="leaveCancelled"//离开过度打断
+```
+
+案例一
+
+```vue
+<template>
+    <!-- <layout></layout> -->
+    <div class="parent">
+        <button @click="flag = !flag">switch</button>
+        <transition 
+        @before-enter="EnterFrom" 
+        @enter="EnterActive" 
+        @after-enter="EnterTo" 
+        @enter-cancelled="EnterCancel"
+        @before-leave="LeaveFrom" 
+        @leave="LeaveActive" 
+        @after-leave="LeaveTo" 
+        @leave-cancelled="LeaveCancel">
+            <div v-if="flag" class="box"></div>
+        </transition>
+    </div>
+</template>
+<script setup lang='ts'>
+import { ref, reactive, watch } from 'vue'
+import layout from './layout/index.vue'
+import 'animate.css'
+
+const flag = ref<boolean>(true)
+
+const EnterFrom = (el: Element) => {
+    console.log("进入之前")
+}
+
+const EnterActive = (el: Element, done: Function) => {
+    console.log("过渡曲线")
+    setTimeout(() => {
+        done()
+    }, 3000)
+}
+
+const EnterTo = (el: Element) => {
+    console.log("过渡完成")
+}
+
+const EnterCancel = (el: Element) => {
+    console.log("过渡打断")
+}
+
+const LeaveFrom = () => {
+    console.log("离开之前");
+}
+
+const LeaveActive = (el: Element, done: Function) => {
+    console.log("离开曲线");
+    setTimeout(() => {
+        done()
+    }, 200)
+}
+
+const LeaveTo = () => {
+    console.log("离开完成");
+}
+
+const LeaveCancel = () => {
+    console.log("离开打断");
+}
+</script>
+<style lang="less">
+html,
+body,
+#app {
+    height: 100%;
+    overflow: hidden;
+}
+
+.box {
+    width: 200px;
+    height: 200px;
+    background-color: skyblue;
+}
+</style>
+```
+
+
+
+案例二 结合gsap
+
+```vue
+<template>
+    <!-- <layout></layout> -->
+    <div class="parent">
+        <button @click="flag = !flag">switch</button>
+        <transition @before-enter="EnterFrom" @enter="EnterActive" @leave="LeaveActive">
+            <div v-if="flag" class="box"></div>
+        </transition>
+    </div>
+</template>
+<script setup lang='ts'>
+import { ref, reactive, watch } from 'vue'
+import layout from './layout/index.vue'
+import 'animate.css'
+import gsap from 'gsap'
+
+const flag = ref<boolean>(true)
+
+const EnterFrom = (el: Element) => {
+    console.log("进入之前")
+    gsap.set(el, {
+        width: 0,
+        height: 0
+    })
+}
+
+const EnterActive = (el: Element, done: gsap.Callback) => {
+    gsap.to(el, {
+        width: 200,
+        height: 200,
+        onComplete: done
+    })
+}
+
+const LeaveActive = (el: Element, done: gsap.Callback) => {
+    gsap.to(el, {
+        width: 0,
+        height: 0,
+        onComplete: done
+    })
+}
+
+</script>
+<style lang="less">
+html,
+body,
+#app {
+    height: 100%;
+    overflow: hidden;
+}
+
+.box {
+    width: 200px;
+    height: 200px;
+    background-color: skyblue;
+}
+</style>
+```
+
+appear 一进页面就开始做的动画
+
+案例开发
+
+```vue
+<template>
+    <!-- <layout></layout> -->
+    <div class="parent">
+        <button @click="flag = !flag">switch</button>
+        <transition 
+        appear
+        appear-active-class="active"
+        appear-from-class="from"
+        appear-to-class="to"
+        >
+            <div v-if="flag" class="box"></div>
+        </transition>
+    </div>
+</template>
+<script setup lang='ts'>
+import { ref, reactive, watch } from 'vue'
+import layout from './layout/index.vue'
+import 'animate.css'
+
+const flag = ref<boolean>(true)
+
+</script>
+<style lang="less">
+html,
+body,
+#app {
+    height: 100%;
+    overflow: hidden;
+}
+
+.box {
+    width: 200px;
+    height: 200px;
+    background-color: skyblue;
+}
+.from {
+    width: 0;
+    height: 0;
+}
+.active {
+    transition: all 2s ease;
+}
+.to {
+    width: 200px;
+    height: 200px;
+}
+</style>
+```
+
+#### transition-group过度列表
+
+当使用v-for这样的一定要用<transition-group></transition-group>去做过渡
+
+```vue
+<template>
+    <div class="content">
+
+            <button @click="ADD">ADD</button>
+            <button @click="POP">POP</button>
+        <div class="wraps">
+            <transition-group
+            leave-active-class="animate_animated animate__wobble" 
+            enter-active-class="animate__animated animate__flash">
+                <div class="wraps-item" :key="item" v-for="item in list">
+                    {{item}}
+                </div>
+            </transition-group>
+        </div>
+    </div>
+
+</template>
+
+<script setup lang='ts'>
+import { ref, reactive, markRaw, defineAsyncComponent } from 'vue'
+import 'animate.css'
+
+const list = reactive<number[]>([1, 2, 3, 4, 5])
+
+const ADD = () => {
+    list.push(list.length + 1)
+}
+const POP = () => {
+    list.pop()
+}
+
+</script>
+<style scoped lang='less'>
+.wraps {
+    display: flex;
+    flex-wrap: wrap;
+    word-break: break-all;
+    border: 1px solid #ccc;
+    &-item{
+        margin: 10px;
+    }
+
+}
+
+.tab {
+    display: flex;
+
+    .active {
+        background: skyblue;
+        color: #fff;
+    }
+
+    div {
+        margin: 10px;
+        border: 1px solid #ccc;
+
+    }
+}
+</style>
+```
 
 
 
