@@ -1,5 +1,5 @@
 {
-  "name": "vite-demo",
+  "name": "blog-me",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -9,17 +9,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "animate.css": "^4.1.1",
-    "element-plus": "^2.2.17",
-    "gsap": "^3.11.3",
-    "lodash": "^4.17.21",
-    "mitt": "^3.0.0",
+    "less": "^4.1.3",
     "vue": "^3.2.37"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^3.1.0",
-    "less": "^4.1.3",
-    "less-loader": "^11.1.0",
     "typescript": "^4.6.4",
     "vite": "^3.1.0",
     "vue-tsc": "^0.40.4"

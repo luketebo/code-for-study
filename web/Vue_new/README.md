@@ -7,6 +7,10 @@
 > ​				  第十一节 2022/10/07
 >
 > ​				  第十六节 2022/10/08
+>
+> ​				  第二十八节 2022/10/09
+>
+> ​				  第三十一节 2022/10/10 （未看完）
 
 ## Vue 初识
 
@@ -75,7 +79,7 @@ const message = "Luke Tebo"
         {{ message == 0 ? "Luke" : "Tebo" }}  // 条件运算
         {{ message + 1 }} // 算数运算
         {{ arr.split(',') }}   // 函数调用
-    </div>	
+
 </template>
 
 <script setup lang="ts">
@@ -367,8 +371,7 @@ const message = ref("v-model 双向绑定")
 >
 > 然后在代码界面 敲vue3 就可以出现模板
 
-
-ref 使用
+##### ref 使用 
 
 ```vue
 <template>
@@ -399,7 +402,7 @@ const Man:Ref<M> = ref({name: "Luke"})
 </style>
 ```
 
-isRef 使用
+##### isRef 使用
 
 ```vue
 <template>
@@ -423,7 +426,7 @@ isRef 使用
 </style>
 ```
 
-shallowRef 使用
+##### shallowRef 使用
 
 ```vue
 <template>
@@ -450,7 +453,7 @@ const change = () => {
 </style>
 ```
 
-混用
+##### 混用
 
 ```vue
 <template>
@@ -477,7 +480,7 @@ const change = () => {
 </style>
 ```
 
-triggerRef 使用
+##### triggerRef 使用
 
 ```vue
 <template>
@@ -506,7 +509,7 @@ const change = () => {
 </style>
 ```
 
-customRef使用
+##### customRef使用
 
 ```vue
 <template>
@@ -553,7 +556,7 @@ const change = () => {
 </style>
 ```
 
-ref的妙用 ----->  通过ref获取网页元素对象
+##### ref的妙用 ----->  通过ref获取网页元素对象
 
 ```vue
 <template>
@@ -589,7 +592,7 @@ const find = () => {
 | 支持类型   | 支持所有类型 | 支持引用类型 Array, Object, Map, Set |
 | 取值，赋值 | 需要.value   | 不需要.value                         |
 
-reactive 绑定表单元素
+##### reactive 绑定表单元素
 
 ```vue
 <template>
@@ -620,7 +623,7 @@ const submit = () => {
 </style>
 ```
 
-reactive 绑定数组
+##### reactive 绑定数组
 
 ```vue
 <template>
@@ -648,7 +651,7 @@ const add = () => {
 </style>
 ```
 
-reactive 绑定数组 （异步）
+##### reactive 绑定数组 （异步）
 
 ```vue
 <template>
@@ -709,7 +712,7 @@ const add_ = () => {
 </style>
 ```
 
-readonly 的使用
+##### readonly 的使用
 
 ```vue
 <template>
@@ -741,7 +744,7 @@ import { reactive, readonly } from 'vue'
 </style>
 ```
 
-shallowReactive 使用
+##### shallowReactive 使用
 
 ```vue
 <template>
@@ -805,7 +808,7 @@ const _edit_ = () => {
 >
 > 解构是啥？
 
-toRef 的使用
+##### toRef 的使用
 
 > toRef 只针对响应式对象，智能修改响应式对象的值， 对于非响应式对象，视图不会改变，值会改变 
 
@@ -839,7 +842,7 @@ const change = () => {
 </style>                         
 ```
 
-toRefs 的使用
+##### toRefs 的使用
 
 > 适用于解构和赋值 和 toRef有点类似，可以理解为一个复数 `s`
 
@@ -874,8 +877,7 @@ const change = () => {
 <style scoped>
 ```
 
-
-toRaw 的使用
+##### toRaw 的使用
 
 ```vue
 <template>
@@ -1791,7 +1793,7 @@ table {
 | defineProps  | 子组件接受值               |
 | withDefaults | 设定默认值                 |
 
-父组件传递参数给子组件案例 
+##### 父组件传递参数给子组件案例 
 
 字符串
 
@@ -1858,7 +1860,7 @@ import Content from './Content/index.vue'
  </style>
  ```
 
-复杂数据类型
+##### 复杂数据类型
 
 ```vue
 // 父组件
@@ -1925,7 +1927,7 @@ defineProps<Props>()
 </style>
 ```
 
-子组件给父组件传值 => 通过事件来进行参数传递
+##### 子组件给父组件传值 => 通过事件来进行参数传递
 
 ```vue
 // 父组件
@@ -1985,7 +1987,7 @@ const clickTap = () => {
 </style>
 ```
 
-获取子组件的实例
+##### 获取子组件的实例
 
 ```vue
 // 父组件
@@ -2049,7 +2051,7 @@ defineExpose({
 </style>
 ```
 
-参数传递是否可选和默认值
+##### 参数传递是否可选和默认值
 
 ```vue
 // 父组件
@@ -2128,7 +2130,7 @@ createApp(App).component("Card", Card).mount("#app") // 不能搞错顺序，这
 
 
 
-Card 卡片案例
+##### Card 卡片案例
 
 ```vue
 // components/Card/index.vue
@@ -2186,7 +2188,7 @@ defineProps<Props>()
 
 递归组件
 
-Tree 树案例
+##### Tree 树案例
 
 ```vue
 // 方案一
@@ -2432,7 +2434,7 @@ import {ref, reactive} from 'vue'
 1. `v-slot：`简写为 `#``
 2. ``v-slot`简写为`#default` 
 
-子组件给父组件传值 案例
+##### 子组件给父组件传值 案例
 
 ```vue
 // 子组件 Dialog/index.vue
@@ -2748,7 +2750,7 @@ html, body, #app {
 
 主要是用transtion和那些css
 
-过渡的类名
+##### 过渡的类名
 
 会有六个class切换
 
@@ -2825,7 +2827,7 @@ body,
 </style>
 ```
 
-自定义类名 配合animate.css 实现更多的动效
+##### 自定义类名 配合animate.css 实现更多的动效
 
 transition 的属性 
 
@@ -2893,7 +2895,7 @@ body,
 </style>
 ```
 
-transition 生命周期 8个
+##### transition 生命周期 8个
 
 ```bash
   @before-enter="beforeEnter" //对应enter-from
@@ -3050,7 +3052,7 @@ body,
 </style>
 ```
 
-appear 一进页面就开始做的动画
+##### appear 一进页面就开始做的动画
 
 案例开发
 
@@ -3169,6 +3171,573 @@ const POP = () => {
 }
 </style>
 ```
+
+##### 列表过渡
+
+flip 动画库 lodash
+
+案例开发
+
+```vue
+// Content/index.vue
+<template>
+    <div>
+        <button @click="change">change</button>
+        <!-- 注意项： 要加tag 将下面变成子集才能操作，transition会消失 -->
+        <transition-group move-class="mmm" class="wraps" tag="div">
+            <div class="items" :key="item.id" v-for="item in list">
+                {{item.number}}
+            </div>
+        </transition-group>
+    </div>
+</template>
+
+<script setup lang='ts'>
+import { ref, reactive } from 'vue'
+import _ from 'lodash'
+
+let list = ref(Array.apply(null, { length: 81 } as number[]).map((_, index) => {
+    return {
+        id: index,
+        number: (index % 9) + 1
+    }
+}))
+/*
+new Array(81)
+Array.apply(null, {length: 81} as number[])
+*/
+const change = () => {
+    list.value = _.shuffle(list.value)
+}
+
+
+</script>
+<style scoped lang='less'>
+
+.wraps{
+    display: flex;
+    flex-wrap: wrap;
+    width: calc(25px * 10 + 9px);
+    .items{
+        width: 25px;
+        height: 25px;
+        border: 1px solid #ccc;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+    }
+}
+.mmm {
+    transition: all 1s ease;
+}
+</style>
+```
+
+##### 状态过渡
+
+案例开发
+
+```vue
+// Content/index.vue
+<template>
+    <div>
+        <input v-model="num.current" step="20" type="number"/>
+        <div>
+            {{num.tweenedNumber.toFixed(0)}}
+        </div>
+        
+    </div>
+</template>
+
+<script setup lang='ts'>
+import { ref, reactive, watch } from 'vue'
+import gsap from 'gsap'
+
+
+const num = reactive({
+    current: 0,
+    tweenedNumber: 0
+})
+
+watch( () => num.current, (newVal, oldVal)=>{
+    gsap.to(num,{
+        duration: 1,
+        tweenedNumber: newVal
+    })
+})
+
+
+</script>
+<style scoped lang='less'>
+
+
+</style>
+```
+
+#### 依赖注入Provide/ Inject
+
+案例开发
+
+```vue
+// index.vue
+<template>
+   <h1>我是爷爷</h1>
+   <label>
+    <input v-model='colorval' value='read' name="color" type="radio"/>
+    red
+   </label> 
+   <label>
+    <input v-model='colorval' value='pink' name="color" type="radio"/>
+    pink
+   </label> 
+   <label>
+    <input v-model='colorval' value='yellow' name="color" type="radio"/>
+    yellow
+   </label> 
+   <div class="box">
+
+   </div>
+   <provideA></provideA>
+
+</template>
+
+<script setup lang='ts'>
+import { ref, reactive, watch, provide } from 'vue'
+import provideA from './provideA.vue'
+const colorval = ref<string>("red")
+// 注入
+provide('color', colorval)
+
+</script>
+<style scoped lang='less'>
+.box{
+    height: 50px;
+    width: 50px;
+    border: 1px solid #ccc;
+    background-color: v-bind(colorval);
+}
+
+
+</style>
+------------
+// provideA.vue
+<template>
+   <h1>我是爷爷</h1>
+   <label>
+    <input v-model='colorval' value='read' name="color" type="radio"/>
+    red
+   </label> 
+   <label>
+    <input v-model='colorval' value='pink' name="color" type="radio"/>
+    pink
+   </label> 
+   <label>
+    <input v-model='colorval' value='yellow' name="color" type="radio"/>
+    yellow
+   </label> 
+   <div class="box">
+
+   </div>
+   <provideA></provideA>
+
+</template>
+
+<script setup lang='ts'>
+import { ref, reactive, watch, provide } from 'vue'
+import provideA from './provideA.vue'
+const colorval = ref<string>("red")
+// 注入
+provide('color', colorval)
+
+</script>
+<style scoped lang='less'>
+.box{
+    height: 50px;
+    width: 50px;
+    border: 1px solid #ccc;
+    background-color: v-bind(colorval);
+}
+
+
+</style>
+-----------
+// provideB.vue
+<template>
+
+ <div>
+    <h1>provideB</h1>
+    <div class="box">
+
+    </div>
+ </div>
+
+</template>
+
+<script setup lang='ts'>
+import {ref, reactive, inject} from 'vue'
+import type {Ref} from 'vue'
+
+const color = inject('color')
+</script>
+<style scoped lang='less'>
+
+.box{
+    height: 50px;
+    width: 50px;
+    border: 1px solid #ccc;
+    background-color: v-bind(color);
+}
+</style>
+```
+
+#### 兄弟组件传参和Bus
+
+##### 借助父组件传参
+
+利用父组件充当桥梁来进行数据传输
+
+案例
+
+父组件
+
+```vue
+<template>
+ 
+ <div>
+    <A @on-click="getFlag"></A>
+    <B :flag="Flag"></B>
+ </div>
+
+</template>
+
+<script setup lang='ts'>
+import { ref, reactive, watch, provide } from 'vue'
+import A from './A.vue'
+import B from './B.vue'
+
+let Flag = ref(false)
+const getFlag = (params:boolean) => {
+    Flag.value =  params
+}
+
+</script>
+<style scoped lang='less'>
+
+</style>
+```
+
+子组件 A
+
+```vue
+<template>
+    <div class="a">
+        <button @click="emitB">submit</button>
+    </div>
+</template>
+
+<script setup lang='ts'>
+import {ref, reactive} from 'vue'
+const emit = defineEmits(['on-click'])
+let flag = false
+const emitB = () => {
+    flag = !flag
+    // 加上传递的参数
+    emit('on-click', flag)
+}
+
+</script>
+<style scoped lang='less'>
+
+.a {
+    height: 200px;
+    width: 200px;
+    background-color: aquamarine;
+    color: black;
+}
+</style>
+```
+
+子组件 B
+
+```vue
+<template>
+    <div class="b">
+        {{flag}}
+    </div>
+
+</template>
+<script setup lang='ts'>
+import {ref, reactive} from 'vue'
+
+type Props = {
+    flag: boolean
+}
+
+defineProps<Props>()
+</script>
+<style scoped lang='less'>
+.b  {
+    width: 200px;
+    height: 200px;
+    background-color: blanchedalmond;
+    color: black;
+}
+
+</style>
+```
+
+ ##### 利用Bus来进行数据传输
+
+// 父组件
+
+```vue
+<template>
+ 
+ <div>
+    <A></A>
+    <B></B>
+ </div>
+
+</template>
+
+<script setup lang='ts'>
+import { ref, reactive, watch, provide } from 'vue'
+import A from './A.vue'
+import B from './B.vue'
+
+
+
+</script>
+<style scoped lang='less'>
+
+</style>
+```
+
+// 子组件 A
+
+````vue
+<template>
+    <div class="a">
+        <button @click="emitB">submit</button>
+    </div>
+</template>
+
+<script setup lang='ts'>
+import {ref, reactive} from 'vue'
+import Bus from '../../Bus'
+let flag = false
+const emitB = () => {
+    flag = !flag
+    Bus.emit('on-click', flag)
+}
+
+</script>
+<style scoped lang='less'>
+
+.a {
+    height: 200px;
+    width: 200px;
+    background-color: aquamarine;
+    color: black;
+}
+</style>
+````
+
+// 子组件 B
+
+```vue
+<template>
+    <div class="a">
+        <button @click="emitB">submit</button>
+    </div>
+</template>
+
+<script setup lang='ts'>
+import {ref, reactive} from 'vue'
+import Bus from '../../Bus'
+let flag = false
+const emitB = () => {
+    flag = !flag
+    Bus.emit('on-click', flag)
+}
+
+</script>
+<style scoped lang='less'>
+
+.a {
+    height: 200px;
+    width: 200px;
+    background-color: aquamarine;
+    color: black;
+}
+</style>
+```
+
+// Bus.ts
+
+```typescript
+type BusClass = {
+  emit: (name: string) => void;
+  on: (name: string, callback: Function) => void;
+};
+
+type PramsKey = string | number | symbol;
+
+type List = {
+  [key: PramsKey]: Array<Function>;
+};
+
+class Bus implements BusClass {
+  list: List;
+
+  constructor() {
+    this.list = {};
+  }
+  emit(name: string, ...args: Array<any>) {
+    let eventName: Array<Function> = this.list[name];
+    eventName.forEach((fn) => {
+      fn.apply(this, args);
+    });
+  }
+  on(name: string, callback: Function) {
+    let fn: Array<Function> = this.list[name] || [];
+    fn.push(callback);
+    this.list[name] = fn;
+  }
+}
+
+export default new Bus()
+```
+
+#### Mitt
+
+安装
+
+```bash
+npm install mitt -S // 下载mitt
+```
+
+配置main.ts
+
+```typescript
+import { createApp } from 'vue'
+import ElementPlus from 'element-plus'
+import 'element-plus/dist/index.css'
+import './style.css'
+import mitt from 'mitt'
+import App from './App.vue'
+import Card from './components/Card/index.vue'
+// createApp(App).component("Card", Card).use(ElementPlus).mount('#app')
+
+
+const Mit = mitt()
+
+const app = createApp(App)
+
+declare module 'vue' {
+    export interface ComponentCustomProperties{
+        $Bus: typeof Mit
+    }
+}
+
+app.config.globalProperties.$Bus = Mit
+
+app.mount('#app')
+```
+
+父组件
+
+```vue
+<template>
+ 
+ <div>
+    <A></A>
+    <B></B>
+ </div>
+
+</template>
+
+<script setup lang='ts'>
+import { ref, reactive, watch, provide } from 'vue'
+import A from './A.vue'
+import B from './B.vue'
+
+
+
+</script>
+<style scoped lang='less'>
+
+</style>
+```
+
+子组件 A
+
+```vue
+<template>
+    <div>A</div>
+    <button @click="emit">emit</button>
+
+</template>
+
+<script setup lang='ts'>
+import { ref, reactive } from 'vue'
+import { getCurrentInstance } from 'vue'
+
+const instance = getCurrentInstance()
+const emit = () => {
+    // emit 发送消息
+    instance?.proxy?.$Bus.emit("on-click", 'mitt')
+    instance?.proxy?.$Bus.emit("on-click2", 'mitt2')
+}
+
+</script>
+<style scoped lang='less'>
+
+</style>
+```
+
+子组件 B
+
+```vue
+<template>
+    <div>B</div>
+
+</template>
+<script setup lang='ts'>
+import { ref, reactive } from 'vue'
+import { getCurrentInstance } from 'vue'
+
+const Bus = (str:any) => {
+    console.log(str, "===========> B")
+}
+
+const instance = getCurrentInstance()
+
+// on 接受消息
+// instance?.proxy?.$Bus.on('on-click', (str) => {
+//     console.log(str, '==========> B')
+// })
+// * 可以监听所有
+instance?.proxy?.$Bus.on('*', (str) => {
+    console.log(str, '==========> B')
+})
+
+instance?.proxy?.$Bus.off('on-click', Bus)
+
+instance?.proxy?.$Bus.all.clear()
+</script>
+<style scoped lang='less'>
+
+</style>
+```
+
+
+
+#### TSX
+
+
+
+
 
 
 
