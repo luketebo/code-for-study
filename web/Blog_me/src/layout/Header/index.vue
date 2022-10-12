@@ -1,53 +1,49 @@
 <template>
-
- <div class="header">
-    <nav>
-        <ul>
-            <li><a>Work</a></li>
-            <li><a>About</a></li>
-            <li><a>Wip</a></li>
-            <li><a>Contact</a></li>
-            <li><a>icon</a></li>
-            <li><a>icon</a></li>
+    <nav class="header container">
+        <ul class="row">
+            <li class="col-sm">
+                <a>
+                    <span>Work</span>
+                </a>
+            </li>
+            <li><a><span>About</span></a></li>
+            <li><a><span>Wip</span></a></li>
+            <li><a><span>Contact</span></a></li>
+            <li><a><span>icon</span></a></li>
+            <li><a><span>github icon</span></a></li>
+            <li><a><span>Blog</span></a></li>
         </ul>
     </nav>
- </div>
 </template>
 
 <script setup lang='ts'>
-import {ref, reactive} from 'vue'
+import { ref, reactive } from 'vue'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/js/bootstrap.min.js'
 
 </script>
 <style scoped lang='less'>
 @border: #ccc;
-.header{
+
+.header {
     display: flex;
     height: 10vh;
-    width: 100%;
     justify-content: center;
-    border: 1px solid @border;
+    align-items: center;
+    border: 5px solid @border;
+    margin-left: 10%;
+    margin-right: 10%;
+
 }
-.header nav{
+
+.header ul {
     display: flex;
-    width: 90%;
 }
-.header nav ul {
-    color: @border;
+
+.header ul li {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: black; 
-}
-.header nav ul li{
-    float: left;
     border: 1px solid @border;
-    
 }
-.header nav ul li a {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-
 </style>

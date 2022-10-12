@@ -3735,6 +3735,367 @@ instance?.proxy?.$Bus.all.clear()
 
 #### TSX
 
+安装插件
+
+```bash
+npm install @vitejs/plugin-vue-jsx  -D
+```
+
+安装之后需要在vite.config.ts中配置一下
+
+```typescript
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import vueJsx from '@vitejs/plugin-vue-jsx'
+export default defineConfig {
+    plugins: [vue(), vueJsx()]
+}
+
+```
+
+tsconfig.json
+
+```json
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "useDefineForClassFields": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "strict": true,
+      // --------------
+    "jsx": "preserve",
+    "jsxFactory": "h",
+    "jsxFragmentFactory": "Fragment",
+     // -------------------
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "lib": ["ESNext", "DOM"],
+    "skipLibCheck": true
+  },
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}
+
+```
+
+
+
+支持 v-model 
+
+操作案例
+
+App.tsx
+
+```tsx
+import {ref} from 'vue'
+
+let v = ref<string>('')
+
+
+const renderDom = () => {
+    return (
+        <div>
+            <input v-model={v.value} type="text" />
+            <div>{v.value}</div>
+        </div>
+    )
+
+}
+
+export default renderDom
+```
+
+App.vue
+
+```vue
+<template>
+    <renderDom></renderDom>
+</template>
+
+<script setup lang='ts'>
+import {ref, reactive} from 'vue'
+import renderDom from './App'
+
+</script>
+<style scoped lang='less'>
+
+</style>
+```
+
+支持v-show
+
+App.tsx
+
+```tsx
+import { ref } from "vue";
+
+let flag = true;
+
+const renderDom = () => {
+  return (
+    <div>
+      <div v-show={flag}>景天</div>
+      <div v-show={!flag}>雪见</div>
+    </div>
+  );
+};
+
+export default renderDom;
+```
+
+不支持 v-if
+
+```tsx
+// 界面当中不会显示景天和雪见
+import { ref } from "vue";
+
+let flag = true;
+
+const renderDom = () => {
+  return (
+    <div>
+      <div v-if={flag}>景天</div>
+      <div v-if={!flag}>雪见</div>
+    </div>
+  );
+};
+
+export default renderDom;
+
+```
+
+可以换一种方式实现v-if
+
+```tsx
+import { ref } from "vue";
+
+let flag = true;
+
+const renderDom = () => {
+  return (
+    <div>
+      {flag ? <div>景天</div> : <div>雪见</div>}
+    </div>
+  );
+};
+
+export default renderDom;
+
+```
+
+不支持v-for 但是可以通过map实现
+
+```tsx
+import { ref } from "vue";
+
+let v = ref<string>('')
+
+let flag = true;
+
+let Arr = [1, 2, 3, 4]
+
+const renderDom = () => {
+  return (
+    <div>
+      {
+        Arr.map(v=>{
+          return (<div>{v}</div>)
+        })
+      }
+    </div>
+  );
+};
+
+export default renderDom;
+
+```
+
+不支持v-bind
+
+```tsx
+import { ref } from "vue";
+
+let v = ref<string>('')
+
+let flag = true;
+
+let Arr = [1, 2, 3, 4]
+
+const renderDom = () => {
+  return (
+    <div>
+      {
+        Arr.map(v=>{
+            // 通过这种方法实现v-bind
+          return (<div data-index={v} >{v}</div>)
+        })
+      }
+    </div>
+  );
+};
+
+export default renderDom;
+
+```
+
+不支持v-on
+
+```tsx
+import { ref } from "vue";
+
+let v = ref<string>('')
+
+let flag = true;
+
+let Arr = [1, 2, 3, 4]
+
+const renderDom = () => {
+  return (
+    <div>
+      {
+        Arr.map(v=>{
+          return (<div onClick={clickTapA.bind(this, v)} data-index={v} >{v}</div>) // 传参
+          // return (<div onClick={clickTap} data-index={v} >{v}</div>)
+        })
+      }
+    </div>
+  );
+};
+const clickTapA = (v:number) => {
+  console.log("ddd", v)
+
+}
+
+const clickTap = () => {
+  console.log("222")
+}
+
+export default renderDom;
+
+```
+
+Props
+
+```tsx
+import { ref } from "vue";
+
+let v = ref<string>('')
+
+let flag = true;
+
+let Arr = [1, 2, 3, 4]
+
+type Props = {
+  title: string
+}
+
+const renderDom = (props: Props) => {
+  return (
+    <div>
+      <div>{props.title}</div>
+      {
+        Arr.map(v=>{
+          return (<div onClick={clickTapA.bind(this, v)} data-index={v} >{v}</div>)
+          // return (<div onClick={clickTap} data-index={v} >{v}</div>)
+        })
+      }
+    </div>
+  );
+};
+const clickTapA = (v:number) => {
+  console.log("ddd", v)
+
+}
+
+const clickTap = () => {
+  console.log("222")
+}
+
+export default renderDom;
+
+```
+
+```vue
+<template>
+    <renderDom title="I am title"></renderDom>
+</template>
+
+<script setup lang='ts'>
+import {ref, reactive} from 'vue'
+import renderDom from './App'
+
+</script>
+<style scoped lang='less'>
+
+</style>
+```
+
+emit 派发消息
+
+```tsx
+import { ref } from "vue";
+
+let v = ref<string>('')
+
+let flag = true;
+
+let Arr = [1, 2, 3, 4]
+
+type Props = {
+  title: string
+}
+
+const renderDom = (props: Props, ctx: any) => {
+  return (
+    <div>
+      <div>{props.title}</div>
+      {
+        Arr.map(v=>{
+          return (<div onClick={clickTapA.bind(this, ctx)} data-index={v} >{v}</div>)
+          // return (<div onClick={clickTap} data-index={v} >{v}</div>)
+        })
+      }
+    </div>
+  );
+};
+const clickTapA = (ctx: any) => {
+    ctx.emit('on-click', 123)
+}
+
+const clickTap = () => {
+  console.log("222")
+}
+
+export default renderDom;
+
+```
+
+```vue
+<template>
+    <renderDom @on-click="getNum"></renderDom>
+</template>
+
+<script setup lang='ts'>
+import {ref, reactive} from 'vue'
+import renderDom from './App'
+
+const getNum = (num:number) => {
+    console.log(num)
+}
+
+</script>
+<style scoped lang='less'>
+
+</style>
+```
+
+#### vue3 自动引入插件
+
+
+
 
 
 

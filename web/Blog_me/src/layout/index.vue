@@ -1,8 +1,6 @@
 <template>
-    <div>
-        <Header></Header>
-        <Content></Content>
-    </div>
+    <Header></Header>
+    <Content></Content>
 </template>
 
 <script setup lang='ts'>
