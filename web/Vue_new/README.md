@@ -11,6 +11,10 @@
 > ​				  第二十八节 2022/10/09
 >
 > ​				  第三十一节 2022/10/10 （未看完）
+>
+> ​				 第三十六节 2022/10/13
+>
+> ​				 第四十五节 2022/10/13
 
 ## Vue 初识
 
@@ -4094,11 +4098,942 @@ const getNum = (num:number) => {
 
 #### vue3 自动引入插件
 
+#### 深入理解v-model
+
+简单v-model
+
+v-model.vue
+
+```vue
+<template>
+
+ <div v-if="modelValue"  class="model">
+    <div class="close"><button @click="close">close</button></div>
+    <h3>v-model.vue</h3>
+    <div>content: <input type="text"/></div>
+ </div>
+
+</template>
+
+<script setup lang='ts'>
+import {ref, reactive} from 'vue'
+// vue2 value vue3 modelValue
+
+defineProps<{
+    modelValue:boolean
+}>()
+
+const emit = defineEmits(['update:modelValue'])
+
+const close = () => {
+    emit('update:modelValue', false) // 子组件发送
+}
+</script>
+<style scoped lang='less'>
+@border: #ccc;
+.model{
+    border: 1px solid @border;
+}
+.close{
+
+}
+
+</style>
+```
+
+App.vue
+
+```vue
+<template>
+
+ <div>
+  <h1>App.vue father</h1>
+  {{ isShow }}
+  <div><button @click="isShow = !isShow">close</button></div>
+  <hr/>
+  <vModelVue v-model="isShow"></vModelVue>
+ </div>
+
+</template>
+
+<script setup lang='ts'>
+import {ref, reactive} from 'vue'
+import vModelVue from './components/v-model.vue'
+
+const isShow = ref<boolean>(true)
 
 
 
+</script>
+<style scoped lang='less'>
+
+</style>
+```
+
+多个v-model的用法
+
+v-model.vue
+
+```vue
+<template>
+
+ <div v-if="modelValue"  class="model">
+    <div class="close"><button @click="close">close</button></div>
+    <h3>v-model.vue</h3>
+    <div>content: <input @input="change" :value="textVal"  type="text"/></div>
+ </div>
+
+</template>
+
+<script setup lang='ts'>
+import {ref, reactive} from 'vue'
+// vue2 value vue3 modelValue
+
+defineProps<{
+    modelValue:boolean,
+    textVal: string
+}>()
+
+const emit = defineEmits(['update:modelValue', 'update:textVal'])
+
+const close = () => {
+    emit('update:modelValue', false) // 子组件发送
+}
+
+const change = (e:Event) => {
+    const target = e.target as HTMLInputElement
+    emit('update:textVal', target.value)
+}
+</script>
+<style scoped lang='less'>
+@border: #ccc;
+.model{
+    border: 1px solid @border;
+}
+.close{
+
+}
+
+</style>
+```
+
+App.vue
+
+```vue
+<template>
+
+ <div>
+  <h1>App.vue father</h1>
+  {{ isShow }}
+  {{ text }}
+  <div><button @click="isShow = !isShow">close</button></div>
+  <hr/>
+  <vModelVue v-model:textVal="text" v-model="isShow"></vModelVue>
+ </div>
+
+</template>
+
+<script setup lang='ts'>
+import {ref, reactive} from 'vue'
+import vModelVue from './components/v-model.vue'
+
+const isShow = ref<boolean>(true)
+const text = ref<string>('Luke')
 
 
 
+</script>
+<style scoped lang='less'>
 
+</style>
+```
+
+自定义参数
+
+App.vue
+
+```vue
+<template>
+
+ <div>
+  <h1>App.vue father</h1>
+  {{ isShow }}
+  {{ text }}
+  <div><button @click="isShow = !isShow">close</button></div>
+  <hr/>
+  <vModelVue v-model:textVal.isBt="text" v-model="isShow"></vModelVue>
+ </div>
+
+</template>
+
+<script setup lang='ts'>
+import {ref, reactive} from 'vue'
+import vModelVue from './components/v-model.vue'
+
+const isShow = ref<boolean>(true)
+const text = ref<string>('Luke')
+
+
+
+</script>
+<style scoped lang='less'>
+
+</style>
+```
+
+v-model.vue
+
+```vue
+<template>
+
+ <div v-if="modelValue"  class="model">
+    <div class="close"><button @click="close">close</button></div>
+    <h3>v-model.vue</h3>
+    <div>content: <input @input="change" :value="textVal"  type="text"/></div>
+ </div>
+
+</template>
+
+<script setup lang='ts'>
+import {ref, reactive} from 'vue'
+// vue2 value vue3 modelValue
+
+const props = defineProps<{
+    modelValue:boolean,
+    textVal: string,
+    textValModifiers?: {
+        isBt: boolean
+    }
+}>()
+
+const emit = defineEmits(['update:modelValue', 'update:textVal'])
+
+const close = () => {
+    emit('update:modelValue', false) // 子组件发送
+}
+
+const change = (e:Event) => {
+    const target = e.target as HTMLInputElement
+    // 有报错 还不知道怎么解决
+    emit('update:textVal', props?.textValModifiers.isBt ?  target.value + "bt" : target.value)
+}
+</script>
+<style scoped lang='less'>
+@border: #ccc;
+.model{
+    border: 1px solid @border;
+}
+.close{
+
+}
+
+</style>
+```
+
+#### 自定义指令directive
+
+属于破坏性更新, 可以实现自己想要的功能
+
+操作案例
+
+App.vue
+
+```vue
+<template>
+
+    <div>
+        <button @click="flag = !flag">change</button>
+        <A v-move:aaa.Luke="{background: 'red'}"></A>
+
+    </div>
+
+</template>
+
+<script setup lang='ts'>
+import { ref, reactive, Directive, DirectiveBinding } from 'vue'
+import A from './components/A.vue'
+const flag = ref<boolean>(true)
+type Dir = {
+    background:string
+}
+const vMove: Directive = {
+    created() {
+        console.log('=======> created')
+    },
+    beforeMount() {
+        console.log('=======> beforeMount');
+    },
+    // 常用
+    mounted(el:HTMLElement, dir: DirectiveBinding) {
+        console.log('=======> mounted');
+        el.style.background = dir.value.background
+    },
+    beforeUpdate() {
+        console.log('=========> beforeUpdate');
+    },
+    // 常用
+    updated() {
+        console.log("=======> updated");
+    },
+    beforeUnmount() {
+        console.log('======> beforeUnmount');
+    },
+    // 常用
+    unmounted() {
+        console.log('=======> unmounted');
+
+    }
+
+}
+
+</script>
+<style scoped lang='less'>
+
+</style>
+```
+
+A.vue
+
+```vue
+<template>
+    <div class="A">
+        AAA
+    </div>
+</template>
+
+<script setup lang='ts'>
+import { ref, reactive } from 'vue'
+
+</script>
+<style scoped lang='less'>
+.A {
+    width: 200px;
+    height: 200px;
+    border: 1px solid #ccc;
+}
+
+</style>
+```
+
+案例操作二
+
+```vue
+<template>
+
+    <div>
+        <input v-model="value" type="text" />
+        <A v-move="{background: value}"></A>
+    </div>
+
+</template>
+
+<script setup lang='ts'>
+import { ref, reactive, Directive, DirectiveBinding } from 'vue'
+import A from './components/A.vue'
+const value = ref<string>("")
+type Dir = {
+    background:string
+}
+
+const vMove: Directive = (el:HTMLElement, bingding: DirectiveBinding<Dir>) => {
+    el.style.background = bingding.value.background
+    
+}
+
+</script>
+<style scoped lang='less'>
+
+</style>
+```
+
+```vue
+<template>
+    <div class="A">
+        AAA
+    </div>
+</template>
+
+<script setup lang='ts'>
+import { ref, reactive } from 'vue'
+
+</script>
+<style scoped lang='less'>
+.A {
+    width: 200px;
+    height: 200px;
+    border: 1px solid #ccc;
+}
+
+</style>
+```
+
+案例三 点击盒子 移动
+
+```vue
+<template>
+    <div v-move class="box">
+        <div class="header">header</div>
+        <div>Content</div>
+    </div>
+
+</template>
+
+<script setup lang='ts'>
+import { ref, reactive, Directive, DirectiveBinding } from 'vue'
+import A from './components/A.vue'
+const vMove:Directive<any, void> = (el: HTMLElement, bingding: DirectiveBinding) => {
+    let moveElement:HTMLDivElement = el.firstElementChild as HTMLDivElement
+
+    const mouseDown = (e: MouseEvent) => {
+        let x = e.clientX - el.offsetLeft
+        let y = e.clientY - el.offsetTop
+        const move = (e: MouseEvent) => {
+            el.style.left = e.clientX - x + "px"
+            el.style.top = e.clientY - y + "px"
+        }
+        document.addEventListener("mousemove", move)
+        document.addEventListener("mouseup", () => {
+            document.removeEventListener('mousemove', move)      
+        })
+    }
+    moveElement.addEventListener("mousedown", mouseDown)
+
+
+}
+
+</script>
+<style scoped lang='less'>
+.box{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
+    border: 3px solid black;
+    .header{
+        height: 20px;
+        background: black;
+        color: aliceblue;
+
+    }
+    
+
+}
+
+</style>
+```
+
+#### 自定义Hooks
+
+> 主要用于处理复用代码逻辑的一些封装， 和vue2的Mixins比较相似
+
+案例 把图片转成base64
+
+App.vue
+
+```vue
+<template>
+
+ <div>
+    <img id="img" width="400" height="300" src="./assets/test.jpg" />
+ </div>
+
+</template>
+
+<script setup lang='ts'>
+import {ref, reactive} from 'vue'
+import useBase64 from './hooks'
+
+useBase64 ({
+    el: '#img'
+}).then((res) => {
+    console.log(res.baseUrl);
+    
+}) 
+
+</script>
+<style scoped lang='less'>
+
+</style>
+```
+
+ index.ts
+
+```typescript
+import { onMounted } from "vue";
+
+type Option = {
+  el: string;
+};
+
+export default function (option: Option): Promise<{ baseUrl: string }> {
+  return new Promise((resolve) => {
+    onMounted(() => {
+      let img: HTMLImageElement = document.querySelector(
+        option.el
+      ) as HTMLImageElement;
+      img.onload = () => {
+        resolve({
+          baseUrl: base64(img),
+        });
+      };
+    });
+
+    const base64 = (el: HTMLImageElement) => {
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
+      canvas.width = el.width;
+      canvas.height = el.height;
+      ctx?.drawImage(el, 0, 0, canvas.width, canvas.height);
+      return canvas.toDataURL("image/jpg");
+    };
+  });
+}
+
+```
+
+#### Vue3 全局函数和变量
+
+案例 全局函数和全局变量
+
+main.ts
+
+```typescript
+import { createApp } from "vue";
+import "./style.css";
+import App from "./App.vue";
+
+let app = createApp(App);
+
+type Filter = {
+  format: <T>(str: T) => string;
+};
+
+declare module "@vue/runtime-core" {
+  export interface ComponentCustomProperties {
+    $filter: Filter;
+    $env: string
+  }
+}
+
+app.config.globalProperties.$filters = {
+  format<T>(str: T): string {
+    return "{$str}";
+  },
+};
+
+app.config.globalProperties.$env = "dev"
+
+app.mount("#app");
+
+```
+
+App.vue
+
+```vue
+<template>
+
+    <div>
+        {{ $filters.format("demo")}}
+        {{$env}}
+    </div>
+
+</template>
+
+<script setup lang='ts'>
+import { ref, reactive } from 'vue'
+
+</script>
+<style scoped lang='less'>
+
+</style>
+```
+
+#### 编写vue3插件
+
+插件实例
+
+Loading/index.vue
+
+```vue
+<template>
+
+ <div v-if="isShow" class="loading">
+    Loading....
+ </div>
+
+</template>
+
+<script setup lang='ts'>
+import {ref, reactive} from 'vue'
+
+const isShow = ref<boolean>(false)
+
+const show  = () => isShow.value = true
+
+const hide = () => isShow.value = false
+
+defineExpose({
+    isShow,
+    show,
+    hide
+})
+
+</script>
+<style scoped lang='less'>
+.loading{
+    background: black;
+    opacity: 0.8;
+    font-size: 30px;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #ccc;
+}
+
+</style>
+```
+
+Loading/index.ts
+
+```typescript
+import type { App, VNode } from "vue";
+
+import Loading from "./index.vue";
+import { createVNode, render } from "vue";
+
+export default {
+  // 对象形式和函数形式，对象形式一定有install
+  install(app: App) {
+    const Vnode: VNode = createVNode(Loading);
+    // 挂载
+    render(Vnode, document.body)
+    app.config.globalProperties.$loading = {
+        show: Vnode.component?.exposed?.show,
+        hide: Vnode.component?.exposed?.hide
+    }
+    app.config.globalProperties.$loading.show()
+    // 读取 妙招 通过抛出
+    console.log(app, 123, Vnode.component?.exposed)
+  },
+};
+
+```
+
+main.ts
+
+```typescript
+import { createApp } from "vue";
+import "./style.css";
+import App from "./App.vue";
+import Loading from './components/Loading'
+
+let app = createApp(App)
+
+// 插件注册都是用use
+app.use(Loading)
+
+app.mount("#app");
+
+type Lod = {
+    show: () => void,
+    hide: () => void
+}
+
+// 类型声明
+declare module '@vue/runtime-core' {
+    export interface ComponentCustomProperties {
+            $loading: Lod
+    }
+}
+```
+
+App.vue
+
+```vue
+<template>
+
+</template>
+
+<script setup lang='ts'>
+import { ref, reactive, getCurrentInstance} from 'vue'
+
+
+const instance = getCurrentInstance()
+
+instance?.proxy?.$loading.show()
+</script>
+<style scoped lang='less'>
+
+</style>
+```
+
+#### 了解UI库 
+
+> ElementUI AntDesigin
+
+
+
+#### 详解Scoped和样式穿透
+
+>Scoped 保持唯一性
+
+样式穿透是为了修改那些组件库提供的原始样式，需要用到样式穿透
+
+```vue
+<template>
+
+  <div>
+    <el-input class="ipt" v-model="input"  />
+  </div>
+
+</template>
+
+<script setup lang='ts'>
+import { ref, reactive } from 'vue'
+
+const input = ref<string>('')
+
+</script>
+<style scoped lang='less'>
+.ipt {
+  width: 300px;
+    // vue2 中使用 /deep/ vue3使用 :deep()
+  :deep(.el-input__inner) {
+    background: red;
+  }
+}
+</style>
+```
+
+#### CSS Style 完整新特性
+
++ 插槽选择器
++ 全局选择器
++ 动态CSS
+
+App.vue
+
+```vue
+<template>
+ <A>
+    <div class="a">slot div</div>
+ </A>
+</template>
+
+<script setup lang='ts'>
+import {ref, reactive} from 'vue'
+import A from "./components/A.vue"
+
+</script>
+<style scoped lang='less'>
+
+</style>
+```
+
+A.vue
+
+```vue
+<template>
+
+    <div>
+        i am slot
+        <!-- 占位符 -->
+        <slot></slot>  
+    </div>
+
+</template>
+
+<script setup lang='ts'>
+import { ref, reactive } from 'vue'
+
+</script>
+<style scoped lang='less'>
+// 插槽选择器
+// :slotted(.a) {
+//     color: red;
+// }
+// 全局选择器
+:global(div) {
+    color: red;
+}
+</style>
+```
+
+动态CSS
+
+```vue
+<template>
+    <div class="a b">
+        动态css
+    </div>
+</template>
+
+<script setup lang='ts'>
+import {ref, reactive} from 'vue'
+
+const style = ref('red')
+const style_ = ref({
+    color: 'red'
+})
+
+</script>
+<style scoped lang='less'>
+.a{
+    color: v-bind(style)
+}
+.b {
+    color: v-bind('style_.color')
+}
+
+</style>
+```
+
+CSS-module
+
+默认
+
+```vue
+<template>
+    <div :class="$style.div">
+        动态css
+    </div>
+</template>
+
+<script setup lang='ts'>
+import {ref, reactive} from 'vue'
+
+
+</script>
+<style module>
+
+.div{
+    color: red;
+}
+
+
+</style>
+```
+
+自定义名字
+
+```vue
+<template>
+    <div :class="LK.div">
+        动态css
+    </div>
+</template>
+
+<script setup lang='ts'>
+import {ref, reactive} from 'vue'
+
+
+</script>
+<style module="LK">
+
+.div{
+    color: red;
+}
+
+
+</style>
+```
+
+自定义hooks
+
+```vue
+<template>
+    <div :class="LK.div">
+        动态css
+    </div>
+</template>
+
+<script setup lang='ts'>
+import {ref, reactive, useCssModule} from 'vue'
+
+const css = useCssModule('LK')
+console.log(css);
+
+
+</script>
+<style module="LK">
+
+.div{
+    color: red;
+}
+
+
+</style>
+```
+
+#### vue3 集成Tailwind CSS
+
+安装
+
+```bash
+npm install -D tailwindcss@latest postcss@latest autoprefixer@latest
+```
+
+生成配置文件
+
+```bash
+npx tailwindcss init -p
+```
+
+修改配置文件  tailwind.config.js
+
+2.6版本
+
+```js
+module.exports = {
+  purge: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+```
+
+3.*版本
+
+```js
+module.exports = {
+  content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+```
+
+创建一个index.css
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+在main.ts中引入
+
+main.ts
+
+```typescript
+import { createApp } from 'vue'
+import './style.css'
+import ELementPlus from 'element-plus'
+import "element-plus/dist/index.css"
+import App from './App.vue'
+import './index.css' // 引入index.css
+
+
+const app = createApp(App)
+
+app.use(ELementPlus)
+
+
+app.mount('#app')
+
+```
 

@@ -2,6 +2,6 @@
 *.out
 *.o
 *.class
-.vscode/
+# .vscode/
 *.txt
 /demo/
