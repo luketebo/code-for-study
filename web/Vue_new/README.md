@@ -5111,7 +5111,7 @@ console.log(0);
 
 #### vue 开发移动端
 
-
+首先添加一个自动把px转换程vw或vhde
 
 
 
