@@ -5111,8 +5111,75 @@ console.log(0);
 
 #### vue 开发移动端
 
-首先添加一个自动把px转换程vw或vhde
+首先添加一个自动把px转换程vw或vh的插件
 
+> 没有解决 存在一个scoped 影响我页面的问题
 
+#### unocss 原子化
 
+什么是css原子化
+
+1. 减少css体积，提高css复用
+2. 减少了起名的复杂度
+3. 增加记忆成本
+
+接入unocss
+
+```bash
+npm i -D unocss
+```
+
+vite.config.ts
+
+````typescript
+import unocss from 'unocss/vite'
  
+ plugins: [vue(), vueJsx(),unocss({
+      rules:[
+        
+      ]
+  })],
+````
+
+#### 函数式编程
+
+案例
+
+```vue
+<template>
+
+    <div>
+        <Btn text="Luke">
+
+        </Btn>
+    </div>
+
+</template>
+
+<script setup lang='ts'>
+import {ref, reactive, h} from 'vue'
+type Props = {
+    text: string
+}
+
+const Btn = (props: Props, ctx:any) => {
+    return h('div',{
+        class: [''],
+        onClick: () => {
+            ctx.emit("on-click", "demo")
+        }
+    },
+        props.text
+    )
+}
+
+</script>
+<style scoped lang='less'>
+
+</style>
+```
+
+#### vue开发桌面程序electron
+
+
+
