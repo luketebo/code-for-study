@@ -15,6 +15,8 @@
 > ​				 第三十六节 2022/10/13
 >
 > ​				 第四十五节 2022/10/13
+>
+> 第四十六 - 第五十六 略看
 
 
 
@@ -5201,6 +5203,179 @@ hs -p 9000 # 端口号
 ```
 
 #### webpack 构建vue3项目
+
+#### Vue3 高级性能优化
+
+离线缓存？  
+
+#### web Components
+
+样式隔离 js
+
+#### pinia
+
+> 全局状态管理工具 vuex?
+
+下载
+
+```bash
+npm install pinia -S 
+```
+
+vue3中引入
+
+main.ts
+
+```vue
+import {createPinia } from 'pinia'
+
+const store = createPinia()
+
+app.use(store)
+```
+
+vue2中引入
+
+```vue
+import {PiniaVuePliugin} form 'pinia'
+
+const store = PiniaVuePligin()
+
+app.use(store)
+```
+
+简单使用案例
+
+App.vue
+
+```vue
+<template>
+
+    <div>
+        pinia: {{ Test.current }} ---- {{Test.name}}
+    </div>
+
+</template>
+
+<script setup lang='ts'>
+import {ref, reactive} from 'vue'
+// hook
+import {useTestStore} from './store'
+
+
+const Test = useTestStore()
+
+</script>
+<style scoped lang='less'>
+
+</style>
+```
+
+store
+
+```typescript
+//index.ts
+import {defineStore} from 'pinia'
+import {Names} from './store-name'
+
+export const useTestStore = defineStore(Names.TEST, {
+    state: () => {
+        return {
+            // 初始化
+            current: 1,
+            name: "Luke"
+        }
+    },
+    // computed
+    getters:{
+
+    },
+    // methods 
+    actions: {
+
+    }
+})
+------------------------
+// store-name.ts
+export const enum Names {
+    TEST = 'TEST'
+}
+```
+
+##### state 修改数据
+
+```vue
+<template>
+
+    <div>
+        pinia: {{ Test.current }} ---- {{Test.name}}
+    </div>
+
+</template>
+
+<script setup lang='ts'>
+import {ref, reactive} from 'vue'
+// hook
+import {useTestStore} from './store'
+
+const Test = useTestStore()
+// 1 Test.current++
+// 2 Test.$patch({ current: 999, name: "Luke"})
+// 3 Test.$patch((state) => { state.current, state.name = "Tebo"})
+// 4 Test.$state = { current: 200, name: "luke"}
+// 5 Test.setCurrent(546) 在index.ts action 中添加函数
+/*
+action: {
+    // not => function
+    setCurrent(num: number) {
+        this.current = num
+    }
+}
+*/
+
+
+</script>
+<style scoped lang='less'>
+
+</style>
+```
+
+##### 解构store
+
+```vue
+<template>
+
+    <div>
+        origin value {{ Test.current}}
+    </div>
+    <div>
+        pinia: {{current}} --- {{name}}
+        change:
+        <button @click="change">change</button>
+    </div>
+
+</template>
+
+<script setup lang='ts'>
+import { ref, reactive } from 'vue'
+import { useTestStore } from './store'
+import { storeToRefs } from 'pinia'
+const Test = useTestStore()
+// pinia 解构不具有响应式
+const {current, name} = storeToRefs(Test)
+
+const change = () => {
+    Test.current ++
+    console.log(current, name);
+}
+
+</script>
+<style scoped lang='less'>
+
+</style>
+```
+
+##### actions, getters
 
 
 
