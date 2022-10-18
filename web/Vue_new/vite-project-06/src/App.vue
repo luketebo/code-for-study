@@ -1,27 +1,25 @@
 <template>
 
     <div>
-        origin value {{ Test.current}}
-    </div>
-    <div>
-        pinia: {{current}} --- {{name}}
-        change:
+        <p>action-use: {{Test.user}}</p>
+        <hr/>
+        <p>action-name: {{Test.name}}</p>
+        <hr/>
+        <p>getters: {{Test.newName}}</p>
+        <hr/>
         <button @click="change">change</button>
     </div>
 
 </template>
 
 <script setup lang='ts'>
-import { ref, reactive } from 'vue'
-import { useTestStore } from './store'
-import { storeToRefs } from 'pinia'
+import {ref, reactive} from 'vue'
+import {useTestStore} from "./store"
+
 const Test = useTestStore()
-// pinia 解构不具有响应式
-const {current, name} = storeToRefs(Test)
 
 const change = () => {
-    Test.current ++
-    console.log(current, name);
+    Test.setUser()
 }
 
 </script>

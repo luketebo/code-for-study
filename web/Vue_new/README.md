@@ -17,6 +17,10 @@
 > ​				 第四十五节 2022/10/13
 >
 > 第四十六 - 第五十六 略看
+>
+> ​				看完了 2022/10/18 😭😭😭😭😭😭😭
+>
+> 把第六十三节实现
 
 
 
@@ -5376,6 +5380,213 @@ const change = () => {
 ```
 
 ##### actions, getters
+
+actions
+
+同步
+
+```typescript
+import {defineStore} from 'pinia'
+import {Names} from './store-name'
+
+type User = {
+    name: string,
+    age: number
+}
+
+let result:User = {
+    name: "Luke",
+    age: 18
+}
+
+export const useTestStore = defineStore(Names.TEST, {
+    state: () => {
+        return {
+            // 初始化
+            user: <User>{},
+            age: <Number> 9
+        }
+    },
+    // computed
+    getters:{
+
+    },
+    // methods 
+    actions: {
+        setUser() {
+            this.user = result
+        }
+    }
+})
+```
+
+异步
+
+App.vue
+
+```vue
+<template>
+
+    <div>
+        <p>action-use: {{Test.user}}</p>
+        <hr/>
+        <p>action-name: {{Test.name}}</p>
+        <hr/>
+        <p>getters:</p>
+        <hr/>
+        <button @click="change">change</button>
+    </div>
+
+</template>
+
+<script setup lang='ts'>
+import {ref, reactive} from 'vue'
+import {useTestStore} from "./store"
+
+const Test = useTestStore()
+
+const change = () => {
+    Test.setUser()
+}
+
+</script>
+<style scoped lang='less'>
+
+</style>
+```
+
+index.ts
+
+```typescript
+import { defineStore } from "pinia";
+import { Names } from "./store-name";
+
+type User = {
+  name: string;
+  age: number;
+};
+
+const Login = (): Promise<User> => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve({
+        name: "Tebo",
+        age: 20,
+      });
+    }, 2000);
+  });
+};
+
+export const useTestStore = defineStore(Names.TEST, {
+  state: () => {
+    return {
+      // 初始化
+      user: <User>{},
+      name: ""
+    };
+  },
+  // computed
+  getters: {
+    newName ():string {
+        return '$-${this.name}'
+    },
+    getUserAge():Number {
+        return this.user.age
+    }
+  },
+  // methods
+  actions: {
+    async setUser() {
+      const result = await Login();
+      this.user = result;
+    },
+    setName(name: string) {
+        this.name = name
+    }
+  },
+});
+
+
+```
+
+getters
+
+```typescript
+import { defineStore } from "pinia";
+import { Names } from "./store-name";
+
+type User = {
+  name: string;
+  age: number;
+};
+
+const Login = (): Promise<User> => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve({
+        name: "Tebo",
+        age: 20,
+      });
+    }, 2000);
+  });
+};
+
+export const useTestStore = defineStore(Names.TEST, {
+  state: () => {
+    return {
+      // 初始化
+      user: <User>{},
+      name: ""
+    };
+  },
+  // computed
+  getters: {
+    newName ():string {
+        return '$-${this.name}'
+    }
+  },
+  // methods
+  actions: {
+    async setUser() {
+      const result = await Login();
+      this.user = result;
+    },
+  },
+});
+
+```
+
+##### API
+
+1. $reset 重置state
+
+```vue
+const reset = () => {
+	Test.$reset()
+}
+```
+
+2. $subscribe 当值变化的时候就会监听到
+
+```vue
+Test.$subscribe((args, state) => {
+	console.log("args: " , args)
+	console.log("state: ", state)
+})
+```
+
+3. $onAction 监听action函数
+
+```vue
+Test.$onAction((args) => {
+	args.after(() => {
+	console.log("after");
+})
+	console.log(args)
+})
+```
+
+##### pinia 持久化插件
 
 
 
