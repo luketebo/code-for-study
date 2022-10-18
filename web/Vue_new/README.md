@@ -5181,5 +5181,27 @@ const Btn = (props: Props, ctx:any) => {
 
 #### vue开发桌面程序electron
 
+#### vue 响应式语法糖
+
+*Tips: 实验内容，不要再生产环境使用*
+
+$ref 主要作用可以省略使用value才能访问数据， 基于编译时
+
+> `$ref` `$$` `$`
+
+#### 环境变量
+
+通过npm启动一个服务，用来启动前端
+
+```bash
+npm install http-server -g
+# 使用方法
+hs -p 9000 # 端口号
+# 在对应项目的目录上使用
+```
+
+#### webpack 构建vue3项目
 
 
+
+​    
