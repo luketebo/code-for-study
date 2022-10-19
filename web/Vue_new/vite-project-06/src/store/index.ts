@@ -22,26 +22,26 @@ export const useTestStore = defineStore(Names.TEST, {
     return {
       // 初始化
       user: <User>{},
-      name: ""
+      name: "Luke",
     };
-  },
-  // computed
-  getters: {
-    newName ():string {
-        return '$-${this.name}'
-    },
-    getUserAge():Number {
-        return this.user.age
-    }
   },
   // methods
   actions: {
-    async setUser() {
+    async setUser(name?: string) {
       const result = await Login();
       this.user = result;
     },
     setName(name: string) {
-        this.name = name
-    }
+      this.name = name;
+    },
   },
 });
+export const userStore = defineStore(Names.BASE, {
+  state: () => {
+    return {
+      baseCurrent: 1,
+      
+    }
+  }
+
+})
