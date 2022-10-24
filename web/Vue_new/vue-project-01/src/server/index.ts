@@ -6,4 +6,4 @@ const server = axios.create({
 })
 
 
-export const getList = () => server.get('/api/list').then(res => res.data)
+export const getApiList = () => server.get('/api/list').then(res => res.data)

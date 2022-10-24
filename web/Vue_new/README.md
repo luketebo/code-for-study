@@ -5591,3 +5591,9 @@ Test.$onAction((args) => {
 页面内刷新，状态丢失
 
 ​    
+
+
+
+#### echarts 
+
+json2js 摸鱼神器 生成js类型
