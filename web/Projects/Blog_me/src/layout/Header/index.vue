@@ -1,49 +1,86 @@
 <template>
-    <nav class="header container">
-        <ul class="row">
-            <li class="col-sm">
-                <a>
-                    <span>Work</span>
-                </a>
-            </li>
-            <li><a><span>About</span></a></li>
-            <li><a><span>Wip</span></a></li>
-            <li><a><span>Contact</span></a></li>
-            <li><a><span>icon</span></a></li>
-            <li><a><span>github icon</span></a></li>
-            <li><a><span>Blog</span></a></li>
-        </ul>
+
+    <nav class="header">
+        <a class="header-left"> icon
+            <img />
+            <span>
+                十月
+            </span>
+        </a>
+        <div class="header-right">
+            <el-row>
+                <el-col :span="6"></el-col>
+                <el-col :span="6">
+                    <div class="header-right-search">
+                        <el-input v-model="input1" :prefix-icon="Search" />
+                    </div>
+                </el-col>
+                <el-col :span="12">
+                    <div class="header-right-bar">
+                        <rightBar></rightBar>
+                    </div>
+                </el-col>
+            </el-row>
+        </div>
     </nav>
+
 </template>
 
 <script setup lang='ts'>
 import { ref, reactive } from 'vue'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import 'bootstrap/dist/js/bootstrap.min.js'
+import rightBar from './right-bar.vue'
+import { Search } from "@element-plus/icons-vue"
+
+const input1 = ref('')
+
 
 </script>
 <style scoped lang='less'>
 @border: #ccc;
 
 .header {
-    display: flex;
+    left: 0;
+    top: 0;
+    width: 100%;
     height: 10vh;
-    justify-content: center;
-    align-items: center;
-    border: 5px solid @border;
-    margin-left: 10%;
-    margin-right: 10%;
-
-}
-
-.header ul {
     display: flex;
-}
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-between;
 
-.header ul li {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid @border;
+    &-left {
+        height: inherit;
+        width: 15%;
+        // padding-top: 15px;
+        // padding-left: 5%;
+    }
+
+
+    &-right {
+        display: flex;
+        padding-top: 15px;
+        // justify-content: space-around;
+        // padding-right: 15%;
+        margin-left: 11.3%;
+
+        &-search {
+            height: 5vh;
+            padding-right: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            // margin-left: 15%;
+            // padding-right: 15%;
+            // margin-right: 15%;
+        }
+
+        &-bar {
+            height: 5vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+    }
 }
 </style>

@@ -1,5 +1,5 @@
 {
-  "name": "blog-me",
+  "name": "search-nav",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -9,9 +9,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "bootstrap": "^5.2.2",
-    "element-plus": "^2.2.19",
-    "less": "^4.1.3",
     "vue": "^3.2.37"
   },
   "devDependencies": {
