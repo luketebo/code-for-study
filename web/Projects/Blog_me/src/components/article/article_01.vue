@@ -19,7 +19,7 @@ import {ref, reactive} from 'vue'
 @border: #ccc;
 .article {
     height: 12vw;
-    width: 90%;
+    width: 85%;
     display: flex;
     margin-top: 15px;
     margin-bottom: 5px;

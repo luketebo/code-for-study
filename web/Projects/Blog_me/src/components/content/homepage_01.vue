@@ -2,7 +2,7 @@
 
     <div class="home">
         <header class="home-top">
-            <p class="animate__animated animate__zoomInDown">与其提升自己，不如诋毁他人</p>
+            <p class="animate__animated animate__zoomInDown note">与其提升自己，不如诋毁他人</p>
         </header>
         <main class="home-main">
             <div class="home-main-left">笔记</div>
@@ -34,6 +34,7 @@ import 'animate.css'
         justify-content: center;
         align-items: center;
         border: 1px solid @border;
+        
 
         p {
             font-size: 40px;
@@ -75,3 +76,4 @@ import 'animate.css'
     --animate-duration: 1.5s;
 }
 </style>
+

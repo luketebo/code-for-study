@@ -8,6 +8,7 @@
             <article1></article1>
             <article1></article1>
             <article1></article1>
+            
         </div>
         <div class="home-right">
             <tagMe></tagMe>
@@ -23,6 +24,7 @@ import article1 from '../article/article_01.vue'
 import tagMe from '../tag/tag_me.vue'
 import tag2 from '../tag/tag_02.vue'
 
+
 </script>
 <style scoped lang='less'>
 @border: #ccc;
@@ -36,7 +38,7 @@ import tag2 from '../tag/tag_02.vue'
     justify-content: space-between;
 
     &-left {
-        width: 70%;
+        width: 75%;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -45,8 +47,12 @@ import tag2 from '../tag/tag_02.vue'
     }
 
     &-right {
-        width: 30%;
+        width: 25%;
         border: 1px solid @border;
+        display: flex;
+        flex-direction: column;
+        // justify-content: center;
+        align-items: center;
 
     }
 }

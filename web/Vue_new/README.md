@@ -5597,3 +5597,12 @@ Test.$onAction((args) => {
 #### echarts 
 
 json2js 摸鱼神器 生成js类型
+
+
+
+
+
+#### router
+
+路由模式
+
