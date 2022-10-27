@@ -1,14 +1,19 @@
 <template>
 
     <div class="content">
-        <div>内容</div>
-
+        <el-backtop :right="100" :bottom="100" />
+        <div class="content-f">
+            <homePage1></homePage1>
+            <homePage2></homePage2>
+        </div>
     </div>
 
 </template>
 
 <script setup lang='ts'>
 import { ref, reactive } from 'vue'
+import homePage1 from '../../components/content/homepage_01.vue'
+import homePage2 from '../../components/content/homepage_02.vue'
 
 </script>
 <style scoped lang='less'>
@@ -22,5 +27,8 @@ import { ref, reactive } from 'vue'
     display: flex;
     justify-content: center;
     align-items: center;
+    &-f{
+        width: inherit;
+    }
 }
 </style>

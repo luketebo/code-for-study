@@ -37,7 +37,8 @@ const input1 = ref('')
     left: 0;
     top: 0;
     width: 100%;
-    height: 15vh;
+    height: 4vw;
+    // position: fixed;
     display: flex;
     flex-wrap: wrap;
     border-bottom: 1px solid @border;
