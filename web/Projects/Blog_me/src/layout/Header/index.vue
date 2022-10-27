@@ -1,6 +1,7 @@
 <template>
 
     <nav class="header">
+
         <a class="header-left"> icon
             <img />
             <span>
@@ -8,19 +9,13 @@
             </span>
         </a>
         <div class="header-right">
-            <el-row>
-                <el-col :span="6"></el-col>
-                <el-col :span="6">
-                    <div class="header-right-search">
-                        <el-input v-model="input1" :prefix-icon="Search" />
-                    </div>
-                </el-col>
-                <el-col :span="12">
-                    <div class="header-right-bar">
-                        <rightBar></rightBar>
-                    </div>
-                </el-col>
-            </el-row>
+            <div class="flex-grow" />
+            <div class="header-right-search">
+                <el-input v-model="input1" :prefix-icon="Search" />
+            </div>
+            <div class="header-right-bar">
+                <rightBar></rightBar>
+            </div>
         </div>
     </nav>
 
@@ -42,45 +37,47 @@ const input1 = ref('')
     left: 0;
     top: 0;
     width: 100%;
-    height: 10vh;
+    height: 15vh;
     display: flex;
     flex-wrap: wrap;
+    border-bottom: 1px solid @border;
     flex-direction: column;
     justify-content: space-between;
 
     &-left {
         height: inherit;
         width: 15%;
-        // padding-top: 15px;
-        // padding-left: 5%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
 
     &-right {
+        height: inherit;
         display: flex;
-        padding-top: 15px;
-        // justify-content: space-around;
-        // padding-right: 15%;
-        margin-left: 11.3%;
+        justify-content: center;
+        align-items: center;
 
         &-search {
-            height: 5vh;
+            // height: 5vh;
+            height: inherit;
             padding-right: 15px;
             display: flex;
             justify-content: center;
             align-items: center;
-            // margin-left: 15%;
-            // padding-right: 15%;
-            // margin-right: 15%;
         }
 
         &-bar {
-            height: 5vh;
+            height: inherit;
             display: flex;
             justify-content: center;
             align-items: center;
-
         }
     }
+}
+
+.flex-grow {
+    flex-grow: 1;
 }
 </style>

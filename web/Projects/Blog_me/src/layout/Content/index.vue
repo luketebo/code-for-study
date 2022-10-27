@@ -1,6 +1,9 @@
 <template>
 
+    <div class="content">
+        <div>内容</div>
 
+    </div>
 
 </template>
 
@@ -12,6 +15,12 @@ import { ref, reactive } from 'vue'
 @border: #ccc;
 
 .content {
+    height: auto;
+    width: 80%;
     border: 1px solid @border;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 </style>
