@@ -1,9 +1,9 @@
 <template>
     <el-affix>
         <nav class="header">
-            <a class="header-left"> icon
-                <img />
-                <span>
+            <a class="header-left" style="text-decoration: none" href="javascript: void(0)"> 
+                <div class="img_"></div>
+                <span style="font-weight: bold; font-size: 25px">
                     十月
                 </span>
             </a>
@@ -31,6 +31,14 @@ const input1 = ref('')
 </script>
 <style scoped lang='less'>
 @border: #ccc;
+
+.img_ {
+    background-image: url(../../assets/index.jpeg);
+    background-size: cover;
+    height: 30px;
+    width: 30px;
+    margin-right: 15px;
+}
 
 .header {
     left: 0;

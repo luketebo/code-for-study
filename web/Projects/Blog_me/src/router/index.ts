@@ -26,6 +26,28 @@ const routes = [
     name: "odd",
     component: () => import("../components/knowledge/odd.vue"),
   },
+  {
+    path: "/system",
+    name: "system",
+    component: () => import("../components/tools/system.vue"),
+  },
+  {
+    path: "/star",
+    name: "star",
+    component: () => import("../components/tools/star.vue"),
+  },
+  {
+    path: "/operate",
+    name: "operate",
+    component: () => import("../components/tools/operate.vue"),
+  },
+  {
+    path: "/paper",
+    name: "paper",
+    component: () => import("../components/paper/index.vue"),
+  },
+
+
 ];
 
 const router = createRouter({

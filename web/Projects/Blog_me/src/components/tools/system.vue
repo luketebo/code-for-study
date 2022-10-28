@@ -35,14 +35,15 @@
 import { ref, reactive } from 'vue'
 import { useRouter } from 'vue-router';
 
-const title = ref("奇怪知识 - odd")
-const title_main = ref("毕竟是程序员，懂点奇怪的知识还是很正常的")
+const title = ref("系统工具")
+const title_main = ref("一些零零散散的系统工具，偏包管理的一类工具")
 
 const router = useRouter()
 
 const toPage = (name: string) => {
     router.push(name)
 }
+
 </script>
 <style scoped lang='less'>
 @border: #ccc;

@@ -3,10 +3,11 @@
     <div class="home">
         <header class="home-top">
             <p class="animate__animated animate__zoomInDown note">与其提升自己，不如诋毁他人</p>
+            <p class="animate__animated animate__zoomInDown note">&nbsp&nbsp我是大厦B</p>
         </header>
         <main class="home-main">
             <div class="home-main-left">笔记</div>
-            <div class="home-main-center">聊天</div>
+            <div class="home-main-center">项目</div>
             <div class="home-main-right">技能</div>
         </main>
 

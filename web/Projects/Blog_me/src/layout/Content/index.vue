@@ -1,14 +1,18 @@
 <template>
 
     <div class="content">
-        <el-backtop :right="100" :bottom="100" />
-        <div class="content-f">
-            <RouterView></RouterView>
-        </div>
+
+        <RouterView></RouterView>
+        <!-- <div class="content-f">
+            
+        </div> -->
+
     </div>
+
     <div class="footer">
         <Footer></Footer>
     </div>
+
 
 </template>
 
@@ -23,18 +27,18 @@ import Footer from '../../components/footer/index.vue'
 
 .content {
     height: auto;
-    width: 80%;
+    width: 100%;
     border: 1px solid @border;
     margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
 
-    &-f {
-        width: inherit;
-        justify-content: center;
-        align-items: center;
-    }
+    // &-f {
+    //     width: inherit;
+    //     justify-content: center;
+    //     align-items: center;
+    // }
 }
 
 .footer {

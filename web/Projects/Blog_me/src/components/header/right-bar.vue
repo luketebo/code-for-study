@@ -13,7 +13,7 @@
             <template #title>工具</template>
             <el-menu-item @click="toPage('system')" index="4-1">系统工具</el-menu-item>
             <el-menu-item @click="toPage('operate')" index="4-2">开发工具</el-menu-item>
-            <el-menu-item @click="toPage('start')" index="4-3">收藏工具</el-menu-item>
+            <el-menu-item @click="toPage('star')" index="4-3">收藏工具</el-menu-item>
         </el-sub-menu>
         <el-sub-menu class="subMenu" index="5">
             <template #title>项目</template>
@@ -47,8 +47,6 @@ const handleSelect = (key: string, keyPath: string[]) => {
 const router = useRouter()
 
 const toPage = (name: string) => {
-    console.log(name);
-    
     router.push(name)
 }
 
@@ -63,17 +61,11 @@ const toPage = (name: string) => {
     align-items: center;
 }
 
-.el-menu--popup-container {
-    border-right: none;
-    background-color: red;
+:deep(.el-menu--popup) {
+    max-width: 90px;
 }
 
-// .el-menu-item{
-//     color: transparent;
-// }
-
 .el-menu-item.is-active {
-    // color: transparent;
     background-color: transparent;
 }
 
@@ -83,7 +75,6 @@ const toPage = (name: string) => {
 
 .el-menu--horizontal > .el-menu-item {
     width: 5%;
-
 }
 
 .el-menu--horizontal > .el-sub-menu {
@@ -93,7 +84,6 @@ const toPage = (name: string) => {
 .subMenu{
     :deep(.el-sub-menu__title){
         padding: 0;
-        
     }
 }
 

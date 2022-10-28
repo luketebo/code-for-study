@@ -35,8 +35,8 @@
 import { ref, reactive } from 'vue'
 import { useRouter } from 'vue-router';
 
-const title = ref("奇怪知识 - odd")
-const title_main = ref("毕竟是程序员，懂点奇怪的知识还是很正常的")
+const title = ref("收藏工具")
+const title_main = ref("互联网大浪淘沙，一些精品小工具，有助于摸鱼(不是)开发")
 
 const router = useRouter()
 
