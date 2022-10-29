@@ -10,7 +10,6 @@
 <script setup lang='ts'>
 import { ref, reactive, } from 'vue'
 
-const htmlMD = URL('../')
 
 </script>
 <style scoped lang='less'>

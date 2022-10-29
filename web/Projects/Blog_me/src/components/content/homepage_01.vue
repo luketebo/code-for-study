@@ -6,9 +6,18 @@
             <p class="animate__animated animate__zoomInDown note">&nbsp&nbsp我是大厦B</p>
         </header>
         <main class="home-main">
-            <div class="home-main-left">笔记</div>
-            <div class="home-main-center">项目</div>
-            <div class="home-main-right">技能</div>
+            <div class="home-main-left">
+                <div class="home-main-left-icon"></div>
+                <p>笔记</p>
+            </div>
+            <div class="home-main-center">
+                <div class="home-main-center-icon"></div>
+                <p>项目</p>
+            </div>
+            <div class="home-main-right">
+                <div class="home-main-right-icon"></div>
+                <p>技能</p>
+            </div>
         </main>
 
     </div>
@@ -24,7 +33,7 @@ import 'animate.css'
 @border: #ccc;
 
 .home {
-    height: 45vw;
+    height: 49vw;
     width: 100%;
     border: 1px solid @border;
 
@@ -35,7 +44,7 @@ import 'animate.css'
         justify-content: center;
         align-items: center;
         border: 1px solid @border;
-        
+
 
         p {
             font-size: 40px;
@@ -55,6 +64,23 @@ import 'animate.css'
             width: 15vw;
             text-align: center;
             border: 1px solid @border;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            &-icon {
+                border: 1px solid @border;
+                width: 55%;
+                height: 55%;
+                background-size: cover;
+                background-image: url(../../assets/icon/renwuguanli.png);
+            }
+
+            p {
+                font-size: 25px;
+                font-weight: bold;
+            }
         }
 
         &-center {
@@ -62,6 +88,23 @@ import 'animate.css'
             width: 15vw;
             text-align: center;
             border: 1px solid @border;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            &-icon {
+                border: 1px solid @border;
+                width: 55%;
+                height: 55%;
+                background-size: cover;
+                background-image: url(../../assets/icon/shounahe.png);
+            }
+
+            p {
+                font-size: 25px;
+                font-weight: bold;
+            }
         }
 
         &-right {
@@ -69,6 +112,23 @@ import 'animate.css'
             width: 15vw;
             text-align: center;
             border: 1px solid @border;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            &-icon {
+                border: 1px solid @border;
+                width: 55%;
+                height: 55%;
+                background-size: cover;
+                background-image: url(../../assets/icon/xunzhang.png);
+            }
+            
+            p {
+                font-size: 25px;
+                font-weight: bold;
+            }
         }
     }
 }

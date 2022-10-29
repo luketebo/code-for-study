@@ -5,7 +5,7 @@
             <div class="essay">
                 <div class="essay-contain">
                     <header class="essay-contain-header">
-                        <a class="essay-contain-header-nav">icon</a>
+                        <a class="essay-contain-header-nav"></a>
                         <div class="essay-contain-header-body">
                             <div>{{ title }}</div>
                             <div>{{ title_main }}</div>
@@ -101,6 +101,8 @@ const toPage = (name: string) => {
                 height: 90%;
                 width: 15%;
                 border: 1px solid @border;
+                background-image: url(../../assets/icon/renwuguanli.png);
+                background-size: cover;
             }
 
             &-body {
