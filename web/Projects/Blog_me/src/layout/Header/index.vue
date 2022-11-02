@@ -45,7 +45,7 @@ const input1 = ref('')
     top: 0;
     width: 100%;
     height: 2.5vw;
-    // background-color: rgb(33, 30, 30);
+    background-color: white;
     // position: fixed;
     // filter: blur(6px);
     display: flex;

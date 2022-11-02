@@ -2,7 +2,10 @@
 
     <div class="paper">
         <div class="paper-left">目录</div>
-        <div class="paper-center">内容</div>
+        <div class="paper-center">
+            <div>paper</div>
+            <div>content</div>
+        </div>
     </div>
 
 </template>
