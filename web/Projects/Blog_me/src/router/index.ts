@@ -46,8 +46,6 @@ const routes = [
     name: "paper",
     component: () => import("../components/paper/index.vue"),
   },
-
-
 ];
 
 const router = createRouter({
