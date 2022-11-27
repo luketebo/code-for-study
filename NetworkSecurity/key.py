@@ -22,7 +22,7 @@ class Key:
             return 1
         else:
             return 0
-        
+
     def dec2bin(self, dec):
         """dec => bin
 
@@ -40,14 +40,14 @@ class Key:
             temp.append(quo)
         while temp:
             ans += str(temp.pop())
-            
-        if (len(ans)  < 8):
+
+        if (len(ans) < 8):
             i = 8 - len(ans)
             while i > 0:
                 ans = '0' + ans
                 i -= 1
         return ans
-    
+
     def bin2dec(self, bin):
         """bin => dec
 
@@ -73,7 +73,7 @@ class Key:
             bin: 返回一个完成了异或运算的二进制值
         """
         return '{0:b}'.format(int(x, 2) ^ int(y, 2))
-    
+
     def encrypt(self):
         """加密算法
         """
@@ -94,32 +94,32 @@ class Key:
 
         for i in range(index):
             listCip.append(self.xor(newKeyList[i], listBin[i]))
-        
+
         newCip = []
         for item in listCip:
             newCip.append("0" + item)
-            
+
         self.dir = self.get_bit_val(int(self.key[0]), 7)
-        
-        for i in range(1,len(self.key)):
+
+        for i in range(1, len(self.key)):
             self.count += str(self.get_bit_val(int(self.key[i]), 0))
         count = self.bin2dec(self.count)
         allCip = ""
-        
+
         for item in newCip:
             allCip += item
         endCip = ""
         # 0 <- 1 ->
         if (0 == self.dir):
-            endCip = allCip[count:32] + allCip[0:count] 
+            endCip = allCip[count:32] + allCip[0:count]
         else:
             endCip = allCip[32 - count:32] + allCip[:32 - count]
-        
+
         # 切割
         finCip = []
         a = 0
         for i in range(4):
-            finCip.append(endCip[a:a+8])
+            finCip.append(endCip[a:a + 8])
             a = a + 8
         good = []
         for item in finCip:
@@ -129,7 +129,7 @@ class Key:
         for item in good:
             Liu += chr(item)
         print("加密后： ", Liu)
-        
+
     def decrypt(self):
         """解密算法
         """
@@ -146,7 +146,7 @@ class Key:
         text = []
         a = 0
         for i in range(4):
-            text.append(finCip[a:a+8])
+            text.append(finCip[a:a + 8])
             a = a + 8
         newKey = [str(a) for a in str(self.key)]
         newKeyList = []
@@ -155,16 +155,16 @@ class Key:
         index = 0
         for i in newKeyList:
             index = index + 1
-            
+
         TextCip = []
         for i in range(index):
             TextCip.append(self.bin2dec(self.xor(newKeyList[i], text[i])))
-        
+
         Qu = ""
         for item in TextCip:
             Qu += chr(item)
-        print("解密后： ",Qu)
-    
+        print("解密后： ", Qu)
+
 
 if __name__ == "__main__":
     """目前有缺陷，密钥必须和密文的长度一样，不然会出错
