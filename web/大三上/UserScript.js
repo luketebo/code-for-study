@@ -29,7 +29,7 @@
     window.scrollTo(0,document.body.scrollHeight)
 
     //获取题块列表
-    var lists = document.querySelectorAll('.ulradiocheck')
+    var lists = document.querySelectorAll('.ul-controlgroup')
     var ccc=0;
     var liangbiao_index=0;
     var xiala_index=0;
@@ -41,92 +41,68 @@
     var min_options;
 
     //1 
-    ops = lists[ccc].querySelectorAll('li')
+    ops = lists[ccc].querySelectorAll('.ui-radio')
     ccc+=1
     bili = [55,45];
     ops[danxuan(bili)].click()
 
     //2
-    ops = lists[ccc].querySelectorAll('li')
+    ops = lists[ccc].querySelectorAll('.ui-radio')
     ccc+=1
     bili = [40,30,15,15];
     ops[danxuan(bili)].click()
 
-    //3 多选
-    ops = lists[ccc].querySelectorAll('li')
-    ccc+=1
-    bili = [14,14,14,14,14,30]
-    temp_flag = false
-    while(!temp_flag) {
-        for(let count = 0; count < bili.length;count++) {
-            if(duoxuan(bili[count])){
-                ops[count].click();
-                temp_flag = true;
-            }
-        }
-    }
-    // ops = lists[ccc].querySelectorAll('li')
-    // ccc+=1
-    // bili = [20,20,20,20,20];
-    // ops[danxuan(bili)].click()
-
-    //4
-    ops = lists[ccc].querySelectorAll('li')
+    
+    // 3
+    ops = lists[ccc].querySelectorAll('.ui-radio')
     ccc+=1
     bili = [10,40,50];
     ops[danxuan(bili)].click()
 
-    //5
-    ops = lists[ccc].querySelectorAll('li')
+    // 4
+    ops = lists[ccc].querySelectorAll('.ui-radio')
     ccc+=1
     bili = [45,55];
     ops[danxuan(bili)].click()
 
-    //6
-    ops = lists[ccc].querySelectorAll('li')
+    // 5
+    ops = lists[ccc].querySelectorAll('.ui-radio')
     ccc+=1
     bili = [70,30];
     ops[danxuan(bili)].click()
 
-    //7
-    ops = lists[ccc].querySelectorAll('li')
+    // 6
+    ops = lists[ccc].querySelectorAll('.ui-radio')
     ccc+=1
     bili = [65,35]
     ops[danxuan(bili)].click()
 
-    // //7
-    // ops = lists[ccc].querySelectorAll('li');
-    // ccc+=1;
-    // bili = [5,5,5,5];
-    // temp_flag = false;
-    // while(!temp_flag){
-    //     for(let count = 0;count<bili.length;count++){
-    //         if(duoxuan(bili[count])){
-    //             ops[count].click();
-    //             temp_flag = true;
-    //         }
-    //     }
-    // }
+    
+    // 7
+    ops = lists[ccc].querySelectorAll('.ui-radio')
+    ccc+=1
+    bili = [65,35]
+    ops[danxuan(bili)].click()
 
-    // //8
-    // ops = lists[ccc].querySelectorAll('li')
-    // ccc+=1
-    // bili = [50,50,50,50];
-    // temp_flag = false
 
-    // while(!temp_flag){
-    //     for(let count = 0;count<bili.length;count++){
-    //         if(duoxuan(bili[count])){
-    //             ops[count].click();
-    //             temp_flag = true;
-    //         }
-    //     }
-    // }
+    // 8
+    ops = lists[ccc].querySelectorAll('.ui-radio')
+    ccc+=1
+    bili = [65,35]
+    ops[danxuan(bili)].click()
 
-    //9
-    // tiankong_list = ['王翠花','小明','小红'];
-    // bili = [33,33,34];
-    // document.querySelector('#q9').value=tiankong_list[danxuan(bili)]
+
+    // 9
+    ops = lists[ccc].querySelectorAll('.ui-radio')
+    ccc+=1
+    bili = [65,35]
+    ops[danxuan(bili)].click()
+
+    // 10
+    ops = lists[ccc].querySelectorAll('.ui-radio')
+    ccc+=1
+    bili = [65,35]
+    ops[danxuan(bili)].click()
 
     let count = 0
     //提交函数
