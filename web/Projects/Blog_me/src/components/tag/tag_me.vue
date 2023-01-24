@@ -48,9 +48,10 @@ import {ref, reactive} from 'vue'
             height: 3vw;
             border: 1px solid @border;
             display: flex;
-            justify-content: center;
+            // 定义了浏览器之间，如何分配顺着弹性容器主轴的元素之间及其周围的空间
+            justify-content: left;
             align-items: center;
-            font-size: 25px;
+            font-size: 22px;
             font-weight: bold;
         }
     }

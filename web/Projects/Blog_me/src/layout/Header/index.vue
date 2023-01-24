@@ -3,7 +3,7 @@
         <nav class="header">
             <a class="header-left" style="text-decoration: none" href="javascript: void(0)"> 
                 <div class="img_"></div>
-                <span style="font-weight: bold; font-size: 25px">
+                <span style="font-weight: bold; font-size: 25px;">
                     十月
                 </span>
             </a>
